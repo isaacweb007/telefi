@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.title">텔레파이 TeleFi — 텔레그램 크립토 카지노 · $TFI DAO 라운드</title>
+<meta name="description" data-i18n-attr="content:meta.desc" content="텔레그램 미니앱에서 3초 만에 시작하는 크립토 카지노. 슬롯·라이브·테이블·미니게임 10,000+, USDT 입출금. 플랫폼의 성장은 솔라나 기반 $TFI 토큰으로 DAO에 돌아갑니다.">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TeleFi 텔레파이">
+<meta property="og:title" content="TeleFi — Play on Telegram. Own the House.">
+<meta property="og:description" content="Telegram mini-app crypto casino. 10,000+ licensed games, USDT in/out, and a Solana-based $TFI token that gives the house back to the DAO.">
+<meta property="og:url" content="https://isaacweb007.github.io/telefi/">
+<meta property="og:image" content="https://isaacweb007.github.io/telefi/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Han+Sans&family=Inter:wght@400;600;800&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0B; --bg2:#101012; --panel:#151517; --panel2:#1C1C1F;
+    --line:rgba(255,255,255,.09); --line2:rgba(245,184,24,.35);
+    --ink:#F5F4F0; --dim:#9C9B96; --dim2:#6E6D69;
+    --gold:#F5B818; --gold2:#FFD35C; --goldd:#C8930C; --blue:#2AABEE; --red:#E8352E;
+    --display:"Anton","Black Han Sans",Impact,sans-serif;
+    --body:"Inter","Noto Sans KR","Apple SD Gothic Neo","Noto Sans JP","Noto Sans SC",-apple-system,"Segoe UI",sans-serif;
+    --wrap:1240px;
+  }
+  html[lang="ko"]{--display:"Black Han Sans","Anton",Impact,sans-serif;--body:"Inter","Noto Sans KR","Apple SD Gothic Neo",-apple-system,sans-serif}
+  html[lang="en"]{--display:"Anton",Impact,"Arial Narrow",sans-serif;--body:"Inter",-apple-system,"Segoe UI",sans-serif}
+  html[lang="ja"]{--display:"Anton","Noto Sans JP","Hiragino Sans",sans-serif;--body:"Inter","Noto Sans JP","Hiragino Sans",sans-serif}
+  html[lang="zh"]{--display:"Anton","Noto Sans SC","PingFang SC",sans-serif;--body:"Inter","Noto Sans SC","PingFang SC",sans-serif}
+  html[lang="ja"] .d,html[lang="zh"] .d{font-weight:900;letter-spacing:0}
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65;overflow-x:hidden}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--gold);color:#000}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .d{font-family:var(--display);text-transform:uppercase;line-height:.95;letter-spacing:-.005em;font-weight:400}
+  em{font-style:normal;color:var(--gold)}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.24em;font-weight:800;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--gold)}
+  h2.d{font-size:clamp(38px,6vw,72px);margin-bottom:18px;word-break:keep-all}
+  html[lang="ko"] h2.d{font-size:clamp(34px,5vw,62px)}
+  .sub{color:var(--dim);font-size:16px;max-width:52em}
+  section{padding:96px 0;position:relative}
+  section.alt{background:var(--bg2)}
+  .sechead{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;margin-bottom:44px}
+  @media(max-width:860px){.sechead{grid-template-columns:1fr;gap:12px}}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:4px;font-weight:800;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;transition:transform .15s,background .15s,color .15s;cursor:pointer;border:1px solid transparent;font-family:var(--body)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.gold{background:var(--gold);color:#0A0A0B}
+  .btn.gold:hover{background:var(--gold2)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:rgba(255,255,255,.22)}
+  .btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .btn .ar{font-size:15px;transform:translateY(-1px)}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(10,10,11,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav .in{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;gap:26px}
+  .logo{display:flex;align-items:center;gap:9px;font-family:"Inter",sans-serif;font-weight:800;font-size:21px;letter-spacing:-.6px}
+  .logo img{height:30px;width:auto}
+  .logo b{color:var(--gold);font-weight:800}
+  .links{display:flex;gap:26px;margin-left:12px}
+  .links a{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);position:relative;padding:6px 0}
+  .links a:hover{color:var(--ink)}
+  .links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--gold);transition:width .2s}
+  .links a:hover::after{width:100%}
+  .nav .right{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .langs{display:flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .langs button{background:transparent;border:0;color:var(--dim);font:700 11.5px/1 var(--body);letter-spacing:.06em;padding:9px 11px;cursor:pointer}
+  .langs button.on{background:var(--gold);color:#000}
+  .langs button:hover:not(.on){color:var(--ink)}
+  .burger{display:none;background:none;border:1px solid var(--line);border-radius:4px;color:var(--ink);width:42px;height:42px;cursor:pointer;font-size:20px}
+  @media(max-width:1000px){
+    .links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--bg);flex-direction:column;gap:0;padding:8px 24px 18px;border-bottom:1px solid var(--line)}
+    .links.open{display:flex}
+    .links a{padding:13px 0;border-bottom:1px solid var(--line)}
+    .burger{display:inline-flex;align-items:center;justify-content:center}
+    .nav .navcta{display:none}
+  }
+  @media(max-width:480px){.nav .in{padding:0 14px;gap:12px}.langs button{padding:8px 7px;font-size:11px}.logo{font-size:19px}.wrap{padding:0 18px}.hero .grid{padding-left:18px;padding-right:18px}}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:0;background:radial-gradient(1200px 600px at 75% 30%,rgba(245,184,24,.10),transparent 60%),var(--bg)}
+  .hero .grid{max-width:var(--wrap);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) 180px;gap:24px;align-items:center;min-height:calc(100vh - 68px - 60px)}
+  .hero h1{font-size:clamp(46px,6.6vw,100px);line-height:.92;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:normal}
+  html[lang="ko"] .hero h1{font-size:clamp(40px,5.7vw,84px)}
+  html[lang="ja"] .hero h1,html[lang="zh"] .hero h1{font-size:clamp(36px,5vw,72px)}
+  .hero h1 .l3{color:var(--gold)}
+  .hero .sub{margin-top:26px;font-size:16.5px;max-width:34em}
+  .hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .hero .visual{position:relative;height:min(78vh,720px);min-height:460px;overflow:hidden}
+  .hero .stripes{position:absolute;right:-6%;top:6%;width:78%;height:88%;background:repeating-linear-gradient(-45deg,var(--gold) 0 26px,transparent 26px 58px);clip-path:polygon(18% 0,100% 0,100% 100%,0 100%);opacity:.95;transform:skewX(-6deg)}
+  .hero .slab{position:absolute;right:6%;top:0;width:44%;height:100%;background:var(--gold);clip-path:polygon(35% 0,100% 0,65% 100%,0 100%);opacity:.55}
+  .hero .pini{position:absolute;inset:0;margin:auto;height:100%;width:auto;max-width:none;object-fit:contain;-webkit-mask-image:radial-gradient(ellipse 62% 66% at 50% 52%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 62% 66% at 50% 52%,#000 58%,transparent 100%);filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
+  .hero .frag{position:absolute;background:var(--gold);opacity:.9}
+  .hero .stats{display:flex;flex-direction:column;gap:12px;border-left:1px solid var(--line);padding-left:22px;position:relative;z-index:2}
+  .hero .stat{padding:8px 0}
+  .hero .stat .v{font-family:var(--display);font-size:38px;line-height:1;color:var(--ink)}
+  .hero .stat .v i{font-style:normal;color:var(--gold)}
+  .hero .stat .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:5px;font-weight:700}
+  .featured{margin:34px 0 0;display:inline-flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 16px 12px 12px;max-width:380px}
+  .featured .ic{width:44px;height:44px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 44px}
+  .featured .tag{font-size:10px;letter-spacing:.2em;color:var(--red);font-weight:800}
+  .featured b{display:block;font-size:14px}
+  .featured span{font-size:12px;color:var(--dim)}
+  @media(max-width:1100px){.hero .grid{grid-template-columns:1fr 1fr;} .hero .stats{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:18px} .hero .stat{flex:1 1 140px}}
+  @media(max-width:820px){.hero .grid{grid-template-columns:1fr;padding-top:44px;min-height:0} .hero .visual{height:420px;min-height:0;margin-top:10px} .hero h1{font-size:clamp(50px,15vw,88px)} .hero .stat .v{font-size:30px}}
+
+  /* TICKER */
+  .ticker{display:flex;align-items:stretch;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0D0D0F;margin-top:40px;overflow:hidden}
+  .ticker .tag{background:var(--gold);color:#000;font-family:var(--display);font-size:15px;letter-spacing:.06em;padding:0 22px;display:flex;align-items:center;white-space:nowrap;clip-path:polygon(0 0,100% 0,92% 100%,0 100%);padding-right:34px;text-transform:uppercase}
+  .ticker .track{flex:1;overflow:hidden;position:relative}
+  .ticker .run{display:inline-flex;gap:0;white-space:nowrap;animation:run 40s linear infinite;height:52px;align-items:center}
+  .ticker .run span{padding:0 26px;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+  .ticker .run span::after{content:"///";color:var(--gold);margin-left:52px;letter-spacing:0}
+  @keyframes run{to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.ticker .run{animation:none}}
+
+  /* ABOUT */
+  .feat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:900px){.feat{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.feat{grid-template-columns:1fr}}
+  .fcard{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:26px 24px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+  .fcard:hover{border-color:var(--line2);transform:translateY(-3px)}
+  .fcard .n{font-family:var(--display);font-size:44px;line-height:1;color:rgba(255,255,255,.08);position:absolute;right:16px;top:12px}
+  .fcard .ic{width:44px;height:44px;border-radius:6px;background:rgba(245,184,24,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .fcard .ic svg{width:22px;height:22px}
+  .fcard h3{font-size:16.5px;font-weight:800;margin-bottom:8px}
+  .fcard p{font-size:13.5px;color:var(--dim)}
+  .season{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:linear-gradient(90deg,rgba(245,184,24,.14),transparent 60%);border:1px solid var(--line2);border-radius:8px;padding:22px 26px}
+  .season img{width:64px;height:auto}
+  .season b{display:block;font-size:17px;margin-bottom:4px}
+  .season p{color:var(--dim);font-size:13.5px}
+  @media(max-width:560px){.season{grid-template-columns:1fr}}
+
+  /* GAMES */
+  .verticals{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+  @media(max-width:900px){.verticals{grid-template-columns:repeat(2,1fr)}}
+  .vert{border:1px solid var(--line);border-radius:6px;padding:14px 16px;background:var(--panel)}
+  .vert b{display:block;font-family:var(--display);font-size:22px;letter-spacing:.02em;text-transform:uppercase}
+  .vert span{font-size:12px;color:var(--dim)}
+  .games{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  @media(max-width:1000px){.games{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:600px){.games{grid-template-columns:repeat(3,1fr);gap:8px}}
+  .game{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:384/516;background:var(--panel);border:1px solid var(--line)}
+  .game img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+  .game:hover img{transform:scale(1.06)}
+  .game .tag{position:absolute;left:8px;top:8px;font-size:9.5px;font-weight:800;letter-spacing:.12em;padding:4px 7px;border-radius:3px;background:var(--gold);color:#000}
+  .game .tag.NEW{background:var(--blue);color:#000}
+  .game .tag.JACKPOT{background:var(--red);color:#fff}
+  .providers{margin-top:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden}
+  .providers .lab{font-size:10.5px;letter-spacing:.2em;color:var(--dim2);font-weight:800;text-align:center;margin-bottom:12px}
+  .providers .run{display:inline-flex;white-space:nowrap;animation:run 50s linear infinite}
+  .providers .run span{font-family:var(--display);font-size:24px;letter-spacing:.06em;color:var(--dim);padding:0 30px;text-transform:uppercase}
+  .providers .run span:nth-child(odd){color:var(--ink)}
+  .preview{margin-top:64px;display:grid;grid-template-columns:2fr 1fr;gap:14px;align-items:stretch}
+  @media(max-width:800px){.preview{grid-template-columns:1fr}}
+  .shot{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+  .shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+  .preview .m{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .pnote{font-size:12px;color:var(--dim2);margin-top:12px}
+
+  /* HOW */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:24px;position:relative}
+  .step .n{font-family:var(--display);font-size:54px;line-height:1;color:var(--gold);margin-bottom:14px}
+  .step h3{font-size:16px;font-weight:800;margin-bottom:8px}
+  .step p{font-size:13.5px;color:var(--dim)}
+
+  /* INVEST */
+  .facts{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line2);border-radius:8px;overflow:hidden;margin-bottom:30px;background:var(--panel)}
+  @media(max-width:900px){.facts{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.facts{grid-template-columns:1fr}}
+  .fact{padding:18px 20px;border-right:1px solid var(--line)}
+  .fact:last-child{border-right:0}
+  .fact .l{font-size:10.5px;letter-spacing:.18em;color:var(--dim);font-weight:800;text-transform:uppercase}
+  .fact .v{font-family:var(--display);font-size:21px;margin-top:6px;color:var(--gold)}
+  .tiers{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  @media(max-width:1100px){.tiers{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:760px){.tiers{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:500px){.tiers{grid-template-columns:1fr}}
+  .tier{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px 20px;display:flex;flex-direction:column;position:relative;transition:transform .2s,border-color .2s}
+  .tier:hover{transform:translateY(-4px);border-color:var(--line2)}
+  .tier.hot{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset,0 30px 70px -40px rgba(245,184,24,.5)}
+  .tier.max{background:linear-gradient(180deg,#221A05,var(--panel) 70%);border-color:var(--goldd)}
+  .tier .badge{position:absolute;top:-11px;left:18px;background:var(--gold);color:#000;font-size:10px;font-weight:900;letter-spacing:.16em;padding:4px 9px;border-radius:3px;text-transform:uppercase}
+  .tier.max .badge{background:var(--red);color:#fff}
+  .tier .name{font-family:var(--display);font-size:30px;letter-spacing:.03em;line-height:1;text-transform:uppercase}
+  .tier .kname{font-size:12px;color:var(--dim);font-weight:700;margin-top:4px}
+  .tier .price{font-family:var(--display);font-size:46px;color:var(--gold);line-height:1;margin:18px 0 4px}
+  .tier .price small{font-size:16px;color:var(--dim);font-family:var(--body);font-weight:700;margin-left:4px}
+  .tier .alloc{font-size:13px;color:var(--ink);font-weight:800;margin-top:10px}
+  .tier .alloc span{color:var(--dim);font-weight:600}
+  .tier .bonus{display:inline-block;margin-top:8px;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--gold);border:1px solid var(--line2);border-radius:3px;padding:3px 7px}
+  .tier ul{list-style:none;margin:18px 0 22px;padding-top:16px;border-top:1px solid var(--line);flex:1}
+  .tier li{font-size:13px;color:var(--dim);padding:5px 0 5px 18px;position:relative}
+  .tier li::before{content:"";position:absolute;left:0;top:12px;width:8px;height:8px;background:var(--gold);clip-path:polygon(0 0,100% 50%,0 100%)}
+  .tier .btn{justify-content:center;width:100%;padding:13px}
+  .invhow{margin-top:56px;display:grid;grid-template-columns:1fr 2fr;gap:30px;align-items:start}
+  @media(max-width:860px){.invhow{grid-template-columns:1fr}}
+  .invhow h3{font-family:var(--display);font-size:clamp(26px,4vw,34px);text-transform:uppercase}
+  .invhow ol{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:700px){.invhow ol{grid-template-columns:1fr}}
+  .invhow li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}
+  .invhow li::before{content:"0" counter(s);font-family:var(--display);font-size:26px;color:var(--gold);display:block;margin-bottom:8px}
+  .invhow li b{display:block;font-size:14.5px;margin-bottom:6px}
+  .invhow li span{font-size:13px;color:var(--dim)}
+  .disc{margin-top:26px;font-size:12px;color:var(--dim2);border-top:1px dashed var(--line);padding-top:14px}
+
+  /* TOKEN */
+  .tfacts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 40px}
+  @media(max-width:800px){.tfacts{grid-template-columns:repeat(2,1fr)}}
+  .tfact{border:1px solid var(--line);border-radius:8px;padding:16px 18px;background:var(--panel)}
+  .tfact .l{font-size:10.5px;letter-spacing:.18em;color:var(--dim);font-weight:800;text-transform:uppercase}
+  .tfact .v{font-family:var(--display);font-size:24px;margin-top:6px}
+  .tokgrid{display:grid;grid-template-columns:420px 1fr;gap:40px;align-items:center}
+  @media(max-width:900px){.tokgrid{grid-template-columns:1fr}}
+  .donut{position:relative;width:100%;max-width:420px;margin:0 auto}
+  .donut svg{width:100%;height:auto;display:block}
+  .donut .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none}
+  .donut .c b{font-family:var(--display);font-size:40px;line-height:1;color:var(--gold)}
+  .donut .c span{font-size:11px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;font-weight:800;margin-top:6px}
+  .alloc{display:grid;gap:8px}
+  .arow{display:grid;grid-template-columns:14px 1fr auto auto;gap:12px;align-items:center;padding:11px 14px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+  .arow i{width:14px;height:14px;border-radius:3px;display:block}
+  .arow b{font-size:14px}
+  .arow small{display:block;font-size:12px;color:var(--dim);font-weight:400;margin-top:2px}
+  .arow .p{font-family:var(--display);font-size:22px;color:var(--gold);min-width:56px;text-align:right}
+  .arow .a{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums;min-width:64px;text-align:right}
+  @media(max-width:520px){.arow{grid-template-columns:14px 1fr auto}.arow .a{display:none}}
+  .utils{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:44px}
+  @media(max-width:900px){.utils{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.utils{grid-template-columns:1fr}}
+  .util{border:1px solid var(--line);border-radius:8px;padding:20px;background:var(--panel)}
+  .util b{display:block;font-size:15px;margin-bottom:6px}
+  .util p{font-size:13px;color:var(--dim)}
+  .util .k{font-family:var(--display);color:var(--gold);font-size:13px;letter-spacing:.14em;margin-bottom:10px}
+
+  /* ROADMAP */
+  .road{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;position:relative}
+  @media(max-width:1000px){.road{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.road{grid-template-columns:1fr}}
+  .ms{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px 20px;position:relative}
+  .ms.done{border-color:rgba(74,222,128,.35)}
+  .ms.now{border-color:var(--gold)}
+  .ms .when{font-family:var(--display);font-size:28px;color:var(--gold);line-height:1}
+  .ms .st{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.16em;padding:3px 7px;border-radius:3px;margin-top:8px;text-transform:uppercase}
+  .ms.done .st{background:rgba(74,222,128,.15);color:#4ADE80}
+  .ms.now .st{background:rgba(245,184,24,.15);color:var(--gold)}
+  .ms h3{font-size:15.5px;font-weight:800;margin:14px 0 10px}
+  .ms ul{list-style:none}
+  .ms li{font-size:13px;color:var(--dim);padding:4px 0 4px 14px;position:relative}
+  .ms li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;background:var(--gold);border-radius:1px}
+
+  /* FAQ */
+  .faq{max-width:860px}
+  details{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;list-style:none;padding:20px 0;font-size:16px;font-weight:800;display:flex;justify-content:space-between;gap:20px;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--display);font-size:26px;color:var(--gold);flex:0 0 auto;transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--dim);font-size:14px;padding:0 0 20px;max-width:60em}
+
+  /* CTA */
+  .cta{background:var(--gold);color:#0A0A0B;padding:84px 0;position:relative;overflow:hidden}
+  .cta::before{content:"";position:absolute;right:-10%;top:-40%;width:50%;height:180%;background:repeating-linear-gradient(-45deg,rgba(0,0,0,.08) 0 26px,transparent 26px 58px);transform:skewX(-8deg)}
+  .cta .wrap{position:relative;display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:center}
+  @media(max-width:860px){.cta .wrap{grid-template-columns:1fr}}
+  .cta h2{font-size:clamp(46px,7vw,92px);color:#0A0A0B}
+  .cta h2 em{color:#fff;-webkit-text-stroke:1px #0A0A0B}
+  .cta p{color:rgba(0,0,0,.72);font-size:16px;max-width:40em;margin-top:14px;font-weight:600}
+  .cta .btns{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+  .cta .btn.dark{background:#0A0A0B;color:var(--gold);justify-content:center;padding:18px}
+  .cta .btn.line{background:transparent;color:#0A0A0B;border-color:#0A0A0B;justify-content:center;padding:18px}
+  .cta .btn.line:hover{background:rgba(0,0,0,.08)}
+
+  /* FOOTER */
+  footer{padding:60px 0 30px;border-top:1px solid var(--line);background:#070708}
+  .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
+  @media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.fgrid{grid-template-columns:1fr}}
+  footer .tagl{color:var(--dim);font-size:13.5px;margin-top:12px;max-width:30em}
+  footer h4{font-size:11px;letter-spacing:.2em;color:var(--gold);font-weight:800;margin-bottom:14px;text-transform:uppercase}
+  footer ul{list-style:none}
+  footer li{margin:8px 0}
+  footer li a{font-size:13.5px;color:var(--dim)}
+  footer li a:hover{color:var(--ink)}
+  .legal{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;font-size:11.5px;color:var(--dim2);line-height:1.7}
+  .legal .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:12px}
+  .age{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:2px solid var(--dim2);border-radius:50%;font-size:10px;font-weight:900;color:var(--dim);margin-right:8px;vertical-align:middle}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="top">
+  <div class="in">
+    <a class="logo" href="#top" aria-label="TeleFi"><img src="assets/symbol.webp" alt="" width="30" height="30"><span>Tele<b>Fi</b></span></a>
+    <div class="links" id="links">
+      <a href="#about" data-i18n="nav.about">소개</a>
+      <a href="#games" data-i18n="nav.games">게임</a>
+      <a href="#invest" data-i18n="nav.invest">DAO 투자</a>
+      <a href="#token" data-i18n="nav.token">$TFI 토큰</a>
+      <a href="#roadmap" data-i18n="nav.roadmap">로드맵</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </div>
+    <div class="right">
+      <div class="langs" role="group" aria-label="Language">
+        <button data-lang="ko">KO</button><button data-lang="en">EN</button><button data-lang="zh">中文</button><button data-lang="ja">日本</button>
+      </div>
+      <a class="btn gold navcta" href="#invest"><span data-i18n="nav.cta">DAO 참여하기</span><span class="ar">↗</span></a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="grid">
+    <div>
+      <div class="eyebrow" data-i18n="hero.eyebrow">TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN</div>
+      <h1 class="d"><span class="l1" data-i18n="hero.l1">텔레그램에서</span><br><span class="l2" data-i18n="hero.l2">플레이하고,</span><br><span class="l3" data-i18n="hero.l3">하우스를 소유하라</span></h1>
+      <p class="sub" data-i18n="hero.sub"></p>
+      <div class="ctas">
+        <a class="btn gold" href="#invest"><span data-i18n="hero.cta1">DAO 투자 상품 보기</span><span class="ar">↗</span></a>
+        <a class="btn ghost" href="#about"><span data-i18n="hero.cta2">텔레파이란?</span><span class="ar">↓</span></a>
+      </div>
+      <a class="featured" href="#about">
+        <div class="ic">★</div>
+        <div><div class="tag" data-i18n="hero.ftag">FEATURED</div><b data-i18n="hero.ftitle">스핀파이 시즌 2</b><span data-i18n="hero.fsub">피니 IP · 4개 언어 운영 노하우 계승</span></div>
+      </a>
+    </div>
+    <div class="visual" aria-hidden="true">
+      <div class="slab"></div>
+      <div class="stripes"></div>
+      <span class="frag" style="left:8%;top:14%;width:14px;height:14px;transform:rotate(20deg)"></span>
+      <span class="frag" style="left:14%;top:70%;width:22px;height:8px;transform:rotate(-30deg)"></span>
+      <span class="frag" style="right:10%;top:80%;width:10px;height:10px;transform:rotate(45deg)"></span>
+      <span class="frag" style="right:18%;top:8%;width:8px;height:26px;transform:rotate(15deg)"></span>
+      <img class="pini" src="assets/pini-hero.webp" alt="" width="900" height="1124">
+    </div>
+    <aside class="stats" id="heroStats"></aside>
+  </div>
+  <div class="ticker"><div class="tag" data-i18n="ticker.tag">DAO ROUND</div><div class="track"><div class="run" id="ticker"></div></div></div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sechead">
+      <div><div class="eyebrow">ABOUT TELEFI</div><h2 class="d" data-i18n-html="about.title"></h2></div>
+      <p class="sub" data-i18n="about.sub"></p>
+    </div>
+    <div class="feat" id="features"></div>
+    <div class="season">
+      <img src="assets/symbol.webp" alt="TeleFi" width="64" height="64">
+      <div><b data-i18n="about.seasonT"></b><p data-i18n="about.seasonP"></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="games" class="alt">
+  <div class="wrap">
+    <div class="sechead">
+      <div><div class="eyebrow">GAME LOBBY</div><h2 class="d" data-i18n-html="games.title"></h2></div>
+      <p class="sub" data-i18n="games.sub"></p>
+    </div>
+    <div class="verticals" id="verticals"></div>
+    <div class="games" id="gameGrid"></div>
+    <div class="providers"><div class="lab" data-i18n="games.providers"></div><div class="run" id="providers"></div></div>
+    <div class="preview">
+      <div class="shot"><img src="assets/shots/desktop-lobby.webp" alt="TeleFi desktop lobby" loading="lazy"></div>
+      <div class="m"><div class="shot"><img src="assets/shots/mobile-lobby.webp" alt="TeleFi mobile lobby" loading="lazy"></div><div class="shot"><img src="assets/shots/mobile-promos.webp" alt="TeleFi mobile promotions" loading="lazy"></div></div>
+    </div>
+    <p class="pnote" data-i18n="games.pnote"></p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sechead">
+      <div><div class="eyebrow">HOW TO PLAY</div><h2 class="d" data-i18n-html="how.title"></h2></div>
+      <p class="sub" data-i18n="how.sub"></p>
+    </div>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<section id="invest" class="alt">
+  <div class="wrap">
+    <div class="sechead">
+      <div><div class="eyebrow">DAO INVESTMENT ROUND</div><h2 class="d" data-i18n-html="invest.title"></h2></div>
+      <p class="sub" data-i18n="invest.sub"></p>
+    </div>
+    <div class="facts" id="facts"></div>
+    <div class="tiers" id="tiers"></div>
+    <div class="invhow">
+      <h3 data-i18n="invest.howT"></h3>
+      <ol id="invSteps"></ol>
+    </div>
+    <p class="disc" data-i18n="invest.disc"></p>
+  </div>
+</section>
+
+<section id="token">
+  <div class="wrap">
+    <div class="sechead">
+      <div><div class="eyebrow">TOKENOMICS</div><h2 class="d" data-i18n-html="token.title"></h2></div>
+      <p class="sub" data-i18n="token.sub"></p>
+    </div>
+    <div class="tfacts" id="tfacts"></div>
+    <div class="tokgrid">
+      <div class="donut"><svg viewBox="0 0 200 200" id="donut" role="img" aria-label="Token allocation"></svg><div class="c"><b>10B</b><span data-i18n="token.center"></span></div></div>
+      <div class="alloc" id="alloc"></div>
+    </div>
+    <div class="utils" id="utils"></div>
+  </div>
+</section>
+
+<section id="roadmap" class="alt">
+  <div class="wrap">
+    <div class="sechead">
+      <div><div class="eyebrow">ROADMAP</div><h2 class="d" data-i18n-html="road.title"></h2></div>
+      <p class="sub" data-i18n="road.sub"></p>
+    </div>
+    <div class="road" id="road"></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="d" data-i18n="faq.title"></h2>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<section class="cta" id="join">
+  <div class="wrap">
+    <div><h2 class="d" data-i18n-html="cta.title"></h2><p data-i18n="cta.sub"></p></div>
+    <div class="btns">
+      <a class="btn dark" id="ctaTg" href="#"><span data-i18n="cta.b1"></span><span class="ar">↗</span></a>
+      <a class="btn line" id="ctaDocs" href="#" target="_blank" rel="noopener"><span data-i18n="cta.b2"></span><span class="ar">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="#top"><img src="assets/symbol.webp" alt="" width="30" height="30"><span>Tele<b>Fi</b></span></a>
+        <p class="tagl" data-i18n="footer.tag"></p>
+      </div>
+      <div><h4 data-i18n="footer.c1"></h4><ul><li><a href="#about" data-i18n="nav.about"></a></li><li><a href="#games" data-i18n="nav.games"></a></li><li><a href="#how" data-i18n="footer.how"></a></li></ul></div>
+      <div><h4 data-i18n="footer.c2"></h4><ul><li><a href="#invest" data-i18n="nav.invest"></a></li><li><a href="#token" data-i18n="nav.token"></a></li><li><a href="#roadmap" data-i18n="nav.roadmap"></a></li></ul></div>
+      <div><h4 data-i18n="footer.c3"></h4><ul><li><a id="fTg" href="#" data-i18n="footer.tg"></a></li><li><a id="fDocs" href="#" target="_blank" rel="noopener" data-i18n="footer.docs"></a></li><li><a href="#faq">FAQ</a></li></ul></div>
+    </div>
+    <div class="legal">
+      <p data-i18n="footer.legal1"></p>
+      <p style="margin-top:8px" data-i18n="footer.legal2"></p>
+      <div class="row"><span><span class="age">18+</span><span data-i18n="footer.age"></span></span><span>© 2026 TeleFi. All rights reserved.</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============ CONFIG — 숫자·링크는 여기서만 바꾸면 됩니다 ============ */
+const CONFIG = {
+  TELEGRAM_URL: "https://t.me/telefiofficial",            // TODO: 텔레파이 공식 채널/봇 핸들로 교체
+  DOCS_URL: "https://isaacweb007.github.io/telefi-businessplan/",
+  TOTAL_SUPPLY: 10_000_000_000,
+  ROUND_PRICE: 0.005,                                      // USD per TFI (DAO round)
+  TIERS: [ // 보너스는 배정량에 가산
+    { id:"mini",  usd:300,   bonus:0    },
+    { id:"basic", usd:1000,  bonus:0.05 },
+    { id:"plus",  usd:3000,  bonus:0.10 },
+    { id:"pro",   usd:5000,  bonus:0.15, badge:"popular" },
+    { id:"max",   usd:10000, bonus:0.25, badge:"founding" },
+  ],
+  ALLOC: [ // 합계 100
+    { id:"liq",  pct:30, color:"#F5B818" },
+    { id:"dao",  pct:30, color:"#FFD35C" },
+    { id:"eco",  pct:15, color:"#2AABEE" },
+    { id:"fdn",  pct:10, color:"#F5F4F0" },
+    { id:"team", pct:8,  color:"#9C9B96" },
+    { id:"mkt",  pct:5,  color:"#E8352E" },
+    { id:"rsv",  pct:2,  color:"#4ADE80" },
+  ],
+  GAMES: [
+    ["marlin-masters","HOT"],["burning-chilli","HOT"],["sweet-bonanza","HOT"],["fruit-invaders","NEW"],["dogmasons","NEW"],["mega-wild-fruits","NEW"],
+    ["gears-of-fortune","NEW"],["jaws-of-justice","JACKPOT"],["ufo-pyramids","JACKPOT"],["energy-crowns","JACKPOT"],["colossus-fortune","JACKPOT"],["fortune-bags","JACKPOT"]
+  ],
+  PROVIDERS: ["HACKSAW","PRAGMATIC PLAY","EVOLUTION","BGAMING","PG SOFT","SPRIBE","NOVOMATIC","NOLIMIT CITY","PLAY'N GO","EZUGI","HABANERO","AMIGO GAMING","3 OAKS","EVOPLAY"],
+};
+
+/* ============ i18n ============ */
+const I18N = {
+ko: {
+  meta:{ title:"텔레파이 TeleFi — 텔레그램 크립토 카지노 · $TFI DAO 라운드", desc:"텔레그램 미니앱에서 3초 만에 시작하는 크립토 카지노. 슬롯·라이브·테이블·미니게임 10,000+, USDT 입출금. 플랫폼의 성장은 솔라나 기반 $TFI 토큰으로 DAO에 돌아갑니다." },
+  nav:{ about:"소개", games:"게임", invest:"DAO 투자", token:"$TFI 토큰", roadmap:"로드맵", faq:"FAQ", cta:"DAO 참여하기" },
+  hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"텔레그램에서", l2:"플레이하고,", l3:"하우스를 소유하라",
+    sub:"텔레파이는 텔레그램 미니앱에서 3초 만에 시작하는 크립토 카지노입니다. 슬롯·라이브·테이블·미니게임 10,000종 이상, USDT 입출금. 그리고 플랫폼의 성장은 솔라나 기반 $TFI 토큰으로 DAO 커뮤니티에 돌아갑니다.",
+    cta1:"DAO 투자 상품 보기", cta2:"텔레파이란?", ftag:"FEATURED", ftitle:"스핀파이 시즌 2", fsub:"피니 IP · 4개 언어 운영 노하우 계승",
+    stats:[["10,000+","라이선스 게임"],["100+","게임 프로바이더"],["10B","$TFI 총 발행량"],["3초","첫 게임까지"]] },
+  ticker:{ tag:"DAO ROUND", items:["$TFI DAO 라운드 오픈 예정","앙주안 라이선스 진행 중","2027 Q1 정식 런칭","슬롯 · 라이브 · 테이블 · 크래시","USDT 입출금 · 평균 3분","솔라나 기반 유틸리티 토큰","5개 투자 상품 · $300부터"] },
+  about:{ title:"설치도 가입도 없이,<br>텔레그램에서 <em>바로 한 판</em>.",
+    sub:"텔레파이는 스핀파이의 시즌 2입니다. 슬롯 전문이던 시즌 1에서 확장해, 라이선스 프로바이더가 공급하는 슬롯·카드·라이브 카지노·미니게임 전체를 텔레그램 미니앱에서 서비스합니다.",
+    features:[
+      ["텔레그램 미니앱","봇을 여는 순간 게임 로비까지 3초. 앱 설치도, 회원가입 서류도 없습니다. 텔레그램 계정 하나면 내 게임 지갑이 자동으로 만들어집니다."],
+      ["라이선스 게임만","앙주안 게이밍 라이선스 아래, 100곳이 넘는 라이선스 프로바이더의 게임만 제공합니다. RTP는 프로바이더 공식 수치 그대로."],
+      ["풀 버티컬","슬롯 · 라이브 카지노 · 테이블 · 크래시/미니게임. 스포츠북만 제외한 카지노 전 장르를 한 지갑으로."],
+      ["크립토 네이티브","USDT 입출금. 카드·PSP 수수료도 거절율도 없습니다. 출금은 1배 롤링만 채우면 24시간 언제든, 평균 3분."],
+      ["보너스 엔진","웰컴 보너스 · 리로드 · 캐시백 · 레이크백 · 데일리 럭키휠. 스핀파이에서 설계한 낙하산 보너스 시스템을 그대로 계승합니다."],
+      ["DAO가 소유하는 하우스","플랫폼의 성장은 $TFI로 커뮤니티에 돌아갑니다. DAO는 토큰을 보유하고, 게임 라인업과 프로모션 예산을 함께 결정합니다."]
+    ],
+    seasonT:"시즌 1 → 시즌 2", seasonP:"시즌 1(스핀파이)이 랜딩과 브랜드, 4개 언어 운영을 검증했다면, 시즌 2(텔레파이)는 실제 게임 운영과 DAO 소유 구조로 확장합니다. 피니 캐릭터 IP는 시즌 2 리스킨으로 이어집니다." },
+  games:{ title:"10,000+ 게임,<br><em>한 지갑</em>으로.", sub:"스포츠북만 제외한 풀 버티컬. 라이선스 프로바이더의 공식 RTP 그대로, 텔레그램 안에서 바로 실행됩니다.",
+    verticals:[["슬롯","Hacksaw · Pragmatic · BGaming · PG Soft"],["라이브 카지노","Evolution · Ezugi · Vivo"],["테이블 · 카드","Evoplay · Platipus · 3 Oaks"],["크래시 · 미니게임","Spribe (Aviator) · InOut · Turbo"]],
+    providers:"파트너 프로바이더", pnote:"※ 위 화면은 동일 턴키 플랫폼의 실운영 화면에 텔레파이 로고를 적용한 목업입니다. 정식 화면은 피니 IP와 자체 브랜딩으로 별도 제작되며, 표시된 게임·프로모션은 텔레파이의 실제 콘텐츠가 아닙니다." },
+  how:{ title:"코인이 처음이어도<br><em>3분이면</em> 첫 게임", sub:"원화나 카드가 아닌 USDT로 즐기는 Web3 카지노입니다. 지갑 생성부터 출금까지 네 단계면 끝납니다.",
+    steps:[["텔레그램에서 열기","설치도 가입 서류도 없습니다. 텔레파이 봇을 여는 순간 내 게임 지갑이 자동으로 만들어집니다."],["USDT 입금","거래소나 텔레그램 지갑에서 USDT를 내 입금 주소로 보내면 몇 초 안에 잔액에 반영됩니다."],["보너스 받고 플레이","웰컴 보너스를 챙기고 슬롯·라이브·테이블·크래시 10,000종 이상을 즐기세요."],["언제든 출금","1배 롤링만 채우면 24시간 언제든 내 지갑으로. 평균 3분이면 도착합니다."]] },
+  invest:{ title:"DAO를 위한<br><em>5개의 투자 상품</em>", sub:"총 발행량의 30%(30억 $TFI)를 DAO 라운드에 배정합니다. 상품을 구매한 DAO에는 $TFI가 배정되고 등급별 혜택이 부여됩니다. 결제는 USDT로 진행합니다.",
+    facts:[["라운드 가격","$0.005 / TFI"],["라운드 배정","3,000,000,000 TFI"],["하드캡","$15,000,000"],["결제","USDT (Solana · TRC20)"],["언락","TGE 25% + 6개월 선형"]],
+    l:{ price:"참여 금액", alloc:"$TFI 배정", base:"기본", bonus:"보너스", cta:"이 상품으로 참여", popular:"인기", founding:"파운딩" },
+    names:{ mini:"미니", basic:"베이직", plus:"플러스", pro:"프로", max:"맥스" },
+    perks:{
+      mini:["DAO 멤버 배지 · 거버넌스 투표권 1x","런칭 에어드랍 대상","DAO 커뮤니티 채널 입장"],
+      basic:["미니 혜택 전부 포함","월간 $TFI 리워드 풀 참여","소프트런치 화이트리스트 (얼리 액세스)"],
+      plus:["베이직 혜택 전부 포함","거버넌스 투표 가중 2x","VIP 티어 1년 · 파트너 데이 초청"],
+      pro:["플러스 혜택 전부 포함","거버넌스 투표 가중 3x","어필리에이트 리베이트 우대율","분기 리포트 · AMA 직접 참여"],
+      max:["프로 혜택 전부 포함","파운딩 DAO 시트 (운영 자문 위원회)","거버넌스 투표 가중 5x","공동 브랜딩 · 프로모션 슬롯","프라이빗 채널 · 창립 멤버 명패"]
+    },
+    howT:"참여 방법",
+    steps:[["상품 선택 후 텔레그램으로 신청","원하는 상품을 고르고 텔레그램으로 DAO 이름과 상품명을 보내주세요. 담당자가 절차를 안내합니다."],["USDT 송금","안내받은 지갑 주소(Solana 또는 TRC20)로 USDT를 송금합니다. 입금 확인 후 배정 확인서를 발급합니다."],["TGE 시 $TFI 지급","TGE 시점에 배정량의 25%를 솔라나 지갑으로 지급하고, 나머지는 6개월간 매월 선형 언락됩니다."]],
+    disc:"※ 본 페이지의 내용은 정보 제공 목적이며 투자 권유가 아닙니다. $TFI는 텔레파이 게임 생태계 내 유틸리티 토큰이며, 가격·배정·언락 조건은 DAO 라운드 확정 시 최종 공지되는 조건을 따릅니다. 디지털 자산은 가격 변동 위험이 있습니다." },
+  token:{ title:"<em>$TFI</em> — 게임 생태계를<br>움직이는 토큰", sub:"티파이($TFI)는 솔라나 위에서 발행되는 텔레파이의 유틸리티 토큰입니다. 100억 개 고정 공급, 추가 발행 없음. 유동성의 30%와 DAO 라운드 30%가 커뮤니티에 배정됩니다.",
+    facts:[["티커","$TFI (티파이)"],["체인","Solana · SPL"],["총 발행량","10,000,000,000"],["추가 발행","없음 · 고정 공급"]],
+    center:"총 발행량",
+    alloc:{ liq:["DAO 유동성 공급","DEX 유동성 풀 · 마켓메이킹. DAO 참여자의 유동성을 보장합니다."], dao:["DAO 라운드","5개 투자 상품을 통해 DAO에 배정"], eco:["생태계 · 플레이어 리워드","레이크백 · 미션 · 럭키휠 · 시즌 보상"], fdn:["재단","운영 · 법률 · 라이선스 · 개발 (24개월 선형)"], team:["팀 · 어드바이저","12개월 클리프 후 24개월 선형"], mkt:["마케팅 · 파트너십","KOL · 거래소 · 제휴"], rsv:["트레저리 리저브","비상 준비금"] },
+    utils:[["REWARDS","게임 리워드 지급","레이크백 · 미션 · 럭키휠 보상이 $TFI로 지급됩니다. 플레이할수록 토큰이 쌓입니다."],["STAKING","스테이킹 · VIP 티어","$TFI를 스테이킹하면 VIP 티어가 올라가고 보너스 부스트와 출금 우선권을 받습니다."],["GOVERNANCE","DAO 거버넌스","게임 프로바이더 추가, 프로모션 예산, 시즌 이벤트를 DAO 투표로 결정합니다."],["DISCOUNT","수수료 할인 · 상점 결제","리워드 상점 결제와 프리미엄 기능 이용 시 $TFI로 할인을 받습니다."],["BUYBACK","바이백 & 번","플랫폼 순수익의 일정 비율로 시장에서 $TFI를 매입해 소각합니다. 공급은 줄어들기만 합니다."],["AFFILIATE","어필리에이트 보상","친구 초대와 채널 어필리에이트 보상을 $TFI로 지급합니다. 유저가 곧 마케터가 됩니다."]] },
+  road:{ title:"2027 Q1 <em>정식 런칭</em>까지", sub:"라이선스 → 연동 → DAO 라운드 → 런칭 → TGE. 각 단계는 앞 단계의 결과를 조건으로 진행됩니다.", done:"완료", now:"진행 중",
+    items:[["2026 Q3","브랜드 · 사업계획 확정",["텔레파이 브랜드 CI · 피니 IP 시즌 2 리스킨","턴키 플랫폼 파트너 견적 · 계약 협상","수익모델 검증 · 사업계획서 5개 언어"],"done"],
+      ["2026 Q4","법인 · 라이선스 · DAO 라운드",["역외 법인 설립 · 앙주안 라이선스 신청","플랫폼 API 연동 · 결제(USDT) 연동","DAO 라운드 오픈 · 소프트런치(화이트리스트)"],"now"],
+      ["2027 Q1","정식 런칭 · TGE",["텔레그램 미니앱 정식 오픈","$TFI TGE · DEX 유동성 공급","레이크백 · 럭키휠 · 리워드 상점 가동"],""],
+      ["2027 Q2","웹 · 스테이킹 · 거버넌스",["웹 카지노 오픈 (같은 계정 · 같은 지갑)","$TFI 스테이킹 · VIP 티어","DAO 거버넌스 1차 투표"],""],
+      ["2027 H2","확장",["텔레파이 오리지널 게임","어필리에이트 프로그램 · KOL 확장","신규 언어 · 지역 확장"],""]] },
+  faq:{ title:"자주 묻는 질문", items:[
+    ["텔레파이는 무엇인가요?","텔레그램 미니앱에서 실행되는 크립토 카지노입니다. 슬롯·라이브·테이블·미니게임을 라이선스 프로바이더로부터 공급받아 서비스하며, 입출금은 USDT로 이루어집니다. 스핀파이의 시즌 2로, 별도 법인·별도 브랜드로 운영됩니다."],
+    ["DAO 투자 상품을 구매하면 무엇을 받나요?","참여 금액에 따라 $TFI가 배정되고(기본 배정 + 등급별 보너스), 거버넌스 투표권과 등급별 혜택(리워드 풀, VIP 티어, 파운딩 시트 등)이 부여됩니다. 각 상품 카드에서 상세 내용을 확인하세요."],
+    ["$TFI는 언제, 어떻게 지급되나요?","TGE(토큰 생성 이벤트) 시점에 배정량의 25%가 솔라나 지갑으로 지급되고, 나머지 75%는 6개월간 매월 선형으로 언락됩니다. TGE는 정식 런칭과 함께 2027년 1분기를 목표로 합니다."],
+    ["결제는 어떤 방식인가요?","USDT로 결제합니다(Solana 또는 TRC20). 텔레그램으로 신청하면 담당자가 지갑 주소와 절차를 안내하며, 입금 확인 후 배정 확인서를 발급합니다."],
+    ["라이선스가 있나요?","앙주안(Anjouan) 게이밍 라이선스를 진행 중입니다. 라이선스 발급과 플랫폼 계약 완료 전에는 실제 게임 서비스를 오픈하지 않습니다."],
+    ["어느 국가에서 이용할 수 있나요?","라이선스 및 파트너 조건상 제한되는 관할(미국·영국·프랑스·독일·네덜란드·스페인·호주 등)과 현지 법령상 온라인 게임이 금지된 국가에서는 이용할 수 없습니다. 이용 전 거주 국가의 법령을 확인해 주세요."]] },
+  cta:{ title:"DAO 라운드에<br><em>함께하세요</em>", sub:"5개 상품, $300부터. 텔레그램으로 DAO 이름과 상품명을 보내주시면 담당자가 절차를 안내합니다.", b1:"텔레그램으로 신청", b2:"사업계획서 보기" },
+  footer:{ tag:"텔레그램 안의 풀스택 크립토 카지노. 플랫폼의 성장은 $TFI로 DAO에 돌아갑니다.", c1:"제품", c2:"DAO", c3:"링크", how:"플레이 방법", tg:"텔레그램", docs:"사업계획서",
+    legal1:"텔레파이(TeleFi)는 스핀파이와 별도 법인·별도 브랜드로 운영됩니다. 본 웹사이트의 모든 내용은 정보 제공 목적이며 투자 권유, 금융 자문 또는 증권의 청약 권유에 해당하지 않습니다. $TFI는 텔레파이 게임 생태계 내에서 사용되는 유틸리티 토큰이며, 수익이나 가격 상승을 보장하지 않습니다.",
+    legal2:"온라인 게임은 관할별 인허가 대상입니다. 제한 관할 및 현지 법령상 금지된 국가에서는 서비스를 이용할 수 없습니다. 도박은 중독성이 있을 수 있습니다 — 책임 있게 플레이하세요.",
+    age:"만 18세 이상만 이용할 수 있습니다." }
+},
+en: {
+  meta:{ title:"TeleFi — Telegram Crypto Casino · $TFI DAO Round", desc:"A crypto casino that starts in 3 seconds inside Telegram. 10,000+ licensed games, USDT in and out, and a Solana-based $TFI token that gives the house back to the DAO." },
+  nav:{ about:"About", games:"Games", invest:"DAO Round", token:"$TFI Token", roadmap:"Roadmap", faq:"FAQ", cta:"Join the DAO" },
+  hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"Play on", l2:"Telegram.", l3:"Own the house.",
+    sub:"TeleFi is a crypto casino that opens in three seconds inside a Telegram mini app. 10,000+ slots, live tables, card and crash games, USDT in and out — and the platform's growth flows back to the DAO community through the Solana-based $TFI token.",
+    cta1:"View DAO packages", cta2:"What is TeleFi?", ftag:"FEATURED", ftitle:"SpinFi Season 2", fsub:"Pini IP · 4-language ops know-how carried over",
+    stats:[["10,000+","Licensed games"],["100+","Game providers"],["10B","$TFI total supply"],["3s","To first spin"]] },
+  ticker:{ tag:"DAO ROUND", items:["$TFI DAO round opening soon","Anjouan license in progress","Full launch Q1 2027","Slots · Live · Table · Crash","USDT in & out · 3-min avg withdrawal","Solana-based utility token","5 packages · from $300"] },
+  about:{ title:"No install. No sign-up.<br>Just <em>one spin</em> in Telegram.",
+    sub:"TeleFi is Season 2 of SpinFi. Season 1 was slots only; Season 2 brings the full casino — slots, cards, live tables and mini games from licensed providers — into a Telegram mini app.",
+    features:[
+      ["Telegram mini app","Open the bot and you're in the lobby in three seconds. No app install, no paperwork. Your Telegram account is your game wallet."],
+      ["Licensed games only","Under an Anjouan gaming license, TeleFi serves games from 100+ licensed providers only. RTP is the provider's official figure — nothing else."],
+      ["Full vertical","Slots · live casino · table games · crash and mini games. Every casino genre except sportsbook, from one wallet."],
+      ["Crypto native","USDT deposits and withdrawals. No card or PSP fees, no declines. Withdraw any time after 1× rollover — three minutes on average."],
+      ["Bonus engine","Welcome bonus · reload · cashback · rakeback · daily lucky wheel. The parachute bonus system designed at SpinFi carries over intact."],
+      ["A house the DAO owns","Platform growth flows back to the community as $TFI. DAOs hold the token and vote on game line-ups and promotion budgets."]
+    ],
+    seasonT:"Season 1 → Season 2", seasonP:"Season 1 (SpinFi) proved the landing page, the brand and 4-language operations. Season 2 (TeleFi) expands into real game operations and a DAO-owned structure. The Pini character IP continues with a Season 2 reskin." },
+  games:{ title:"10,000+ games,<br><em>one wallet</em>.", sub:"Every vertical except sportsbook. The provider's official RTP, launched straight inside Telegram.",
+    verticals:[["Slots","Hacksaw · Pragmatic · BGaming · PG Soft"],["Live casino","Evolution · Ezugi · Vivo"],["Table · cards","Evoplay · Platipus · 3 Oaks"],["Crash · mini games","Spribe (Aviator) · InOut · Turbo"]],
+    providers:"Partner providers", pnote:"※ Screens above are mockups: live screens of an operator on the same turnkey platform with the TeleFi logo applied. Final screens will be built separately with the Pini IP and TeleFi branding; games and promotions shown are not TeleFi content." },
+  how:{ title:"New to crypto?<br><em>First game</em> in 3 minutes", sub:"A Web3 casino played in USDT, not cards or fiat. From wallet creation to withdrawal in four steps.",
+    steps:[["Open it in Telegram","No install, no forms. The moment you open the TeleFi bot, your game wallet is created."],["Deposit USDT","Send USDT from an exchange or the Telegram wallet to your deposit address — it shows in your balance within seconds."],["Claim the bonus, play","Grab the welcome bonus and play 10,000+ slots, live tables, card and crash games."],["Withdraw any time","Clear a 1× rollover and withdraw to your own wallet 24/7. Three minutes on average."]] },
+  invest:{ title:"Five packages<br><em>built for DAOs</em>", sub:"30% of total supply (3 billion $TFI) is allocated to the DAO round. A DAO that buys a package receives a $TFI allocation plus tier benefits. Payment is in USDT.",
+    facts:[["Round price","$0.005 / TFI"],["Round allocation","3,000,000,000 TFI"],["Hard cap","$15,000,000"],["Payment","USDT (Solana · TRC20)"],["Unlock","25% at TGE + 6-mo linear"]],
+    l:{ price:"Contribution", alloc:"$TFI allocation", base:"base", bonus:"bonus", cta:"Join now", popular:"Popular", founding:"Founding" },
+    names:{ mini:"Mini", basic:"Basic", plus:"Plus", pro:"Pro", max:"Max" },
+    perks:{
+      mini:["DAO member badge · 1× governance vote","Eligible for launch airdrop","Access to the DAO community channel"],
+      basic:["Everything in Mini","Monthly $TFI reward pool","Soft-launch whitelist (early access)"],
+      plus:["Everything in Basic","2× governance vote weight","VIP tier for 1 year · partner day invite"],
+      pro:["Everything in Plus","3× governance vote weight","Preferred affiliate rebate rate","Quarterly reports · direct AMA access"],
+      max:["Everything in Pro","Founding DAO seat (operations advisory board)","5× governance vote weight","Co-branding · promotion slots","Private channel · founding member plaque"]
+    },
+    howT:"How to join",
+    steps:[["Pick a package, apply on Telegram","Choose a package and send your DAO name and the package name on Telegram. Our team walks you through the process."],["Send USDT","Send USDT to the wallet address provided (Solana or TRC20). Once confirmed, you receive an allocation certificate."],["Receive $TFI at TGE","25% of your allocation is delivered to your Solana wallet at TGE; the rest unlocks linearly over six months."]],
+    disc:"※ This page is for information only and is not an offer or solicitation to invest. $TFI is a utility token within the TeleFi game ecosystem; price, allocation and unlock terms are subject to the final terms published when the DAO round is confirmed. Digital assets carry price risk." },
+  token:{ title:"<em>$TFI</em> — the token that<br>runs the game economy", sub:"TFI is TeleFi's utility token issued on Solana. Fixed supply of 10 billion, no further minting. 30% liquidity and 30% DAO round go to the community.",
+    facts:[["Ticker","$TFI"],["Chain","Solana · SPL"],["Total supply","10,000,000,000"],["Further minting","None · fixed supply"]],
+    center:"Total supply",
+    alloc:{ liq:["DAO liquidity provision","DEX liquidity pools and market making — guaranteeing liquidity for DAO participants."], dao:["DAO round","Allocated to DAOs through the five packages"], eco:["Ecosystem · player rewards","Rakeback · missions · lucky wheel · season rewards"], fdn:["Foundation","Operations · legal · license · development (24-mo linear)"], team:["Team · advisors","12-month cliff, then 24-month linear"], mkt:["Marketing · partnerships","KOLs · exchanges · alliances"], rsv:["Treasury reserve","Emergency reserve"] },
+    utils:[["REWARDS","Game rewards","Rakeback, missions and lucky-wheel prizes are paid in $TFI. The more you play, the more you hold."],["STAKING","Staking · VIP tiers","Stake $TFI to climb VIP tiers, boost bonuses and get withdrawal priority."],["GOVERNANCE","DAO governance","Adding game providers, promotion budgets and season events are decided by DAO vote."],["DISCOUNT","Fee discounts · shop","Pay in $TFI for reward-shop items and premium features at a discount."],["BUYBACK","Buyback & burn","A share of platform net revenue buys $TFI on the market and burns it. Supply only goes down."],["AFFILIATE","Affiliate rewards","Referral and channel-affiliate rewards are paid in $TFI. Every player is a marketer."]] },
+  road:{ title:"The road to <em>full launch</em> in Q1 2027", sub:"License → integration → DAO round → launch → TGE. Each step is gated on the one before it.", done:"Done", now:"In progress",
+    items:[["2026 Q3","Brand & business plan locked",["TeleFi brand CI · Pini IP Season 2 reskin","Turnkey platform partner offer & contract negotiation","Revenue model verified · business plan in 5 languages"],"done"],
+      ["2026 Q4","Entity · license · DAO round",["Offshore entity · Anjouan license application","Platform API integration · USDT payment integration","DAO round opens · soft launch (whitelist)"],"now"],
+      ["2027 Q1","Full launch · TGE",["Telegram mini app goes live","$TFI TGE · DEX liquidity provision","Rakeback · lucky wheel · reward shop live"],""],
+      ["2027 Q2","Web · staking · governance",["Web casino opens (same account, same wallet)","$TFI staking · VIP tiers","First DAO governance vote"],""],
+      ["2027 H2","Expansion",["TeleFi original games","Affiliate program · KOL expansion","New languages and regions"],""]] },
+  faq:{ title:"Frequently asked questions", items:[
+    ["What is TeleFi?","A crypto casino that runs inside a Telegram mini app. Slots, live tables, table games and mini games come from licensed providers; deposits and withdrawals are in USDT. It is Season 2 of SpinFi, run as a separate entity and brand."],
+    ["What do I get when my DAO buys a package?","A $TFI allocation sized to your contribution (base allocation plus a tier bonus), governance voting rights and tier benefits such as reward pools, VIP tiers and a founding seat. See each package card for details."],
+    ["When and how is $TFI delivered?","25% of your allocation is delivered to your Solana wallet at TGE (token generation event); the remaining 75% unlocks linearly over six months. TGE is targeted for Q1 2027 alongside full launch."],
+    ["How do I pay?","In USDT (Solana or TRC20). Apply on Telegram and our team provides the wallet address and steps; once the deposit is confirmed you receive an allocation certificate."],
+    ["Is TeleFi licensed?","An Anjouan gaming license is in progress. Live gaming does not open until the license is issued and the platform contract is complete."],
+    ["Where can I play?","Not in jurisdictions restricted by the license and partner terms (including the USA, UK, France, Germany, the Netherlands, Spain and Australia) or where online gaming is prohibited by local law. Check your local laws before playing."]] },
+  cta:{ title:"Join the<br><em>DAO round</em>", sub:"Five packages, from $300. Send your DAO name and package on Telegram and our team will take it from there.", b1:"Apply on Telegram", b2:"Read the business plan" },
+  footer:{ tag:"A full-stack crypto casino inside Telegram. Platform growth flows back to the DAO as $TFI.", c1:"Product", c2:"DAO", c3:"Links", how:"How to play", tg:"Telegram", docs:"Business plan",
+    legal1:"TeleFi is operated as a separate entity and brand from SpinFi. Everything on this website is for information only and does not constitute an offer to invest, financial advice or a solicitation to buy securities. $TFI is a utility token used within the TeleFi game ecosystem and carries no guarantee of profit or price appreciation.",
+    legal2:"Online gaming is subject to licensing in each jurisdiction. The service is unavailable in restricted jurisdictions and where prohibited by local law. Gambling can be addictive — play responsibly.",
+    age:"You must be 18 or older." }
+},
+zh: {
+  meta:{ title:"TeleFi 电报加密赌场 · $TFI DAO 轮", desc:"在 Telegram 小程序内 3 秒开局的加密赌场。10,000+ 持牌游戏，USDT 充提，平台增长通过 Solana 链上的 $TFI 代币回馈 DAO。" },
+  nav:{ about:"关于", games:"游戏", invest:"DAO 投资", token:"$TFI 代币", roadmap:"路线图", faq:"FAQ", cta:"加入 DAO" },
+  hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"在 Telegram 玩，", l2:"和 DAO 一起", l3:"做庄家",
+    sub:"TeleFi 是在 Telegram 小程序内 3 秒即可开局的加密赌场。10,000+ 款老虎机、真人、桌面与 Crash 小游戏，USDT 充提——而平台的增长通过 Solana 链上的 $TFI 代币回馈 DAO 社区。",
+    cta1:"查看 DAO 投资产品", cta2:"什么是 TeleFi？", ftag:"FEATURED", ftitle:"SpinFi 第二季", fsub:"Pini IP · 传承 4 语种运营经验",
+    stats:[["10,000+","持牌游戏"],["100+","游戏供应商"],["10B","$TFI 总发行量"],["3秒","即可开局"]] },
+  ticker:{ tag:"DAO ROUND", items:["$TFI DAO 轮即将开放","Anjouan 牌照申请中","2027 年 Q1 正式上线","老虎机 · 真人 · 桌面 · Crash","USDT 充提 · 平均 3 分钟到账","Solana 实用型代币","5 档产品 · $300 起"] },
+  about:{ title:"无需安装，无需注册，<br>在 Telegram 里<em>直接开局</em>。",
+    sub:"TeleFi 是 SpinFi 的第二季。第一季专注老虎机，第二季把持牌供应商提供的老虎机、牌类、真人赌场与小游戏全部搬进 Telegram 小程序。",
+    features:[
+      ["Telegram 小程序","打开机器人，3 秒进入大厅。无需安装 App，无需注册资料，一个 Telegram 账号就是你的游戏钱包。"],
+      ["仅持牌游戏","在 Anjouan 博彩牌照下，仅提供 100+ 家持牌供应商的游戏。RTP 采用供应商官方数据。"],
+      ["全品类","老虎机 · 真人赌场 · 桌面 · Crash/小游戏。除体育博彩外的全部赌场品类，一个钱包搞定。"],
+      ["加密原生","USDT 充提。没有银行卡和 PSP 手续费，也没有拒付。完成 1 倍流水后随时提现，平均 3 分钟。"],
+      ["奖励引擎","欢迎奖金 · 续存 · 返现 · 返水 · 每日幸运转盘。完整继承 SpinFi 设计的降落伞奖金体系。"],
+      ["DAO 拥有的赌场","平台增长以 $TFI 回馈社区。DAO 持有代币，共同决定游戏阵容与推广预算。"]
+    ],
+    seasonT:"第一季 → 第二季", seasonP:"第一季（SpinFi）验证了落地页、品牌与 4 语种运营；第二季（TeleFi）扩展到真实游戏运营与 DAO 所有制结构。Pini 角色 IP 将以第二季新皮肤延续。" },
+  games:{ title:"10,000+ 款游戏，<br><em>一个钱包</em>。", sub:"除体育博彩外的全品类。供应商官方 RTP，在 Telegram 内直接启动。",
+    verticals:[["老虎机","Hacksaw · Pragmatic · BGaming · PG Soft"],["真人赌场","Evolution · Ezugi · Vivo"],["桌面 · 牌类","Evoplay · Platipus · 3 Oaks"],["Crash · 小游戏","Spribe (Aviator) · InOut · Turbo"]],
+    providers:"合作供应商", pnote:"※ 以上画面为同一交钥匙平台上运营商的实际界面套用 TeleFi 标志的样机。正式界面将采用 Pini IP 与自有品牌另行制作，所示游戏与活动并非 TeleFi 的实际内容。" },
+  how:{ title:"第一次接触加密货币？<br><em>3 分钟</em>开始第一局", sub:"这是用 USDT 而非银行卡或法币游玩的 Web3 赌场。从创建钱包到提现只需四步。",
+    steps:[["在 Telegram 打开","无需安装，无需表格。打开 TeleFi 机器人的那一刻，你的游戏钱包就已创建。"],["充值 USDT","从交易所或 Telegram 钱包把 USDT 发到你的充值地址，几秒内到账。"],["领取奖金，开始游戏","领取欢迎奖金，畅玩 10,000+ 款老虎机、真人、桌面与 Crash 游戏。"],["随时提现","完成 1 倍流水后，24 小时随时提到自己的钱包，平均 3 分钟到账。"]] },
+  invest:{ title:"为 DAO 打造的<br><em>5 档投资产品</em>", sub:"总发行量的 30%（30 亿 $TFI）分配给 DAO 轮。购买产品的 DAO 将获得 $TFI 配额及对应等级权益。以 USDT 支付。",
+    facts:[["本轮价格","$0.005 / TFI"],["本轮配额","3,000,000,000 TFI"],["硬顶","$15,000,000"],["支付","USDT (Solana · TRC20)"],["解锁","TGE 25% + 6 个月线性"]],
+    l:{ price:"参与金额", alloc:"$TFI 配额", base:"基础", bonus:"加成", cta:"立即参与", popular:"热门", founding:"创始" },
+    names:{ mini:"迷你", basic:"基础", plus:"进阶", pro:"专业", max:"至尊" },
+    perks:{
+      mini:["DAO 成员徽章 · 治理投票权 1x","上线空投资格","进入 DAO 社区频道"],
+      basic:["包含迷你全部权益","参与月度 $TFI 奖励池","软上线白名单（抢先体验）"],
+      plus:["包含基础全部权益","治理投票权重 2x","VIP 等级 1 年 · 合作伙伴日邀请"],
+      pro:["包含进阶全部权益","治理投票权重 3x","联盟返佣优惠费率","季度报告 · 直接参与 AMA"],
+      max:["包含专业全部权益","创始 DAO 席位（运营顾问委员会）","治理投票权重 5x","联合品牌 · 推广位","私密频道 · 创始成员铭牌"]
+    },
+    howT:"参与方式",
+    steps:[["选择产品，在 Telegram 申请","选好产品后，通过 Telegram 发送 DAO 名称与产品名，专人将引导流程。"],["转账 USDT","将 USDT 转入指定钱包地址（Solana 或 TRC20）。确认到账后发放配额确认函。"],["TGE 时发放 $TFI","TGE 时将配额的 25% 发放至你的 Solana 钱包，其余在 6 个月内按月线性解锁。"]],
+    disc:"※ 本页内容仅供参考，不构成投资邀约。$TFI 是 TeleFi 游戏生态内的实用型代币；价格、配额与解锁条件以 DAO 轮确认时公布的最终条款为准。数字资产存在价格波动风险。" },
+  token:{ title:"<em>$TFI</em> —— 驱动游戏生态的<br>代币", sub:"$TFI 是 TeleFi 在 Solana 上发行的实用型代币。固定发行 100 亿枚，不再增发。30% 流动性与 30% DAO 轮分配给社区。",
+    facts:[["代码","$TFI"],["公链","Solana · SPL"],["总发行量","10,000,000,000"],["增发","无 · 固定供应"]],
+    center:"总发行量",
+    alloc:{ liq:["DAO 流动性供应","DEX 流动性池 · 做市，保障 DAO 参与者的流动性。"], dao:["DAO 轮","通过 5 档产品分配给 DAO"], eco:["生态 · 玩家奖励","返水 · 任务 · 幸运转盘 · 赛季奖励"], fdn:["基金会","运营 · 法务 · 牌照 · 开发（24 个月线性）"], team:["团队 · 顾问","12 个月锁定后 24 个月线性"], mkt:["市场 · 合作","KOL · 交易所 · 联盟"], rsv:["金库储备","应急储备"] },
+    utils:[["REWARDS","游戏奖励","返水、任务与幸运转盘奖励以 $TFI 发放。玩得越多，持有越多。"],["STAKING","质押 · VIP 等级","质押 $TFI 提升 VIP 等级，获得奖金加成与提现优先权。"],["GOVERNANCE","DAO 治理","新增游戏供应商、推广预算与赛季活动由 DAO 投票决定。"],["DISCOUNT","手续费折扣 · 商店","使用 $TFI 购买奖励商店物品与高级功能可享折扣。"],["BUYBACK","回购与销毁","以平台净收入的一定比例在市场回购 $TFI 并销毁，供应只减不增。"],["AFFILIATE","联盟奖励","邀请好友与频道联盟奖励以 $TFI 发放，每个玩家都是推广者。"]] },
+  road:{ title:"通往 2027 Q1<em>正式上线</em>之路", sub:"牌照 → 对接 → DAO 轮 → 上线 → TGE。每一步都以前一步的完成为前提。", done:"已完成", now:"进行中",
+    items:[["2026 Q3","确定品牌与商业计划",["TeleFi 品牌 CI · Pini IP 第二季新皮肤","交钥匙平台合作方报价与合同谈判","收益模型验证 · 5 语种商业计划书"],"done"],
+      ["2026 Q4","公司 · 牌照 · DAO 轮",["设立离岸公司 · 申请 Anjouan 牌照","平台 API 对接 · USDT 支付对接","DAO 轮开放 · 软上线（白名单）"],"now"],
+      ["2027 Q1","正式上线 · TGE",["Telegram 小程序正式开放","$TFI TGE · DEX 流动性供应","返水 · 幸运转盘 · 奖励商店上线"],""],
+      ["2027 Q2","网页版 · 质押 · 治理",["网页赌场开放（同一账号 · 同一钱包）","$TFI 质押 · VIP 等级","首次 DAO 治理投票"],""],
+      ["2027 H2","扩张",["TeleFi 原创游戏","联盟计划 · KOL 扩张","新语种与新地区"],""]] },
+  faq:{ title:"常见问题", items:[
+    ["TeleFi 是什么？","在 Telegram 小程序内运行的加密赌场。老虎机、真人、桌面与小游戏均来自持牌供应商，充提使用 USDT。它是 SpinFi 的第二季，以独立公司与品牌运营。"],
+    ["DAO 购买产品能获得什么？","按参与金额获得 $TFI 配额（基础配额 + 等级加成）、治理投票权以及等级权益（奖励池、VIP 等级、创始席位等）。详情见各产品卡片。"],
+    ["$TFI 何时、如何发放？","TGE（代币生成事件）时将配额的 25% 发放至 Solana 钱包，其余 75% 在 6 个月内按月线性解锁。TGE 目标与正式上线同步，定于 2027 年第一季度。"],
+    ["如何支付？","以 USDT 支付（Solana 或 TRC20）。通过 Telegram 申请后，专人提供钱包地址与流程；确认到账后发放配额确认函。"],
+    ["有牌照吗？","Anjouan 博彩牌照申请中。在牌照签发与平台合同完成前，不会开放真实游戏服务。"],
+    ["哪些国家可以使用？","牌照与合作方条款限制的司法辖区（含美国、英国、法国、德国、荷兰、西班牙、澳大利亚等）以及当地法律禁止在线博彩的国家不可使用。使用前请确认所在地法律。"]] },
+  cta:{ title:"加入<br><em>DAO 轮</em>", sub:"5 档产品，$300 起。通过 Telegram 发送 DAO 名称与产品名，专人将引导后续流程。", b1:"通过 Telegram 申请", b2:"查看商业计划书" },
+  footer:{ tag:"Telegram 内的全栈加密赌场。平台增长以 $TFI 回馈 DAO。", c1:"产品", c2:"DAO", c3:"链接", how:"如何游玩", tg:"Telegram", docs:"商业计划书",
+    legal1:"TeleFi 与 SpinFi 为独立公司、独立品牌。本网站所有内容仅供参考，不构成投资邀约、金融建议或证券要约。$TFI 是 TeleFi 游戏生态内使用的实用型代币，不保证收益或价格上涨。",
+    legal2:"在线博彩在各司法辖区均须持牌。受限辖区及当地法律禁止的国家无法使用本服务。博彩可能成瘾——请理性游戏。",
+    age:"仅限 18 岁以上人士使用。" }
+},
+ja: {
+  meta:{ title:"TeleFi テレファイ — Telegram クリプトカジノ · $TFI DAO ラウンド", desc:"Telegram ミニアプリ内で3秒で始まるクリプトカジノ。10,000+ のライセンスゲーム、USDT 入出金、そしてプラットフォームの成長を Solana ベースの $TFI トークンで DAO に還元。" },
+  nav:{ about:"概要", games:"ゲーム", invest:"DAO 投資", token:"$TFI トークン", roadmap:"ロードマップ", faq:"FAQ", cta:"DAO に参加" },
+  hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"Telegram で遊び、", l2:"DAO と一緒に", l3:"ハウスを所有する",
+    sub:"TeleFi は Telegram ミニアプリ内で3秒で始まるクリプトカジノです。スロット・ライブ・テーブル・クラッシュなど 10,000 種以上、USDT 入出金。そしてプラットフォームの成長は Solana ベースの $TFI トークンとして DAO コミュニティに還元されます。",
+    cta1:"DAO 投資商品を見る", cta2:"TeleFi とは？", ftag:"FEATURED", ftitle:"SpinFi シーズン 2", fsub:"Pini IP · 4言語運営ノウハウを継承",
+    stats:[["10,000+","ライセンスゲーム"],["100+","ゲームプロバイダー"],["10B","$TFI 総発行量"],["3秒","最初のゲームまで"]] },
+  ticker:{ tag:"DAO ROUND", items:["$TFI DAO ラウンド近日開始","Anjouan ライセンス申請中","2027年 Q1 正式ローンチ","スロット · ライブ · テーブル · クラッシュ","USDT 入出金 · 平均3分","Solana ベースのユーティリティトークン","5つの商品 · $300 から"] },
+  about:{ title:"インストールも登録も不要。<br>Telegram で<em>すぐ一勝負</em>。",
+    sub:"TeleFi は SpinFi のシーズン 2 です。スロット専門だったシーズン 1 から拡張し、ライセンスプロバイダーが供給するスロット・カード・ライブカジノ・ミニゲームのすべてを Telegram ミニアプリで提供します。",
+    features:[
+      ["Telegram ミニアプリ","ボットを開いた瞬間、3秒でロビーへ。アプリのインストールも書類も不要。Telegram アカウント一つでゲームウォレットが自動作成されます。"],
+      ["ライセンスゲームのみ","Anjouan ゲーミングライセンスのもと、100社以上のライセンスプロバイダーのゲームのみを提供。RTP はプロバイダー公式値そのままです。"],
+      ["フルバーティカル","スロット · ライブカジノ · テーブル · クラッシュ/ミニゲーム。スポーツブック以外のカジノ全ジャンルを一つのウォレットで。"],
+      ["クリプトネイティブ","USDT 入出金。カードや PSP の手数料も拒否もありません。1倍ロールオーバー達成後は24時間いつでも出金、平均3分。"],
+      ["ボーナスエンジン","ウェルカム · リロード · キャッシュバック · レーキバック · デイリーラッキーホイール。SpinFi で設計したパラシュートボーナス方式をそのまま継承。"],
+      ["DAO が所有するハウス","プラットフォームの成長は $TFI としてコミュニティに還元。DAO はトークンを保有し、ゲームラインナップやプロモ予算を共に決めます。"]
+    ],
+    seasonT:"シーズン 1 → シーズン 2", seasonP:"シーズン 1（SpinFi）がランディングとブランド、4言語運営を検証したなら、シーズン 2（TeleFi）は実際のゲーム運営と DAO 所有構造へ拡張します。Pini キャラクター IP はシーズン 2 リスキンとして続きます。" },
+  games:{ title:"10,000+ のゲーム、<br><em>一つのウォレット</em>で。", sub:"スポーツブック以外のフルバーティカル。プロバイダー公式 RTP のまま、Telegram 内で直接起動します。",
+    verticals:[["スロット","Hacksaw · Pragmatic · BGaming · PG Soft"],["ライブカジノ","Evolution · Ezugi · Vivo"],["テーブル · カード","Evoplay · Platipus · 3 Oaks"],["クラッシュ · ミニゲーム","Spribe (Aviator) · InOut · Turbo"]],
+    providers:"パートナープロバイダー", pnote:"※ 上の画面は同一ターンキープラットフォームで実運営中の事業者画面に TeleFi ロゴを適用したモックアップです。正式画面は Pini IP と独自ブランディングで別途制作され、表示されているゲーム・プロモは TeleFi の実際のコンテンツではありません。" },
+  how:{ title:"暗号資産が初めてでも<br><em>3分</em>で最初のゲーム", sub:"円やカードではなく USDT で楽しむ Web3 カジノ。ウォレット作成から出金まで4ステップで完了します。",
+    steps:[["Telegram で開く","インストールも書類も不要。TeleFi ボットを開いた瞬間にゲームウォレットが作成されます。"],["USDT を入金","取引所や Telegram ウォレットから入金アドレスへ USDT を送ると、数秒で残高に反映されます。"],["ボーナスを受け取ってプレイ","ウェルカムボーナスを獲得し、スロット・ライブ・テーブル・クラッシュ 10,000 種以上を楽しめます。"],["いつでも出金","1倍ロールオーバーを達成すれば 24時間いつでも自分のウォレットへ。平均3分で着金します。"]] },
+  invest:{ title:"DAO のための<br><em>5つの投資商品</em>", sub:"総発行量の 30%（30億 $TFI）を DAO ラウンドに配分します。商品を購入した DAO には $TFI が配分され、ランク別の特典が付与されます。決済は USDT で行います。",
+    facts:[["ラウンド価格","$0.005 / TFI"],["ラウンド配分","3,000,000,000 TFI"],["ハードキャップ","$15,000,000"],["決済","USDT (Solana · TRC20)"],["アンロック","TGE 25% + 6ヶ月リニア"]],
+    l:{ price:"参加金額", alloc:"$TFI 配分", base:"基本", bonus:"ボーナス", cta:"参加する", popular:"人気", founding:"ファウンディング" },
+    names:{ mini:"ミニ", basic:"ベーシック", plus:"プラス", pro:"プロ", max:"マックス" },
+    perks:{
+      mini:["DAO メンバーバッジ · ガバナンス投票権 1x","ローンチエアドロップ対象","DAO コミュニティチャンネルへの参加"],
+      basic:["ミニの特典をすべて含む","月次 $TFI リワードプールに参加","ソフトローンチ・ホワイトリスト（早期アクセス）"],
+      plus:["ベーシックの特典をすべて含む","ガバナンス投票ウェイト 2x","VIP ティア1年 · パートナーデー招待"],
+      pro:["プラスの特典をすべて含む","ガバナンス投票ウェイト 3x","アフィリエイト優遇レート","四半期レポート · AMA に直接参加"],
+      max:["プロの特典をすべて含む","ファウンディング DAO シート（運営諮問委員会）","ガバナンス投票ウェイト 5x","コ・ブランディング · プロモ枠","プライベートチャンネル · 創設メンバー銘板"]
+    },
+    howT:"参加方法",
+    steps:[["商品を選び Telegram で申請","希望の商品を選び、Telegram で DAO 名と商品名を送ってください。担当者が手順をご案内します。"],["USDT を送金","案内されたウォレットアドレス（Solana または TRC20）へ USDT を送金。入金確認後、配分確認書を発行します。"],["TGE 時に $TFI を受領","TGE 時に配分量の 25% を Solana ウォレットへ配布し、残りは6ヶ月間、毎月リニアにアンロックされます。"]],
+    disc:"※ 本ページの内容は情報提供を目的としており、投資勧誘ではありません。$TFI は TeleFi ゲームエコシステム内のユーティリティトークンであり、価格・配分・アンロック条件は DAO ラウンド確定時に公表される最終条件に従います。デジタル資産には価格変動リスクがあります。" },
+  token:{ title:"<em>$TFI</em> — ゲームエコシステムを<br>動かすトークン", sub:"$TFI は Solana 上で発行される TeleFi のユーティリティトークンです。100億枚の固定供給、追加発行なし。流動性 30% と DAO ラウンド 30% がコミュニティに配分されます。",
+    facts:[["ティッカー","$TFI"],["チェーン","Solana · SPL"],["総発行量","10,000,000,000"],["追加発行","なし · 固定供給"]],
+    center:"総発行量",
+    alloc:{ liq:["DAO 流動性供給","DEX 流動性プール · マーケットメイク。DAO 参加者の流動性を保証します。"], dao:["DAO ラウンド","5つの投資商品を通じて DAO に配分"], eco:["エコシステム · プレイヤー報酬","レーキバック · ミッション · ラッキーホイール · シーズン報酬"], fdn:["財団","運営 · 法務 · ライセンス · 開発（24ヶ月リニア）"], team:["チーム · アドバイザー","12ヶ月クリフ後、24ヶ月リニア"], mkt:["マーケティング · パートナーシップ","KOL · 取引所 · 提携"], rsv:["トレジャリー準備金","緊急準備金"] },
+    utils:[["REWARDS","ゲーム報酬","レーキバック・ミッション・ラッキーホイールの報酬は $TFI で支給。遊ぶほどトークンが貯まります。"],["STAKING","ステーキング · VIP ティア","$TFI をステーキングすると VIP ティアが上がり、ボーナスブーストと出金優先権を得られます。"],["GOVERNANCE","DAO ガバナンス","ゲームプロバイダーの追加、プロモ予算、シーズンイベントを DAO 投票で決定します。"],["DISCOUNT","手数料割引 · ショップ","リワードショップの決済やプレミアム機能の利用時に $TFI で割引を受けられます。"],["BUYBACK","バイバック & バーン","プラットフォーム純収益の一定割合で市場から $TFI を買い戻して焼却。供給は減る一方です。"],["AFFILIATE","アフィリエイト報酬","友達招待やチャンネルアフィリエイトの報酬を $TFI で支給。ユーザーがそのままマーケターになります。"]] },
+  road:{ title:"2027 Q1 <em>正式ローンチ</em>への道", sub:"ライセンス → 連携 → DAO ラウンド → ローンチ → TGE。各段階は前段階の完了を条件に進みます。", done:"完了", now:"進行中",
+    items:[["2026 Q3","ブランド · 事業計画確定",["TeleFi ブランド CI · Pini IP シーズン 2 リスキン","ターンキープラットフォームの見積 · 契約交渉","収益モデル検証 · 事業計画書5言語"],"done"],
+      ["2026 Q4","法人 · ライセンス · DAO ラウンド",["オフショア法人設立 · Anjouan ライセンス申請","プラットフォーム API 連携 · USDT 決済連携","DAO ラウンド開始 · ソフトローンチ（ホワイトリスト）"],"now"],
+      ["2027 Q1","正式ローンチ · TGE",["Telegram ミニアプリ正式公開","$TFI TGE · DEX 流動性供給","レーキバック · ラッキーホイール · リワードショップ稼働"],""],
+      ["2027 Q2","Web · ステーキング · ガバナンス",["Web カジノ公開（同一アカウント · 同一ウォレット）","$TFI ステーキング · VIP ティア","DAO ガバナンス初回投票"],""],
+      ["2027 H2","拡張",["TeleFi オリジナルゲーム","アフィリエイトプログラム · KOL 拡大","新言語 · 新地域への拡張"],""]] },
+  faq:{ title:"よくある質問", items:[
+    ["TeleFi とは何ですか？","Telegram ミニアプリ内で動作するクリプトカジノです。スロット・ライブ・テーブル・ミニゲームはライセンスプロバイダーから供給され、入出金は USDT で行います。SpinFi のシーズン 2 として、別法人・別ブランドで運営します。"],
+    ["DAO 投資商品を購入すると何が得られますか？","参加金額に応じた $TFI の配分（基本配分 + ランク別ボーナス）、ガバナンス投票権、そしてリワードプール・VIP ティア・ファウンディングシートなどのランク別特典が付与されます。詳細は各商品カードをご覧ください。"],
+    ["$TFI はいつ、どのように配布されますか？","TGE（トークン生成イベント）時に配分量の 25% が Solana ウォレットへ配布され、残りの 75% は6ヶ月間、毎月リニアにアンロックされます。TGE は正式ローンチと同時に 2027年第1四半期を目標としています。"],
+    ["決済方法は？","USDT で決済します（Solana または TRC20）。Telegram で申請すると担当者がウォレットアドレスと手順をご案内し、入金確認後に配分確認書を発行します。"],
+    ["ライセンスはありますか？","Anjouan ゲーミングライセンスを申請中です。ライセンス発行とプラットフォーム契約の完了前は、実際のゲームサービスを開始しません。"],
+    ["どの国で利用できますか？","ライセンスおよびパートナー条件で制限される管轄（米国・英国・フランス・ドイツ・オランダ・スペイン・オーストラリアなど）と、現地法でオンラインゲームが禁止されている国では利用できません。ご利用前に居住国の法令をご確認ください。"]] },
+  cta:{ title:"DAO ラウンドに<br><em>参加しよう</em>", sub:"5つの商品、$300 から。Telegram で DAO 名と商品名を送っていただければ、担当者が手順をご案内します。", b1:"Telegram で申請", b2:"事業計画書を見る" },
+  footer:{ tag:"Telegram の中のフルスタック・クリプトカジノ。プラットフォームの成長は $TFI として DAO に還元されます。", c1:"プロダクト", c2:"DAO", c3:"リンク", how:"遊び方", tg:"Telegram", docs:"事業計画書",
+    legal1:"TeleFi は SpinFi とは別法人・別ブランドとして運営されます。本ウェブサイトのすべての内容は情報提供を目的としており、投資勧誘、金融助言、または有価証券の募集には該当しません。$TFI は TeleFi ゲームエコシステム内で使用されるユーティリティトークンであり、収益や価格上昇を保証するものではありません。",
+    legal2:"オンラインゲームは管轄ごとに許認可の対象です。制限管轄および現地法で禁止されている国ではサービスを利用できません。ギャンブルには依存性があります — 責任を持ってプレイしてください。",
+    age:"18歳以上のみ利用できます。" }
+}
+};
+
+/* ============ RENDER ============ */
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num = n => Math.round(n).toLocaleString("en-US");
+const get = (o, p) => p.split(".").reduce((a,k) => a && a[k], o);
+
+function render(lang){
+  const T = I18N[lang] || I18N.ko;
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { const v = get(T, el.dataset.i18n); if (v != null) el.textContent = v; });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = get(T, el.dataset.i18nHtml); if (v != null) el.innerHTML = v; });
+  document.querySelectorAll("[data-i18n-attr]").forEach(el => { const [attr, key] = el.dataset.i18nAttr.split(":"); const v = get(T, key); if (v != null) el.setAttribute(attr, v); });
+  document.querySelectorAll(".langs button").forEach(b => b.classList.toggle("on", b.dataset.lang === lang));
+
+  $("#heroStats").innerHTML = T.hero.stats.map(([v,l]) => `<div class="stat"><div class="v">${esc(v).replace(/\+|B|초|s|秒/g, m => `<i>${m}</i>`)}</div><div class="l">${esc(l)}</div></div>`).join("");
+  const tk = T.ticker.items.map(s => `<span>${esc(s)}</span>`).join("");
+  $("#ticker").innerHTML = tk + tk;
+
+  const icons = ["M4 4h16v12H8l-4 4z","M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z","M4 6h16M4 12h16M4 18h10","M3 8h18v10H3zM3 8l2-4h14l2 4","M12 8v13M5 12l7 9 7-9M5 12a4 4 0 017-3 4 4 0 017 3","M12 2a5 5 0 015 5v3H7V7a5 5 0 015-5zM5 10h14v11H5z"];
+  $("#features").innerHTML = T.about.features.map(([t,d],i) => `<div class="fcard"><span class="n">0${i+1}</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="${icons[i]}"/></svg></div><h3>${esc(t)}</h3><p>${esc(d)}</p></div>`).join("");
+
+  $("#verticals").innerHTML = T.games.verticals.map(([t,d]) => `<div class="vert"><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("");
+  $("#gameGrid").innerHTML = CONFIG.GAMES.map(([k,tag]) => `<div class="game"><img src="assets/games/${k}.webp" alt="${k.replace(/-/g," ")}" loading="lazy" width="384" height="516"><span class="tag ${tag}">${tag}</span></div>`).join("");
+  const pv = CONFIG.PROVIDERS.map(p => `<span>${esc(p)}</span>`).join("");
+  $("#providers").innerHTML = pv + pv;
+
+  $("#steps").innerHTML = T.how.steps.map(([t,d],i) => `<div class="step"><div class="n">0${i+1}</div><h3>${esc(t)}</h3><p>${esc(d)}</p></div>`).join("");
+
+  $("#facts").innerHTML = T.invest.facts.map(([l,v]) => `<div class="fact"><div class="l">${esc(l)}</div><div class="v">${esc(v)}</div></div>`).join("");
+  const L = T.invest.l;
+  $("#tiers").innerHTML = CONFIG.TIERS.map(t => {
+    const base = t.usd / CONFIG.ROUND_PRICE, total = base * (1 + t.bonus);
+    const badge = t.badge ? `<span class="badge">${esc(L[t.badge])}</span>` : "";
+    return `<div class="tier ${t.badge === "popular" ? "hot" : ""} ${t.id === "max" ? "max" : ""}">${badge}
+      <div class="name">${t.id}</div><div class="kname">${esc(T.invest.names[t.id])} · ${esc(L.price)}</div>
+      <div class="price">$${num(t.usd)}<small>USDT</small></div>
+      <div class="alloc">${num(total)} TFI <span>· ${esc(L.alloc)}</span></div>
+      <span class="bonus">${esc(L.base)} ${num(base)} ${t.bonus ? `+ ${esc(L.bonus)} ${Math.round(t.bonus*100)}%` : `· ${esc(L.bonus)} 0%`}</span>
+      <ul>${T.invest.perks[t.id].map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+      <a class="btn gold" href="${CONFIG.TELEGRAM_URL}" target="_blank" rel="noopener">${esc(L.cta)}<span class="ar">↗</span></a></div>`;
+  }).join("");
+  $("#invSteps").innerHTML = T.invest.steps.map(([t,d]) => `<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join("");
+
+  $("#tfacts").innerHTML = T.token.facts.map(([l,v]) => `<div class="tfact"><div class="l">${esc(l)}</div><div class="v">${esc(v)}</div></div>`).join("");
+  $("#alloc").innerHTML = CONFIG.ALLOC.map(a => { const [n,d] = T.token.alloc[a.id]; return `<div class="arow"><i style="background:${a.color}"></i><div><b>${esc(n)}</b><small>${esc(d)}</small></div><span class="p">${a.pct}%</span><span class="a">${(CONFIG.TOTAL_SUPPLY*a.pct/100/1e9).toFixed(1)}B</span></div>`; }).join("");
+  $("#utils").innerHTML = T.token.utils.map(([k,t,d]) => `<div class="util"><div class="k">${esc(k)}</div><b>${esc(t)}</b><p>${esc(d)}</p></div>`).join("");
+
+  $("#road").innerHTML = T.road.items.map(([w,t,items,st]) => `<div class="ms ${st}"><div class="when">${esc(w)}</div>${st ? `<span class="st">${esc(T.road[st])}</span>` : ""}<h3>${esc(t)}</h3><ul>${items.map(i => `<li>${esc(i)}</li>`).join("")}</ul></div>`).join("");
+  $("#faqList").innerHTML = T.faq.items.map(([q,a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("");
+
+  try { localStorage.setItem("telefi.lang", lang); } catch(e){}
+  const u = new URL(location.href); u.searchParams.set("lang", lang); history.replaceState(null, "", u);
+}
+
+function donut(){
+  const svg = $("#donut"), r = 78, C = 2*Math.PI*r; let off = 0;
+  svg.innerHTML = `<circle cx="100" cy="100" r="${r}" fill="none" stroke="#1C1C1F" stroke-width="30"/>` + CONFIG.ALLOC.map(a => {
+    const len = C*a.pct/100, s = `<circle cx="100" cy="100" r="${r}" fill="none" stroke="${a.color}" stroke-width="30" stroke-dasharray="${len-1.5} ${C-len+1.5}" stroke-dashoffset="${-off}" transform="rotate(-90 100 100)"><title>${a.pct}%</title></circle>`;
+    off += len; return s;
+  }).join("");
+}
+
+/* links */
+["#ctaTg","#fTg"].forEach(s => { const a = $(s); a.href = CONFIG.TELEGRAM_URL; a.target = "_blank"; a.rel = "noopener"; });
+["#ctaDocs","#fDocs"].forEach(s => $(s).href = CONFIG.DOCS_URL);
+$("#burger").addEventListener("click", () => { const o = $("#links").classList.toggle("open"); $("#burger").setAttribute("aria-expanded", o); });
+$("#links").addEventListener("click", e => { if (e.target.tagName === "A") $("#links").classList.remove("open"); });
+document.querySelectorAll(".langs button").forEach(b => b.addEventListener("click", () => render(b.dataset.lang)));
+
+const initial = (() => {
+  const q = new URLSearchParams(location.search).get("lang"); if (I18N[q]) return q;
+  try { const s = localStorage.getItem("telefi.lang"); if (I18N[s]) return s; } catch(e){}
+  const n = (navigator.language || "en").slice(0,2); return I18N[n] ? n : "en";
+})();
+donut(); render(initial);
+</script>
+</body>
+</html>
