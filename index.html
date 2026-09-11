@@ -285,6 +285,36 @@
   .cta .btn.line{background:transparent;color:#0A0A0B;border-color:#0A0A0B;justify-content:center;padding:18px}
   .cta .btn.line:hover{background:rgba(0,0,0,.08)}
 
+  /* PAY MODAL */
+  dialog#pay{margin:auto;border:0;padding:0;background:transparent;width:min(940px,calc(100vw - 24px));max-width:none;max-height:calc(100vh - 24px);color:var(--ink);overflow:auto}
+  dialog#pay::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(6px)}
+  html:has(dialog[open]){overflow:hidden}
+  .pm{background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:26px 28px 28px;position:relative;font-family:var(--body)}
+  .pm-x{position:absolute;right:14px;top:14px;background:transparent;border:1px solid var(--line);color:var(--dim);width:36px;height:36px;border-radius:6px;cursor:pointer;font-size:15px}
+  .pm-x:hover{color:var(--ink);border-color:var(--gold)}
+  .pm-head h3{font-size:clamp(26px,4vw,40px);margin-top:4px;padding-right:44px}
+  .pm-demo{display:inline-block;margin-top:10px;background:var(--red);color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.16em;padding:4px 9px;border-radius:3px}
+  .pm-demo[hidden]{display:none}
+  .pm-body{display:grid;grid-template-columns:270px 1fr;gap:26px;margin-top:22px}
+  @media(max-width:720px){.pm-body{grid-template-columns:1fr}.pm{padding:20px 18px 22px}}
+  .pm-qr{background:#fff;border-radius:12px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;align-self:start}
+  .pm-qr svg{width:100%;height:auto;display:block;max-width:240px;margin:0 auto}
+  .pm-scan{font-size:11.5px;color:#333;text-align:center;font-weight:700;line-height:1.4}
+  .pm .k{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--dim);font-weight:800;text-transform:uppercase;margin-bottom:5px}
+  .pm-nums{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:420px){.pm-nums{grid-template-columns:1fr}}
+  .pm-nums div{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+  .pm-nums b{font-family:var(--display);font-size:28px;color:var(--gold);line-height:1;display:block;word-break:break-all}
+  .pm-nums small{display:block;font-size:11.5px;color:var(--dim);margin-top:5px}
+  .pm-addr{margin-top:12px;background:var(--bg);border:1px solid var(--line2);border-radius:8px;padding:12px 14px}
+  .pm-addr code{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;word-break:break-all;color:var(--gold2);margin-bottom:10px;line-height:1.5}
+  .pm-addr .btn{padding:9px 14px;font-size:12px}
+  .pm-steps{margin-top:16px}
+  .pm-steps ol{margin:4px 0 0 20px;color:#C6D6E4;font-size:13.5px}
+  .pm-steps li{margin:6px 0}
+  .pm #payTg{margin-top:16px;width:100%;justify-content:center;padding:16px}
+  .pm-warn{margin-top:14px;font-size:12px;color:#F8B4B0;background:rgba(232,53,46,.1);border:1px solid rgba(232,53,46,.35);border-radius:8px;padding:10px 12px;line-height:1.55}
+
   /* FOOTER */
   footer{padding:60px 0 30px;border-top:1px solid var(--line);background:#070708}
   .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
@@ -453,6 +483,23 @@
   </div>
 </section>
 
+<dialog id="pay" aria-labelledby="payTitle">
+  <div class="pm">
+    <button class="pm-x" id="payClose" type="button" aria-label="Close">✕</button>
+    <div class="pm-head"><div class="eyebrow">DAO PACKAGE · USDT (SOLANA)</div><h3 id="payTitle" class="d"></h3><span class="pm-demo" id="payDemo"></span></div>
+    <div class="pm-body">
+      <div class="pm-qr"><div id="payQr"></div><div class="pm-scan" id="payScan"></div></div>
+      <div class="pm-info">
+        <div class="pm-nums"><div><span class="k" id="payAmtL"></span><b id="payAmt"></b></div><div><span class="k" id="payRecL"></span><b id="payRec"></b><small id="payIncl"></small></div></div>
+        <div class="pm-addr"><span class="k" id="payAddrL"></span><code id="payAddr"></code><button class="btn ghost" id="payCopy" type="button"></button></div>
+        <div class="pm-steps"><span class="k" id="payStepsT"></span><ol id="paySteps"></ol></div>
+        <a class="btn gold" id="payTg" target="_blank" rel="noopener"></a>
+        <p class="pm-warn" id="payWarn"></p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
 <footer>
   <div class="wrap">
     <div class="fgrid">
@@ -472,11 +519,17 @@
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
 /* ============ CONFIG — 숫자·링크는 여기서만 바꾸면 됩니다 ============ */
 const CONFIG = {
   TELEGRAM_URL: "https://t.me/telefiofficial",            // TODO: 텔레파이 공식 채널/봇 핸들로 교체
   DOCS_URL: "https://isaacweb007.github.io/telefi-businessplan/",
+  PAY: {
+    address: "TeLeFiDemoWaLLet1111111111111111111111111111", // TODO: 실제 USDT(Solana) 입금 주소로 교체
+    isDemo: true,                                            // 실제 주소로 바꾸면 false — DEMO 배지·경고문이 사라짐
+    usdtMint: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", // USDT SPL mint (Solana mainnet) — Solana Pay QR용
+  },
   TOTAL_SUPPLY: 10_000_000_000,
   ROUND_PRICE: 0.005,                                      // USD per TFI (DAO round)
   TIERS: [ // 보너스는 배정량에 가산
@@ -529,7 +582,7 @@ ko: {
   how:{ title:"코인이 처음이어도<br><em>3분이면</em> 첫 게임", sub:"원화나 카드가 아닌 USDT로 즐기는 Web3 카지노입니다. 지갑 생성부터 출금까지 네 단계면 끝납니다.",
     steps:[["텔레그램에서 열기","설치도 가입 서류도 없습니다. 텔레파이 봇을 여는 순간 내 게임 지갑이 자동으로 만들어집니다."],["USDT 입금","거래소나 텔레그램 지갑에서 USDT를 내 입금 주소로 보내면 몇 초 안에 잔액에 반영됩니다."],["보너스 받고 플레이","웰컴 보너스를 챙기고 슬롯·라이브·테이블·크래시 10,000종 이상을 즐기세요."],["언제든 출금","1배 롤링만 채우면 24시간 언제든 내 지갑으로. 평균 3분이면 도착합니다."]] },
   invest:{ title:"DAO를 위한<br><em>5개의 투자 상품</em>", sub:"총 발행량의 30%(30억 $TFI)를 DAO 라운드에 배정합니다. 상품을 구매한 DAO에는 $TFI가 배정되고 등급별 혜택이 부여됩니다. 결제는 USDT로 진행합니다.",
-    facts:[["라운드 가격","$0.005 / TFI"],["라운드 배정","3,000,000,000 TFI"],["하드캡","$15,000,000"],["결제","USDT (Solana · TRC20)"],["언락","TGE 25% + 6개월 선형"]],
+    facts:[["라운드 가격","$0.005 / TFI"],["라운드 배정","3,000,000,000 TFI"],["하드캡","$15,000,000"],["결제","USDT (Solana)"],["언락","TGE 25% + 6개월 선형"]],
     l:{ price:"참여 금액", alloc:"$TFI 배정", base:"기본", bonus:"보너스", cta:"이 상품으로 참여", popular:"인기", founding:"파운딩" },
     names:{ mini:"미니", basic:"베이직", plus:"플러스", pro:"프로", max:"맥스" },
     perks:{
@@ -540,8 +593,13 @@ ko: {
       max:["프로 혜택 전부 포함","파운딩 DAO 시트 (운영 자문 위원회)","거버넌스 투표 가중 5x","공동 브랜딩 · 프로모션 슬롯","프라이빗 채널 · 창립 멤버 명패"]
     },
     howT:"참여 방법",
-    steps:[["상품 선택 후 텔레그램으로 신청","원하는 상품을 고르고 텔레그램으로 DAO 이름과 상품명을 보내주세요. 담당자가 절차를 안내합니다."],["USDT 송금","안내받은 지갑 주소(Solana 또는 TRC20)로 USDT를 송금합니다. 입금 확인 후 배정 확인서를 발급합니다."],["TGE 시 $TFI 지급","TGE 시점에 배정량의 25%를 솔라나 지갑으로 지급하고, 나머지는 6개월간 매월 선형 언락됩니다."]],
+    steps:[["상품 선택 → 입금 주소·QR 확인","원하는 상품의 참여 버튼을 누르면 USDT(Solana) 입금 주소와 QR, 송금 금액과 배정 토큰 수가 표시됩니다."],["USDT 송금 후 캡처","표시된 금액을 Solana 네트워크로 정확히 송금하고, 완료 화면(트랜잭션 ID)을 캡처합니다."],["텔레그램으로 캡처본 전송 → TGE 시 지급","캡처본 + DAO 이름 + 상품명을 텔레그램으로 보내주세요. 확인 후 배정 확인서를 발급하고, TGE 시 25%를 지급(나머지 6개월 선형)합니다."]],
     disc:"※ 본 페이지의 내용은 정보 제공 목적이며 투자 권유가 아닙니다. $TFI는 텔레파이 게임 생태계 내 유틸리티 토큰이며, 가격·배정·언락 조건은 DAO 라운드 확정 시 최종 공지되는 조건을 따릅니다. 디지털 자산은 가격 변동 위험이 있습니다." },
+  pay:{ title:"{name} 상품 참여", demo:"DEMO · 데모 주소", amount:"송금 금액", receive:"받는 $TFI", incl:"기본 {base} + 보너스 {bonus}%", addrLabel:"입금 주소 · USDT (Solana)", copy:"주소 복사", copied:"복사됨 ✓", stepsT:"참여 절차",
+    steps:["위 주소로 정확히 {amount} USDT를 Solana 네트워크로 송금합니다.","송금 완료 화면(트랜잭션 ID가 보이게)을 캡처합니다.","텔레그램으로 캡처본 + DAO 이름 + 상품명({name})을 보내주세요. 확인 후 배정 확인서를 발급합니다."],
+    tg:"텔레그램으로 캡처본 보내기", scan:"지갑 앱으로 QR 스캔 (Solana Pay)",
+    warn:"⚠️ 데모 주소입니다. 실제 입금 주소는 텔레그램 신청 후 개별 안내됩니다. Solana 네트워크의 USDT만 보내세요 — TRC20·ERC20 등 다른 네트워크로 보내면 복구할 수 없습니다.",
+    warnLive:"⚠️ Solana 네트워크의 USDT만 보내세요 — 다른 네트워크로 보내면 복구할 수 없습니다." },
   token:{ title:"<em>$TFI</em> — 게임 생태계를<br>움직이는 토큰", sub:"티파이($TFI)는 솔라나 위에서 발행되는 텔레파이의 유틸리티 토큰입니다. 100억 개 고정 공급, 추가 발행 없음. 유동성의 30%와 DAO 라운드 30%가 커뮤니티에 배정됩니다.",
     facts:[["티커","$TFI (티파이)"],["체인","Solana · SPL"],["총 발행량","10,000,000,000"],["추가 발행","없음 · 고정 공급"]],
     center:"총 발행량",
@@ -557,7 +615,7 @@ ko: {
     ["텔레파이는 무엇인가요?","텔레그램 미니앱에서 실행되는 크립토 카지노입니다. 슬롯·라이브·테이블·미니게임을 라이선스 프로바이더로부터 공급받아 서비스하며, 입출금은 USDT로 이루어집니다. 스핀파이의 시즌 2로, 별도 법인·별도 브랜드로 운영됩니다."],
     ["DAO 투자 상품을 구매하면 무엇을 받나요?","참여 금액에 따라 $TFI가 배정되고(기본 배정 + 등급별 보너스), 거버넌스 투표권과 등급별 혜택(리워드 풀, VIP 티어, 파운딩 시트 등)이 부여됩니다. 각 상품 카드에서 상세 내용을 확인하세요."],
     ["$TFI는 언제, 어떻게 지급되나요?","TGE(토큰 생성 이벤트) 시점에 배정량의 25%가 솔라나 지갑으로 지급되고, 나머지 75%는 6개월간 매월 선형으로 언락됩니다. TGE는 정식 런칭과 함께 2027년 1분기를 목표로 합니다."],
-    ["결제는 어떤 방식인가요?","USDT로 결제합니다(Solana 또는 TRC20). 텔레그램으로 신청하면 담당자가 지갑 주소와 절차를 안내하며, 입금 확인 후 배정 확인서를 발급합니다."],
+    ["결제는 어떤 방식인가요?","USDT(Solana)로 결제합니다. 상품의 참여 버튼을 누르면 입금 주소와 QR이 표시되며, 송금 후 완료 화면 캡처본을 텔레그램으로 보내주시면 확인 후 배정 확인서를 발급합니다."],
     ["라이선스가 있나요?","앙주안(Anjouan) 게이밍 라이선스를 진행 중입니다. 라이선스 발급과 플랫폼 계약 완료 전에는 실제 게임 서비스를 오픈하지 않습니다."],
     ["어느 국가에서 이용할 수 있나요?","라이선스 및 파트너 조건상 제한되는 관할(미국·영국·프랑스·독일·네덜란드·스페인·호주 등)과 현지 법령상 온라인 게임이 금지된 국가에서는 이용할 수 없습니다. 이용 전 거주 국가의 법령을 확인해 주세요."]] },
   cta:{ title:"DAO 라운드에<br><em>함께하세요</em>", sub:"5개 상품, $300부터. 텔레그램으로 DAO 이름과 상품명을 보내주시면 담당자가 절차를 안내합니다.", b1:"텔레그램으로 신청", b2:"사업계획서 보기" },
@@ -591,7 +649,7 @@ en: {
   how:{ title:"New to crypto?<br><em>First game</em> in 3 minutes", sub:"A Web3 casino played in USDT, not cards or fiat. From wallet creation to withdrawal in four steps.",
     steps:[["Open it in Telegram","No install, no forms. The moment you open the TeleFi bot, your game wallet is created."],["Deposit USDT","Send USDT from an exchange or the Telegram wallet to your deposit address — it shows in your balance within seconds."],["Claim the bonus, play","Grab the welcome bonus and play 10,000+ slots, live tables, card and crash games."],["Withdraw any time","Clear a 1× rollover and withdraw to your own wallet 24/7. Three minutes on average."]] },
   invest:{ title:"Five packages<br><em>built for DAOs</em>", sub:"30% of total supply (3 billion $TFI) is allocated to the DAO round. A DAO that buys a package receives a $TFI allocation plus tier benefits. Payment is in USDT.",
-    facts:[["Round price","$0.005 / TFI"],["Round allocation","3,000,000,000 TFI"],["Hard cap","$15,000,000"],["Payment","USDT (Solana · TRC20)"],["Unlock","25% at TGE + 6-mo linear"]],
+    facts:[["Round price","$0.005 / TFI"],["Round allocation","3,000,000,000 TFI"],["Hard cap","$15,000,000"],["Payment","USDT (Solana)"],["Unlock","25% at TGE + 6-mo linear"]],
     l:{ price:"Contribution", alloc:"$TFI allocation", base:"base", bonus:"bonus", cta:"Join now", popular:"Popular", founding:"Founding" },
     names:{ mini:"Mini", basic:"Basic", plus:"Plus", pro:"Pro", max:"Max" },
     perks:{
@@ -602,8 +660,13 @@ en: {
       max:["Everything in Pro","Founding DAO seat (operations advisory board)","5× governance vote weight","Co-branding · promotion slots","Private channel · founding member plaque"]
     },
     howT:"How to join",
-    steps:[["Pick a package, apply on Telegram","Choose a package and send your DAO name and the package name on Telegram. Our team walks you through the process."],["Send USDT","Send USDT to the wallet address provided (Solana or TRC20). Once confirmed, you receive an allocation certificate."],["Receive $TFI at TGE","25% of your allocation is delivered to your Solana wallet at TGE; the rest unlocks linearly over six months."]],
+    steps:[["Pick a package → get the address & QR","Press the join button on a package to see the USDT (Solana) deposit address, a QR code, the amount to send and the $TFI you receive."],["Send USDT, take a screenshot","Send exactly the shown amount on the Solana network and screenshot the completed transfer (with the transaction ID)."],["Send the screenshot on Telegram → $TFI at TGE","Send the screenshot + your DAO name + package name on Telegram. We confirm, issue an allocation certificate, and deliver 25% at TGE (rest linear over 6 months)."]],
     disc:"※ This page is for information only and is not an offer or solicitation to invest. $TFI is a utility token within the TeleFi game ecosystem; price, allocation and unlock terms are subject to the final terms published when the DAO round is confirmed. Digital assets carry price risk." },
+  pay:{ title:"Join — {name} package", demo:"DEMO · sample address", amount:"Send exactly", receive:"You receive", incl:"base {base} + {bonus}% bonus", addrLabel:"Deposit address · USDT (Solana)", copy:"Copy address", copied:"Copied ✓", stepsT:"How to join",
+    steps:["Send exactly {amount} USDT to the address above on the Solana network.","Take a screenshot of the completed transfer (with the transaction ID visible).","Send the screenshot + your DAO name + the package name ({name}) on Telegram. We confirm and issue your allocation certificate."],
+    tg:"Send screenshot on Telegram", scan:"Scan with your wallet app (Solana Pay)",
+    warn:"⚠️ This is a demo address. The real deposit address is provided individually after you apply on Telegram. Send USDT on the Solana network only — transfers on other networks (TRC20, ERC20…) cannot be recovered.",
+    warnLive:"⚠️ Send USDT on the Solana network only — transfers on other networks cannot be recovered." },
   token:{ title:"<em>$TFI</em> — the token that<br>runs the game economy", sub:"TFI is TeleFi's utility token issued on Solana. Fixed supply of 10 billion, no further minting. 30% liquidity and 30% DAO round go to the community.",
     facts:[["Ticker","$TFI"],["Chain","Solana · SPL"],["Total supply","10,000,000,000"],["Further minting","None · fixed supply"]],
     center:"Total supply",
@@ -619,7 +682,7 @@ en: {
     ["What is TeleFi?","A crypto casino that runs inside a Telegram mini app. Slots, live tables, table games and mini games come from licensed providers; deposits and withdrawals are in USDT. It is Season 2 of SpinFi, run as a separate entity and brand."],
     ["What do I get when my DAO buys a package?","A $TFI allocation sized to your contribution (base allocation plus a tier bonus), governance voting rights and tier benefits such as reward pools, VIP tiers and a founding seat. See each package card for details."],
     ["When and how is $TFI delivered?","25% of your allocation is delivered to your Solana wallet at TGE (token generation event); the remaining 75% unlocks linearly over six months. TGE is targeted for Q1 2027 alongside full launch."],
-    ["How do I pay?","In USDT (Solana or TRC20). Apply on Telegram and our team provides the wallet address and steps; once the deposit is confirmed you receive an allocation certificate."],
+    ["How do I pay?","In USDT on Solana. Press a package's join button to see the deposit address and QR code; after sending, share a screenshot of the completed transfer on Telegram and we issue your allocation certificate once confirmed."],
     ["Is TeleFi licensed?","An Anjouan gaming license is in progress. Live gaming does not open until the license is issued and the platform contract is complete."],
     ["Where can I play?","Not in jurisdictions restricted by the license and partner terms (including the USA, UK, France, Germany, the Netherlands, Spain and Australia) or where online gaming is prohibited by local law. Check your local laws before playing."]] },
   cta:{ title:"Join the<br><em>DAO round</em>", sub:"Five packages, from $300. Send your DAO name and package on Telegram and our team will take it from there.", b1:"Apply on Telegram", b2:"Read the business plan" },
@@ -653,7 +716,7 @@ zh: {
   how:{ title:"第一次接触加密货币？<br><em>3 分钟</em>开始第一局", sub:"这是用 USDT 而非银行卡或法币游玩的 Web3 赌场。从创建钱包到提现只需四步。",
     steps:[["在 Telegram 打开","无需安装，无需表格。打开 TeleFi 机器人的那一刻，你的游戏钱包就已创建。"],["充值 USDT","从交易所或 Telegram 钱包把 USDT 发到你的充值地址，几秒内到账。"],["领取奖金，开始游戏","领取欢迎奖金，畅玩 10,000+ 款老虎机、真人、桌面与 Crash 游戏。"],["随时提现","完成 1 倍流水后，24 小时随时提到自己的钱包，平均 3 分钟到账。"]] },
   invest:{ title:"为 DAO 打造的<br><em>5 档投资产品</em>", sub:"总发行量的 30%（30 亿 $TFI）分配给 DAO 轮。购买产品的 DAO 将获得 $TFI 配额及对应等级权益。以 USDT 支付。",
-    facts:[["本轮价格","$0.005 / TFI"],["本轮配额","3,000,000,000 TFI"],["硬顶","$15,000,000"],["支付","USDT (Solana · TRC20)"],["解锁","TGE 25% + 6 个月线性"]],
+    facts:[["本轮价格","$0.005 / TFI"],["本轮配额","3,000,000,000 TFI"],["硬顶","$15,000,000"],["支付","USDT (Solana)"],["解锁","TGE 25% + 6 个月线性"]],
     l:{ price:"参与金额", alloc:"$TFI 配额", base:"基础", bonus:"加成", cta:"立即参与", popular:"热门", founding:"创始" },
     names:{ mini:"迷你", basic:"基础", plus:"进阶", pro:"专业", max:"至尊" },
     perks:{
@@ -664,8 +727,13 @@ zh: {
       max:["包含专业全部权益","创始 DAO 席位（运营顾问委员会）","治理投票权重 5x","联合品牌 · 推广位","私密频道 · 创始成员铭牌"]
     },
     howT:"参与方式",
-    steps:[["选择产品，在 Telegram 申请","选好产品后，通过 Telegram 发送 DAO 名称与产品名，专人将引导流程。"],["转账 USDT","将 USDT 转入指定钱包地址（Solana 或 TRC20）。确认到账后发放配额确认函。"],["TGE 时发放 $TFI","TGE 时将配额的 25% 发放至你的 Solana 钱包，其余在 6 个月内按月线性解锁。"]],
+    steps:[["选择产品 → 查看充值地址与二维码","点击产品的参与按钮，即可看到 USDT（Solana）充值地址、二维码、转账金额与可获得的 $TFI 数量。"],["转账 USDT 并截图","通过 Solana 网络准确转账所示金额，并截取转账完成画面（含交易 ID）。"],["通过 Telegram 发送截图 → TGE 时发放","将截图 + DAO 名称 + 产品名发送至 Telegram，确认后发放配额确认函，并在 TGE 时发放 25%（其余 6 个月线性解锁）。"]],
     disc:"※ 本页内容仅供参考，不构成投资邀约。$TFI 是 TeleFi 游戏生态内的实用型代币；价格、配额与解锁条件以 DAO 轮确认时公布的最终条款为准。数字资产存在价格波动风险。" },
+  pay:{ title:"参与 — {name} 产品", demo:"DEMO · 演示地址", amount:"转账金额", receive:"您将获得", incl:"基础 {base} + 加成 {bonus}%", addrLabel:"充值地址 · USDT (Solana)", copy:"复制地址", copied:"已复制 ✓", stepsT:"参与流程",
+    steps:["通过 Solana 网络向上方地址准确转账 {amount} USDT。","截取转账完成画面（需显示交易 ID）。","通过 Telegram 发送截图 + DAO 名称 + 产品名（{name}）。确认后发放配额确认函。"],
+    tg:"通过 Telegram 发送截图", scan:"使用钱包 App 扫码（Solana Pay）",
+    warn:"⚠️ 这是演示地址。实际充值地址将在 Telegram 申请后单独提供。请仅通过 Solana 网络发送 USDT —— 通过 TRC20、ERC20 等其他网络转账将无法找回。",
+    warnLive:"⚠️ 请仅通过 Solana 网络发送 USDT —— 其他网络的转账无法找回。" },
   token:{ title:"<em>$TFI</em> —— 驱动游戏生态的<br>代币", sub:"$TFI 是 TeleFi 在 Solana 上发行的实用型代币。固定发行 100 亿枚，不再增发。30% 流动性与 30% DAO 轮分配给社区。",
     facts:[["代码","$TFI"],["公链","Solana · SPL"],["总发行量","10,000,000,000"],["增发","无 · 固定供应"]],
     center:"总发行量",
@@ -681,7 +749,7 @@ zh: {
     ["TeleFi 是什么？","在 Telegram 小程序内运行的加密赌场。老虎机、真人、桌面与小游戏均来自持牌供应商，充提使用 USDT。它是 SpinFi 的第二季，以独立公司与品牌运营。"],
     ["DAO 购买产品能获得什么？","按参与金额获得 $TFI 配额（基础配额 + 等级加成）、治理投票权以及等级权益（奖励池、VIP 等级、创始席位等）。详情见各产品卡片。"],
     ["$TFI 何时、如何发放？","TGE（代币生成事件）时将配额的 25% 发放至 Solana 钱包，其余 75% 在 6 个月内按月线性解锁。TGE 目标与正式上线同步，定于 2027 年第一季度。"],
-    ["如何支付？","以 USDT 支付（Solana 或 TRC20）。通过 Telegram 申请后，专人提供钱包地址与流程；确认到账后发放配额确认函。"],
+    ["如何支付？","使用 Solana 网络的 USDT。点击产品的参与按钮即可查看充值地址与二维码；转账后将完成画面截图发送至 Telegram，确认后发放配额确认函。"],
     ["有牌照吗？","Anjouan 博彩牌照申请中。在牌照签发与平台合同完成前，不会开放真实游戏服务。"],
     ["哪些国家可以使用？","牌照与合作方条款限制的司法辖区（含美国、英国、法国、德国、荷兰、西班牙、澳大利亚等）以及当地法律禁止在线博彩的国家不可使用。使用前请确认所在地法律。"]] },
   cta:{ title:"加入<br><em>DAO 轮</em>", sub:"5 档产品，$300 起。通过 Telegram 发送 DAO 名称与产品名，专人将引导后续流程。", b1:"通过 Telegram 申请", b2:"查看商业计划书" },
@@ -715,7 +783,7 @@ ja: {
   how:{ title:"暗号資産が初めてでも<br><em>3分</em>で最初のゲーム", sub:"円やカードではなく USDT で楽しむ Web3 カジノ。ウォレット作成から出金まで4ステップで完了します。",
     steps:[["Telegram で開く","インストールも書類も不要。TeleFi ボットを開いた瞬間にゲームウォレットが作成されます。"],["USDT を入金","取引所や Telegram ウォレットから入金アドレスへ USDT を送ると、数秒で残高に反映されます。"],["ボーナスを受け取ってプレイ","ウェルカムボーナスを獲得し、スロット・ライブ・テーブル・クラッシュ 10,000 種以上を楽しめます。"],["いつでも出金","1倍ロールオーバーを達成すれば 24時間いつでも自分のウォレットへ。平均3分で着金します。"]] },
   invest:{ title:"DAO のための<br><em>5つの投資商品</em>", sub:"総発行量の 30%（30億 $TFI）を DAO ラウンドに配分します。商品を購入した DAO には $TFI が配分され、ランク別の特典が付与されます。決済は USDT で行います。",
-    facts:[["ラウンド価格","$0.005 / TFI"],["ラウンド配分","3,000,000,000 TFI"],["ハードキャップ","$15,000,000"],["決済","USDT (Solana · TRC20)"],["アンロック","TGE 25% + 6ヶ月リニア"]],
+    facts:[["ラウンド価格","$0.005 / TFI"],["ラウンド配分","3,000,000,000 TFI"],["ハードキャップ","$15,000,000"],["決済","USDT (Solana)"],["アンロック","TGE 25% + 6ヶ月リニア"]],
     l:{ price:"参加金額", alloc:"$TFI 配分", base:"基本", bonus:"ボーナス", cta:"参加する", popular:"人気", founding:"ファウンディング" },
     names:{ mini:"ミニ", basic:"ベーシック", plus:"プラス", pro:"プロ", max:"マックス" },
     perks:{
@@ -726,8 +794,13 @@ ja: {
       max:["プロの特典をすべて含む","ファウンディング DAO シート（運営諮問委員会）","ガバナンス投票ウェイト 5x","コ・ブランディング · プロモ枠","プライベートチャンネル · 創設メンバー銘板"]
     },
     howT:"参加方法",
-    steps:[["商品を選び Telegram で申請","希望の商品を選び、Telegram で DAO 名と商品名を送ってください。担当者が手順をご案内します。"],["USDT を送金","案内されたウォレットアドレス（Solana または TRC20）へ USDT を送金。入金確認後、配分確認書を発行します。"],["TGE 時に $TFI を受領","TGE 時に配分量の 25% を Solana ウォレットへ配布し、残りは6ヶ月間、毎月リニアにアンロックされます。"]],
+    steps:[["商品を選ぶ → 入金アドレスと QR を確認","商品の参加ボタンを押すと、USDT（Solana）の入金アドレスと QR、送金額、受け取る $TFI 数が表示されます。"],["USDT を送金してキャプチャ","表示された金額を Solana ネットワークで正確に送金し、完了画面（トランザクション ID）をキャプチャします。"],["Telegram でキャプチャを送信 → TGE 時に配布","キャプチャ + DAO 名 + 商品名を Telegram で送ると、確認後に配分確認書を発行し、TGE 時に 25% を配布（残りは6ヶ月リニア）します。"]],
     disc:"※ 本ページの内容は情報提供を目的としており、投資勧誘ではありません。$TFI は TeleFi ゲームエコシステム内のユーティリティトークンであり、価格・配分・アンロック条件は DAO ラウンド確定時に公表される最終条件に従います。デジタル資産には価格変動リスクがあります。" },
+  pay:{ title:"参加 — {name} 商品", demo:"DEMO · デモ用アドレス", amount:"送金額", receive:"受け取る $TFI", incl:"基本 {base} + ボーナス {bonus}%", addrLabel:"入金アドレス · USDT (Solana)", copy:"アドレスをコピー", copied:"コピー済み ✓", stepsT:"参加手順",
+    steps:["上記アドレスへ Solana ネットワークで {amount} USDT を正確に送金します。","送金完了画面（トランザクション ID が見える状態）をキャプチャします。","Telegram でキャプチャ + DAO 名 + 商品名（{name}）を送ってください。確認後、配分確認書を発行します。"],
+    tg:"Telegram でキャプチャを送る", scan:"ウォレットアプリで QR をスキャン（Solana Pay）",
+    warn:"⚠️ これはデモ用アドレスです。実際の入金アドレスは Telegram 申請後に個別にご案内します。USDT は Solana ネットワークのみで送金してください — TRC20・ERC20 など他のネットワークで送ると復旧できません。",
+    warnLive:"⚠️ USDT は Solana ネットワークのみで送金してください — 他のネットワークでの送金は復旧できません。" },
   token:{ title:"<em>$TFI</em> — ゲームエコシステムを<br>動かすトークン", sub:"$TFI は Solana 上で発行される TeleFi のユーティリティトークンです。100億枚の固定供給、追加発行なし。流動性 30% と DAO ラウンド 30% がコミュニティに配分されます。",
     facts:[["ティッカー","$TFI"],["チェーン","Solana · SPL"],["総発行量","10,000,000,000"],["追加発行","なし · 固定供給"]],
     center:"総発行量",
@@ -743,7 +816,7 @@ ja: {
     ["TeleFi とは何ですか？","Telegram ミニアプリ内で動作するクリプトカジノです。スロット・ライブ・テーブル・ミニゲームはライセンスプロバイダーから供給され、入出金は USDT で行います。SpinFi のシーズン 2 として、別法人・別ブランドで運営します。"],
     ["DAO 投資商品を購入すると何が得られますか？","参加金額に応じた $TFI の配分（基本配分 + ランク別ボーナス）、ガバナンス投票権、そしてリワードプール・VIP ティア・ファウンディングシートなどのランク別特典が付与されます。詳細は各商品カードをご覧ください。"],
     ["$TFI はいつ、どのように配布されますか？","TGE（トークン生成イベント）時に配分量の 25% が Solana ウォレットへ配布され、残りの 75% は6ヶ月間、毎月リニアにアンロックされます。TGE は正式ローンチと同時に 2027年第1四半期を目標としています。"],
-    ["決済方法は？","USDT で決済します（Solana または TRC20）。Telegram で申請すると担当者がウォレットアドレスと手順をご案内し、入金確認後に配分確認書を発行します。"],
+    ["決済方法は？","Solana ネットワークの USDT で決済します。商品の参加ボタンを押すと入金アドレスと QR が表示され、送金後に完了画面のキャプチャを Telegram で送っていただければ、確認後に配分確認書を発行します。"],
     ["ライセンスはありますか？","Anjouan ゲーミングライセンスを申請中です。ライセンス発行とプラットフォーム契約の完了前は、実際のゲームサービスを開始しません。"],
     ["どの国で利用できますか？","ライセンスおよびパートナー条件で制限される管轄（米国・英国・フランス・ドイツ・オランダ・スペイン・オーストラリアなど）と、現地法でオンラインゲームが禁止されている国では利用できません。ご利用前に居住国の法令をご確認ください。"]] },
   cta:{ title:"DAO ラウンドに<br><em>参加しよう</em>", sub:"5つの商品、$300 から。Telegram で DAO 名と商品名を送っていただければ、担当者が手順をご案内します。", b1:"Telegram で申請", b2:"事業計画書を見る" },
@@ -793,7 +866,7 @@ function render(lang){
       <div class="alloc">${num(total)} TFI <span>· ${esc(L.alloc)}</span></div>
       <span class="bonus">${esc(L.base)} ${num(base)} ${t.bonus ? `+ ${esc(L.bonus)} ${Math.round(t.bonus*100)}%` : `· ${esc(L.bonus)} 0%`}</span>
       <ul>${T.invest.perks[t.id].map(p => `<li>${esc(p)}</li>`).join("")}</ul>
-      <a class="btn gold" href="${CONFIG.TELEGRAM_URL}" target="_blank" rel="noopener">${esc(L.cta)}<span class="ar">↗</span></a></div>`;
+      <button class="btn gold" type="button" data-pay="${t.id}">${esc(L.cta)}<span class="ar">→</span></button></div>`;
   }).join("");
   $("#invSteps").innerHTML = T.invest.steps.map(([t,d]) => `<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join("");
 
@@ -804,6 +877,7 @@ function render(lang){
   $("#road").innerHTML = T.road.items.map(([w,t,items,st]) => `<div class="ms ${st}"><div class="when">${esc(w)}</div>${st ? `<span class="st">${esc(T.road[st])}</span>` : ""}<h3>${esc(t)}</h3><ul>${items.map(i => `<li>${esc(i)}</li>`).join("")}</ul></div>`).join("");
   $("#faqList").innerHTML = T.faq.items.map(([q,a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("");
 
+  if ($("#pay").open) renderPay();
   try { localStorage.setItem("telefi.lang", lang); } catch(e){}
   const u = new URL(location.href); u.searchParams.set("lang", lang); history.replaceState(null, "", u);
 }
@@ -815,6 +889,35 @@ function donut(){
     off += len; return s;
   }).join("");
 }
+
+/* ============ PAY MODAL ============ */
+const fmtT = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k] ?? "");
+let payTier = null;
+function openPay(id){ payTier = CONFIG.TIERS.find(t => t.id === id); if (!payTier) return; renderPay(); const d = $("#pay"); if (!d.open) d.showModal(); }
+function renderPay(){
+  const t = payTier; if (!t) return;
+  const T = I18N[document.documentElement.lang] || I18N.ko, P = T.pay, name = t.id.toUpperCase();
+  const base = t.usd / CONFIG.ROUND_PRICE, total = base * (1 + t.bonus);
+  $("#payTitle").textContent = fmtT(P.title, {name});
+  $("#payDemo").textContent = P.demo; $("#payDemo").hidden = !CONFIG.PAY.isDemo;
+  $("#payAmtL").textContent = P.amount; $("#payAmt").textContent = `$${num(t.usd)} USDT`;
+  $("#payRecL").textContent = P.receive; $("#payRec").textContent = `${num(total)} TFI`;
+  $("#payIncl").textContent = fmtT(P.incl, {base: num(base), bonus: Math.round(t.bonus * 100)});
+  $("#payAddrL").textContent = P.addrLabel; $("#payAddr").textContent = CONFIG.PAY.address;
+  $("#payCopy").textContent = P.copy; $("#payStepsT").textContent = P.stepsT;
+  $("#paySteps").innerHTML = P.steps.map(s => `<li>${esc(fmtT(s, {amount: num(t.usd), name}))}</li>`).join("");
+  $("#payTg").textContent = P.tg; $("#payTg").href = CONFIG.TELEGRAM_URL; $("#payScan").textContent = P.scan;
+  $("#payWarn").textContent = CONFIG.PAY.isDemo ? P.warn : P.warnLive;
+  // Solana Pay URI — 지갑 앱이 스캔하면 주소·금액·USDT 토큰이 자동 입력된다
+  const uri = `solana:${CONFIG.PAY.address}?amount=${t.usd}&spl-token=${CONFIG.PAY.usdtMint}&label=TeleFi&message=${encodeURIComponent("TeleFi DAO " + name)}`;
+  const q = $("#payQr");
+  if (typeof qrcode === "function") { const qr = qrcode(0, "M"); qr.addData(uri); qr.make(); q.innerHTML = qr.createSvgTag({cellSize: 4, margin: 0}).replace(/width="\d+px" height="\d+px"/, 'width="100%" height="100%"'); }
+  else q.innerHTML = `<code style="font-size:11px;word-break:break-all;color:#000">${esc(uri)}</code>`;
+}
+$("#tiers").addEventListener("click", e => { const b = e.target.closest("[data-pay]"); if (b) openPay(b.dataset.pay); });
+$("#payClose").addEventListener("click", () => $("#pay").close());
+$("#pay").addEventListener("click", e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+$("#payCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(CONFIG.PAY.address); $("#payCopy").textContent = (I18N[document.documentElement.lang] || I18N.ko).pay.copied; setTimeout(renderPay, 1500); } catch (e) {} });
 
 /* links */
 ["#ctaTg","#fTg"].forEach(s => { const a = $(s); a.href = CONFIG.TELEGRAM_URL; a.target = "_blank"; a.rel = "noopener"; });
@@ -829,6 +932,7 @@ const initial = (() => {
   const n = (navigator.language || "en").slice(0,2); return I18N[n] ? n : "en";
 })();
 donut(); render(initial);
+const payParam = new URLSearchParams(location.search).get("pay"); if (payParam) openPay(payParam); // ?pay=pro 딥링크
 </script>
 </body>
 </html>
