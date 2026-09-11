@@ -137,7 +137,7 @@
   .fcard h3{font-size:16.5px;font-weight:800;margin-bottom:8px}
   .fcard p{font-size:13.5px;color:var(--dim)}
   .season{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:linear-gradient(90deg,rgba(245,184,24,.14),transparent 60%);border:1px solid var(--line2);border-radius:8px;padding:22px 26px}
-  .season img{width:64px;height:auto}
+  .season img{width:72px;height:72px;object-fit:cover;object-position:50% 28%;border-radius:50%;border:1px solid var(--line2)}
   .season b{display:block;font-size:17px;margin-bottom:4px}
   .season p{color:var(--dim);font-size:13.5px}
   @media(max-width:560px){.season{grid-template-columns:1fr}}
@@ -364,9 +364,9 @@
         <a class="btn gold" href="#invest"><span data-i18n="hero.cta1">DAO 투자 상품 보기</span><span class="ar">↗</span></a>
         <a class="btn ghost" href="#about"><span data-i18n="hero.cta2">텔레파이란?</span><span class="ar">↓</span></a>
       </div>
-      <a class="featured" href="#about">
+      <a class="featured" href="#invest">
         <div class="ic">★</div>
-        <div><div class="tag" data-i18n="hero.ftag">FEATURED</div><b data-i18n="hero.ftitle">스핀파이 시즌 2</b><span data-i18n="hero.fsub">피니 IP · 4개 언어 운영 노하우 계승</span></div>
+        <div><div class="tag" data-i18n="hero.ftag">FEATURED</div><b data-i18n="hero.ftitle">DAO 라운드 오픈 예정</b><span data-i18n="hero.fsub">5개 상품 · $300부터 · 솔라나 $TFI 배정</span></div>
       </a>
     </div>
     <div class="visual" aria-hidden="true">
@@ -391,7 +391,7 @@
     </div>
     <div class="feat" id="features"></div>
     <div class="season">
-      <img src="assets/symbol.webp" alt="TeleFi" width="64" height="64">
+      <img src="assets/pini-hero.webp" alt="Pini" width="72" height="72">
       <div><b data-i18n="about.seasonT"></b><p data-i18n="about.seasonP"></p></div>
     </div>
   </div>
@@ -523,7 +523,7 @@
 <script>
 /* ============ CONFIG — 숫자·링크는 여기서만 바꾸면 됩니다 ============ */
 const CONFIG = {
-  TELEGRAM_URL: "https://t.me/telefiofficial",            // TODO: 텔레파이 공식 채널/봇 핸들로 교체
+  TELEGRAM_URL: "https://t.me/PEAKY1028",                    // 하단 CTA · 푸터 텔레그램 링크
   DOCS_URL: "https://isaacweb007.github.io/telefi-businessplan/",
   PAY: {
     address: "TeLeFiDemoWaLLet1111111111111111111111111111", // TODO: 실제 USDT(Solana) 입금 주소로 교체
@@ -563,20 +563,20 @@ ko: {
   nav:{ about:"소개", games:"게임", invest:"DAO 투자", token:"$TFI 토큰", roadmap:"로드맵", faq:"FAQ", cta:"DAO 참여하기" },
   hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"텔레그램에서", l2:"플레이하고,", l3:"하우스를 소유하라",
     sub:"텔레파이는 텔레그램 미니앱에서 3초 만에 시작하는 크립토 카지노입니다. 슬롯·라이브·테이블·미니게임 10,000종 이상, USDT 입출금. 그리고 플랫폼의 성장은 솔라나 기반 $TFI 토큰으로 DAO 커뮤니티에 돌아갑니다.",
-    cta1:"DAO 투자 상품 보기", cta2:"텔레파이란?", ftag:"FEATURED", ftitle:"스핀파이 시즌 2", fsub:"피니 IP · 4개 언어 운영 노하우 계승",
+    cta1:"DAO 투자 상품 보기", cta2:"텔레파이란?", ftag:"FEATURED", ftitle:"DAO 라운드 오픈 예정", fsub:"5개 상품 · $300부터 · 솔라나 $TFI 배정",
     stats:[["10,000+","라이선스 게임"],["100+","게임 프로바이더"],["10B","$TFI 총 발행량"],["3초","첫 게임까지"]] },
   ticker:{ tag:"DAO ROUND", items:["$TFI DAO 라운드 오픈 예정","앙주안 라이선스 진행 중","2027 Q1 정식 런칭","슬롯 · 라이브 · 테이블 · 크래시","USDT 입출금 · 평균 3분","솔라나 기반 유틸리티 토큰","5개 투자 상품 · $300부터"] },
   about:{ title:"설치도 가입도 없이,<br>텔레그램에서 <em>바로 한 판</em>.",
-    sub:"텔레파이는 스핀파이의 시즌 2입니다. 슬롯 전문이던 시즌 1에서 확장해, 라이선스 프로바이더가 공급하는 슬롯·카드·라이브 카지노·미니게임 전체를 텔레그램 미니앱에서 서비스합니다.",
+    sub:"텔레파이는 라이선스 프로바이더가 공급하는 슬롯·카드·라이브 카지노·미니게임 전체를 텔레그램 미니앱 하나로 서비스하는 크립토 카지노입니다. 설치도, 가입도, 카드도 없이 — 텔레그램 계정과 USDT면 충분합니다.",
     features:[
       ["텔레그램 미니앱","봇을 여는 순간 게임 로비까지 3초. 앱 설치도, 회원가입 서류도 없습니다. 텔레그램 계정 하나면 내 게임 지갑이 자동으로 만들어집니다."],
       ["라이선스 게임만","앙주안 게이밍 라이선스 아래, 100곳이 넘는 라이선스 프로바이더의 게임만 제공합니다. RTP는 프로바이더 공식 수치 그대로."],
       ["풀 버티컬","슬롯 · 라이브 카지노 · 테이블 · 크래시/미니게임. 스포츠북만 제외한 카지노 전 장르를 한 지갑으로."],
       ["크립토 네이티브","USDT 입출금. 카드·PSP 수수료도 거절율도 없습니다. 출금은 1배 롤링만 채우면 24시간 언제든, 평균 3분."],
-      ["보너스 엔진","웰컴 보너스 · 리로드 · 캐시백 · 레이크백 · 데일리 럭키휠. 스핀파이에서 설계한 낙하산 보너스 시스템을 그대로 계승합니다."],
+      ["보너스 엔진","웰컴 보너스 · 리로드 · 캐시백 · 레이크백 · 데일리 럭키휠. 모든 보너스는 1배 롤링 — 받은 만큼만 베팅하면 바로 출금할 수 있습니다."],
       ["DAO가 소유하는 하우스","플랫폼의 성장은 $TFI로 커뮤니티에 돌아갑니다. DAO는 토큰을 보유하고, 게임 라인업과 프로모션 예산을 함께 결정합니다."]
     ],
-    seasonT:"시즌 1 → 시즌 2", seasonP:"시즌 1(스핀파이)이 랜딩과 브랜드, 4개 언어 운영을 검증했다면, 시즌 2(텔레파이)는 실제 게임 운영과 DAO 소유 구조로 확장합니다. 피니 캐릭터 IP는 시즌 2 리스킨으로 이어집니다." },
+    seasonT:"피니 — 텔레파이 마스코트", seasonP:"피니(Pini)는 텔레파이의 공식 캐릭터입니다. 게임 안내, 잭팟 알림, 보너스 쿠폰, 미션 보상까지 유저의 여정을 함께하고, 텔레그램 스티커·이모지 팩으로 바이럴을 만듭니다." },
   games:{ title:"10,000+ 게임,<br><em>한 지갑</em>으로.", sub:"스포츠북만 제외한 풀 버티컬. 라이선스 프로바이더의 공식 RTP 그대로, 텔레그램 안에서 바로 실행됩니다.",
     verticals:[["슬롯","Hacksaw · Pragmatic · BGaming · PG Soft"],["라이브 카지노","Evolution · Ezugi · Vivo"],["테이블 · 카드","Evoplay · Platipus · 3 Oaks"],["크래시 · 미니게임","Spribe (Aviator) · InOut · Turbo"]],
     providers:"파트너 프로바이더", pnote:"※ 위 화면은 동일 턴키 플랫폼의 실운영 화면에 텔레파이 로고를 적용한 목업입니다. 정식 화면은 피니 IP와 자체 브랜딩으로 별도 제작되며, 표시된 게임·프로모션은 텔레파이의 실제 콘텐츠가 아닙니다." },
@@ -607,13 +607,13 @@ ko: {
     alloc:{ liq:["DAO 유동성 공급","DEX 유동성 풀 · 마켓메이킹. DAO 참여자의 유동성을 보장합니다."], dao:["DAO 라운드","5개 투자 상품을 통해 DAO에 배정"], eco:["생태계 · 플레이어 리워드","레이크백 · 미션 · 럭키휠 · 시즌 보상"], fdn:["재단","운영 · 법률 · 라이선스 · 개발 (24개월 선형)"], team:["팀 · 어드바이저","12개월 클리프 후 24개월 선형"], mkt:["마케팅 · 파트너십","KOL · 거래소 · 제휴"], rsv:["트레저리 리저브","비상 준비금"] },
     utils:[["REWARDS","게임 리워드 지급","레이크백 · 미션 · 럭키휠 보상이 $TFI로 지급됩니다. 플레이할수록 토큰이 쌓입니다."],["STAKING","스테이킹 · VIP 티어","$TFI를 스테이킹하면 VIP 티어가 올라가고 보너스 부스트와 출금 우선권을 받습니다."],["GOVERNANCE","DAO 거버넌스","게임 프로바이더 추가, 프로모션 예산, 시즌 이벤트를 DAO 투표로 결정합니다."],["DISCOUNT","수수료 할인 · 상점 결제","리워드 상점 결제와 프리미엄 기능 이용 시 $TFI로 할인을 받습니다."],["BUYBACK","바이백 & 번","플랫폼 순수익의 일정 비율로 시장에서 $TFI를 매입해 소각합니다. 공급은 줄어들기만 합니다."],["AFFILIATE","어필리에이트 보상","친구 초대와 채널 어필리에이트 보상을 $TFI로 지급합니다. 유저가 곧 마케터가 됩니다."]] },
   road:{ title:"2027 Q1 <em>정식 런칭</em>까지", sub:"라이선스 → 연동 → DAO 라운드 → 런칭 → TGE. 각 단계는 앞 단계의 결과를 조건으로 진행됩니다.", done:"완료", now:"진행 중",
-    items:[["2026 Q3","브랜드 · 사업계획 확정",["텔레파이 브랜드 CI · 피니 IP 시즌 2 리스킨","턴키 플랫폼 파트너 견적 · 계약 협상","수익모델 검증 · 사업계획서 5개 언어"],"done"],
+    items:[["2026 Q3","브랜드 · 사업계획 확정",["텔레파이 브랜드 CI · 피니 캐릭터 IP 확정","턴키 플랫폼 파트너 견적 · 계약 협상","수익모델 검증 · 사업계획서 5개 언어"],"done"],
       ["2026 Q4","법인 · 라이선스 · DAO 라운드",["역외 법인 설립 · 앙주안 라이선스 신청","플랫폼 API 연동 · 결제(USDT) 연동","DAO 라운드 오픈 · 소프트런치(화이트리스트)"],"now"],
       ["2027 Q1","정식 런칭 · TGE",["텔레그램 미니앱 정식 오픈","$TFI TGE · DEX 유동성 공급","레이크백 · 럭키휠 · 리워드 상점 가동"],""],
       ["2027 Q2","웹 · 스테이킹 · 거버넌스",["웹 카지노 오픈 (같은 계정 · 같은 지갑)","$TFI 스테이킹 · VIP 티어","DAO 거버넌스 1차 투표"],""],
       ["2027 H2","확장",["텔레파이 오리지널 게임","어필리에이트 프로그램 · KOL 확장","신규 언어 · 지역 확장"],""]] },
   faq:{ title:"자주 묻는 질문", items:[
-    ["텔레파이는 무엇인가요?","텔레그램 미니앱에서 실행되는 크립토 카지노입니다. 슬롯·라이브·테이블·미니게임을 라이선스 프로바이더로부터 공급받아 서비스하며, 입출금은 USDT로 이루어집니다. 스핀파이의 시즌 2로, 별도 법인·별도 브랜드로 운영됩니다."],
+    ["텔레파이는 무엇인가요?","텔레그램 미니앱에서 실행되는 크립토 카지노입니다. 슬롯·라이브·테이블·미니게임을 라이선스 프로바이더로부터 공급받아 서비스하며, 입출금은 USDT로 이루어집니다."],
     ["DAO 투자 상품을 구매하면 무엇을 받나요?","참여 금액에 따라 $TFI가 배정되고(기본 배정 + 등급별 보너스), 거버넌스 투표권과 등급별 혜택(리워드 풀, VIP 티어, 파운딩 시트 등)이 부여됩니다. 각 상품 카드에서 상세 내용을 확인하세요."],
     ["$TFI는 언제, 어떻게 지급되나요?","TGE(토큰 생성 이벤트) 시점에 배정량의 25%가 솔라나 지갑으로 지급되고, 나머지 75%는 6개월간 매월 선형으로 언락됩니다. TGE는 정식 런칭과 함께 2027년 1분기를 목표로 합니다."],
     ["결제는 어떤 방식인가요?","USDT(Solana)로 결제합니다. 상품의 참여 버튼을 누르면 입금 주소와 QR이 표시되며, 송금 후 완료 화면 캡처본을 텔레그램으로 보내주시면 확인 후 배정 확인서를 발급합니다."],
@@ -621,7 +621,7 @@ ko: {
     ["어느 국가에서 이용할 수 있나요?","라이선스 및 파트너 조건상 제한되는 관할(미국·영국·프랑스·독일·네덜란드·스페인·호주 등)과 현지 법령상 온라인 게임이 금지된 국가에서는 이용할 수 없습니다. 이용 전 거주 국가의 법령을 확인해 주세요."]] },
   cta:{ title:"DAO 라운드에<br><em>함께하세요</em>", sub:"5개 상품, $300부터. 텔레그램으로 DAO 이름과 상품명을 보내주시면 담당자가 절차를 안내합니다.", b1:"텔레그램으로 신청", b2:"사업계획서 보기" },
   footer:{ tag:"텔레그램 안의 풀스택 크립토 카지노. 플랫폼의 성장은 $TFI로 DAO에 돌아갑니다.", c1:"제품", c2:"DAO", c3:"링크", how:"플레이 방법", tg:"텔레그램", docs:"사업계획서",
-    legal1:"텔레파이(TeleFi)는 스핀파이와 별도 법인·별도 브랜드로 운영됩니다. 본 웹사이트의 모든 내용은 정보 제공 목적이며 투자 권유, 금융 자문 또는 증권의 청약 권유에 해당하지 않습니다. $TFI는 텔레파이 게임 생태계 내에서 사용되는 유틸리티 토큰이며, 수익이나 가격 상승을 보장하지 않습니다.",
+    legal1:"본 웹사이트의 모든 내용은 정보 제공 목적이며 투자 권유, 금융 자문 또는 증권의 청약 권유에 해당하지 않습니다. $TFI는 텔레파이 게임 생태계 내에서 사용되는 유틸리티 토큰이며, 수익이나 가격 상승을 보장하지 않습니다.",
     legal2:"온라인 게임은 관할별 인허가 대상입니다. 제한 관할 및 현지 법령상 금지된 국가에서는 서비스를 이용할 수 없습니다. 도박은 중독성이 있을 수 있습니다 — 책임 있게 플레이하세요.",
     age:"만 18세 이상만 이용할 수 있습니다." }
 },
@@ -630,20 +630,20 @@ en: {
   nav:{ about:"About", games:"Games", invest:"DAO Round", token:"$TFI Token", roadmap:"Roadmap", faq:"FAQ", cta:"Join the DAO" },
   hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"Play on", l2:"Telegram.", l3:"Own the house.",
     sub:"TeleFi is a crypto casino that opens in three seconds inside a Telegram mini app. 10,000+ slots, live tables, card and crash games, USDT in and out — and the platform's growth flows back to the DAO community through the Solana-based $TFI token.",
-    cta1:"View DAO packages", cta2:"What is TeleFi?", ftag:"FEATURED", ftitle:"SpinFi Season 2", fsub:"Pini IP · 4-language ops know-how carried over",
+    cta1:"View DAO packages", cta2:"What is TeleFi?", ftag:"FEATURED", ftitle:"DAO round opening soon", fsub:"5 packages · from $300 · Solana $TFI allocation",
     stats:[["10,000+","Licensed games"],["100+","Game providers"],["10B","$TFI total supply"],["3s","To first spin"]] },
   ticker:{ tag:"DAO ROUND", items:["$TFI DAO round opening soon","Anjouan license in progress","Full launch Q1 2027","Slots · Live · Table · Crash","USDT in & out · 3-min avg withdrawal","Solana-based utility token","5 packages · from $300"] },
   about:{ title:"No install. No sign-up.<br>Just <em>one spin</em> in Telegram.",
-    sub:"TeleFi is Season 2 of SpinFi. Season 1 was slots only; Season 2 brings the full casino — slots, cards, live tables and mini games from licensed providers — into a Telegram mini app.",
+    sub:"TeleFi is a crypto casino that brings slots, cards, live tables and mini games from licensed providers into a single Telegram mini app. No install, no sign-up, no card — a Telegram account and USDT are all you need.",
     features:[
       ["Telegram mini app","Open the bot and you're in the lobby in three seconds. No app install, no paperwork. Your Telegram account is your game wallet."],
       ["Licensed games only","Under an Anjouan gaming license, TeleFi serves games from 100+ licensed providers only. RTP is the provider's official figure — nothing else."],
       ["Full vertical","Slots · live casino · table games · crash and mini games. Every casino genre except sportsbook, from one wallet."],
       ["Crypto native","USDT deposits and withdrawals. No card or PSP fees, no declines. Withdraw any time after 1× rollover — three minutes on average."],
-      ["Bonus engine","Welcome bonus · reload · cashback · rakeback · daily lucky wheel. The parachute bonus system designed at SpinFi carries over intact."],
+      ["Bonus engine","Welcome bonus · reload · cashback · rakeback · daily lucky wheel. Every bonus carries a 1× rollover — wager it once and it is yours to withdraw."],
       ["A house the DAO owns","Platform growth flows back to the community as $TFI. DAOs hold the token and vote on game line-ups and promotion budgets."]
     ],
-    seasonT:"Season 1 → Season 2", seasonP:"Season 1 (SpinFi) proved the landing page, the brand and 4-language operations. Season 2 (TeleFi) expands into real game operations and a DAO-owned structure. The Pini character IP continues with a Season 2 reskin." },
+    seasonT:"Pini — the TeleFi mascot", seasonP:"Pini is TeleFi's official character. From game guides and jackpot alerts to bonus coupons and mission rewards, Pini walks with the player — and spreads through Telegram sticker and emoji packs." },
   games:{ title:"10,000+ games,<br><em>one wallet</em>.", sub:"Every vertical except sportsbook. The provider's official RTP, launched straight inside Telegram.",
     verticals:[["Slots","Hacksaw · Pragmatic · BGaming · PG Soft"],["Live casino","Evolution · Ezugi · Vivo"],["Table · cards","Evoplay · Platipus · 3 Oaks"],["Crash · mini games","Spribe (Aviator) · InOut · Turbo"]],
     providers:"Partner providers", pnote:"※ Screens above are mockups: live screens of an operator on the same turnkey platform with the TeleFi logo applied. Final screens will be built separately with the Pini IP and TeleFi branding; games and promotions shown are not TeleFi content." },
@@ -674,13 +674,13 @@ en: {
     alloc:{ liq:["DAO liquidity provision","DEX liquidity pools and market making — guaranteeing liquidity for DAO participants."], dao:["DAO round","Allocated to DAOs through the five packages"], eco:["Ecosystem · player rewards","Rakeback · missions · lucky wheel · season rewards"], fdn:["Foundation","Operations · legal · license · development (24-mo linear)"], team:["Team · advisors","12-month cliff, then 24-month linear"], mkt:["Marketing · partnerships","KOLs · exchanges · alliances"], rsv:["Treasury reserve","Emergency reserve"] },
     utils:[["REWARDS","Game rewards","Rakeback, missions and lucky-wheel prizes are paid in $TFI. The more you play, the more you hold."],["STAKING","Staking · VIP tiers","Stake $TFI to climb VIP tiers, boost bonuses and get withdrawal priority."],["GOVERNANCE","DAO governance","Adding game providers, promotion budgets and season events are decided by DAO vote."],["DISCOUNT","Fee discounts · shop","Pay in $TFI for reward-shop items and premium features at a discount."],["BUYBACK","Buyback & burn","A share of platform net revenue buys $TFI on the market and burns it. Supply only goes down."],["AFFILIATE","Affiliate rewards","Referral and channel-affiliate rewards are paid in $TFI. Every player is a marketer."]] },
   road:{ title:"The road to <em>full launch</em> in Q1 2027", sub:"License → integration → DAO round → launch → TGE. Each step is gated on the one before it.", done:"Done", now:"In progress",
-    items:[["2026 Q3","Brand & business plan locked",["TeleFi brand CI · Pini IP Season 2 reskin","Turnkey platform partner offer & contract negotiation","Revenue model verified · business plan in 5 languages"],"done"],
+    items:[["2026 Q3","Brand & business plan locked",["TeleFi brand CI · Pini character IP","Turnkey platform partner offer & contract negotiation","Revenue model verified · business plan in 5 languages"],"done"],
       ["2026 Q4","Entity · license · DAO round",["Offshore entity · Anjouan license application","Platform API integration · USDT payment integration","DAO round opens · soft launch (whitelist)"],"now"],
       ["2027 Q1","Full launch · TGE",["Telegram mini app goes live","$TFI TGE · DEX liquidity provision","Rakeback · lucky wheel · reward shop live"],""],
       ["2027 Q2","Web · staking · governance",["Web casino opens (same account, same wallet)","$TFI staking · VIP tiers","First DAO governance vote"],""],
       ["2027 H2","Expansion",["TeleFi original games","Affiliate program · KOL expansion","New languages and regions"],""]] },
   faq:{ title:"Frequently asked questions", items:[
-    ["What is TeleFi?","A crypto casino that runs inside a Telegram mini app. Slots, live tables, table games and mini games come from licensed providers; deposits and withdrawals are in USDT. It is Season 2 of SpinFi, run as a separate entity and brand."],
+    ["What is TeleFi?","A crypto casino that runs inside a Telegram mini app. Slots, live tables, table games and mini games come from licensed providers; deposits and withdrawals are in USDT."],
     ["What do I get when my DAO buys a package?","A $TFI allocation sized to your contribution (base allocation plus a tier bonus), governance voting rights and tier benefits such as reward pools, VIP tiers and a founding seat. See each package card for details."],
     ["When and how is $TFI delivered?","25% of your allocation is delivered to your Solana wallet at TGE (token generation event); the remaining 75% unlocks linearly over six months. TGE is targeted for Q1 2027 alongside full launch."],
     ["How do I pay?","In USDT on Solana. Press a package's join button to see the deposit address and QR code; after sending, share a screenshot of the completed transfer on Telegram and we issue your allocation certificate once confirmed."],
@@ -688,7 +688,7 @@ en: {
     ["Where can I play?","Not in jurisdictions restricted by the license and partner terms (including the USA, UK, France, Germany, the Netherlands, Spain and Australia) or where online gaming is prohibited by local law. Check your local laws before playing."]] },
   cta:{ title:"Join the<br><em>DAO round</em>", sub:"Five packages, from $300. Send your DAO name and package on Telegram and our team will take it from there.", b1:"Apply on Telegram", b2:"Read the business plan" },
   footer:{ tag:"A full-stack crypto casino inside Telegram. Platform growth flows back to the DAO as $TFI.", c1:"Product", c2:"DAO", c3:"Links", how:"How to play", tg:"Telegram", docs:"Business plan",
-    legal1:"TeleFi is operated as a separate entity and brand from SpinFi. Everything on this website is for information only and does not constitute an offer to invest, financial advice or a solicitation to buy securities. $TFI is a utility token used within the TeleFi game ecosystem and carries no guarantee of profit or price appreciation.",
+    legal1:"Everything on this website is for information only and does not constitute an offer to invest, financial advice or a solicitation to buy securities. $TFI is a utility token used within the TeleFi game ecosystem and carries no guarantee of profit or price appreciation.",
     legal2:"Online gaming is subject to licensing in each jurisdiction. The service is unavailable in restricted jurisdictions and where prohibited by local law. Gambling can be addictive — play responsibly.",
     age:"You must be 18 or older." }
 },
@@ -697,20 +697,20 @@ zh: {
   nav:{ about:"关于", games:"游戏", invest:"DAO 投资", token:"$TFI 代币", roadmap:"路线图", faq:"FAQ", cta:"加入 DAO" },
   hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"在 Telegram 玩，", l2:"和 DAO 一起", l3:"做庄家",
     sub:"TeleFi 是在 Telegram 小程序内 3 秒即可开局的加密赌场。10,000+ 款老虎机、真人、桌面与 Crash 小游戏，USDT 充提——而平台的增长通过 Solana 链上的 $TFI 代币回馈 DAO 社区。",
-    cta1:"查看 DAO 投资产品", cta2:"什么是 TeleFi？", ftag:"FEATURED", ftitle:"SpinFi 第二季", fsub:"Pini IP · 传承 4 语种运营经验",
+    cta1:"查看 DAO 投资产品", cta2:"什么是 TeleFi？", ftag:"FEATURED", ftitle:"DAO 轮即将开放", fsub:"5 档产品 · $300 起 · Solana $TFI 配额",
     stats:[["10,000+","持牌游戏"],["100+","游戏供应商"],["10B","$TFI 总发行量"],["3秒","即可开局"]] },
   ticker:{ tag:"DAO ROUND", items:["$TFI DAO 轮即将开放","Anjouan 牌照申请中","2027 年 Q1 正式上线","老虎机 · 真人 · 桌面 · Crash","USDT 充提 · 平均 3 分钟到账","Solana 实用型代币","5 档产品 · $300 起"] },
   about:{ title:"无需安装，无需注册，<br>在 Telegram 里<em>直接开局</em>。",
-    sub:"TeleFi 是 SpinFi 的第二季。第一季专注老虎机，第二季把持牌供应商提供的老虎机、牌类、真人赌场与小游戏全部搬进 Telegram 小程序。",
+    sub:"TeleFi 是把持牌供应商提供的老虎机、牌类、真人赌场与小游戏全部装进一个 Telegram 小程序的加密赌场。无需安装、无需注册、无需银行卡——一个 Telegram 账号加 USDT 即可。",
     features:[
       ["Telegram 小程序","打开机器人，3 秒进入大厅。无需安装 App，无需注册资料，一个 Telegram 账号就是你的游戏钱包。"],
       ["仅持牌游戏","在 Anjouan 博彩牌照下，仅提供 100+ 家持牌供应商的游戏。RTP 采用供应商官方数据。"],
       ["全品类","老虎机 · 真人赌场 · 桌面 · Crash/小游戏。除体育博彩外的全部赌场品类，一个钱包搞定。"],
       ["加密原生","USDT 充提。没有银行卡和 PSP 手续费，也没有拒付。完成 1 倍流水后随时提现，平均 3 分钟。"],
-      ["奖励引擎","欢迎奖金 · 续存 · 返现 · 返水 · 每日幸运转盘。完整继承 SpinFi 设计的降落伞奖金体系。"],
+      ["奖励引擎","欢迎奖金 · 续存 · 返现 · 返水 · 每日幸运转盘。所有奖金仅需 1 倍流水——下注一次即可提现。"],
       ["DAO 拥有的赌场","平台增长以 $TFI 回馈社区。DAO 持有代币，共同决定游戏阵容与推广预算。"]
     ],
-    seasonT:"第一季 → 第二季", seasonP:"第一季（SpinFi）验证了落地页、品牌与 4 语种运营；第二季（TeleFi）扩展到真实游戏运营与 DAO 所有制结构。Pini 角色 IP 将以第二季新皮肤延续。" },
+    seasonT:"Pini —— TeleFi 吉祥物", seasonP:"Pini 是 TeleFi 的官方角色。从游戏引导、头奖提醒到奖金券与任务奖励，Pini 全程陪伴玩家，并通过 Telegram 贴纸与表情包传播。" },
   games:{ title:"10,000+ 款游戏，<br><em>一个钱包</em>。", sub:"除体育博彩外的全品类。供应商官方 RTP，在 Telegram 内直接启动。",
     verticals:[["老虎机","Hacksaw · Pragmatic · BGaming · PG Soft"],["真人赌场","Evolution · Ezugi · Vivo"],["桌面 · 牌类","Evoplay · Platipus · 3 Oaks"],["Crash · 小游戏","Spribe (Aviator) · InOut · Turbo"]],
     providers:"合作供应商", pnote:"※ 以上画面为同一交钥匙平台上运营商的实际界面套用 TeleFi 标志的样机。正式界面将采用 Pini IP 与自有品牌另行制作，所示游戏与活动并非 TeleFi 的实际内容。" },
@@ -741,13 +741,13 @@ zh: {
     alloc:{ liq:["DAO 流动性供应","DEX 流动性池 · 做市，保障 DAO 参与者的流动性。"], dao:["DAO 轮","通过 5 档产品分配给 DAO"], eco:["生态 · 玩家奖励","返水 · 任务 · 幸运转盘 · 赛季奖励"], fdn:["基金会","运营 · 法务 · 牌照 · 开发（24 个月线性）"], team:["团队 · 顾问","12 个月锁定后 24 个月线性"], mkt:["市场 · 合作","KOL · 交易所 · 联盟"], rsv:["金库储备","应急储备"] },
     utils:[["REWARDS","游戏奖励","返水、任务与幸运转盘奖励以 $TFI 发放。玩得越多，持有越多。"],["STAKING","质押 · VIP 等级","质押 $TFI 提升 VIP 等级，获得奖金加成与提现优先权。"],["GOVERNANCE","DAO 治理","新增游戏供应商、推广预算与赛季活动由 DAO 投票决定。"],["DISCOUNT","手续费折扣 · 商店","使用 $TFI 购买奖励商店物品与高级功能可享折扣。"],["BUYBACK","回购与销毁","以平台净收入的一定比例在市场回购 $TFI 并销毁，供应只减不增。"],["AFFILIATE","联盟奖励","邀请好友与频道联盟奖励以 $TFI 发放，每个玩家都是推广者。"]] },
   road:{ title:"通往 2027 Q1<em>正式上线</em>之路", sub:"牌照 → 对接 → DAO 轮 → 上线 → TGE。每一步都以前一步的完成为前提。", done:"已完成", now:"进行中",
-    items:[["2026 Q3","确定品牌与商业计划",["TeleFi 品牌 CI · Pini IP 第二季新皮肤","交钥匙平台合作方报价与合同谈判","收益模型验证 · 5 语种商业计划书"],"done"],
+    items:[["2026 Q3","确定品牌与商业计划",["TeleFi 品牌 CI · Pini 角色 IP","交钥匙平台合作方报价与合同谈判","收益模型验证 · 5 语种商业计划书"],"done"],
       ["2026 Q4","公司 · 牌照 · DAO 轮",["设立离岸公司 · 申请 Anjouan 牌照","平台 API 对接 · USDT 支付对接","DAO 轮开放 · 软上线（白名单）"],"now"],
       ["2027 Q1","正式上线 · TGE",["Telegram 小程序正式开放","$TFI TGE · DEX 流动性供应","返水 · 幸运转盘 · 奖励商店上线"],""],
       ["2027 Q2","网页版 · 质押 · 治理",["网页赌场开放（同一账号 · 同一钱包）","$TFI 质押 · VIP 等级","首次 DAO 治理投票"],""],
       ["2027 H2","扩张",["TeleFi 原创游戏","联盟计划 · KOL 扩张","新语种与新地区"],""]] },
   faq:{ title:"常见问题", items:[
-    ["TeleFi 是什么？","在 Telegram 小程序内运行的加密赌场。老虎机、真人、桌面与小游戏均来自持牌供应商，充提使用 USDT。它是 SpinFi 的第二季，以独立公司与品牌运营。"],
+    ["TeleFi 是什么？","在 Telegram 小程序内运行的加密赌场。老虎机、真人、桌面与小游戏均来自持牌供应商，充提使用 USDT。"],
     ["DAO 购买产品能获得什么？","按参与金额获得 $TFI 配额（基础配额 + 等级加成）、治理投票权以及等级权益（奖励池、VIP 等级、创始席位等）。详情见各产品卡片。"],
     ["$TFI 何时、如何发放？","TGE（代币生成事件）时将配额的 25% 发放至 Solana 钱包，其余 75% 在 6 个月内按月线性解锁。TGE 目标与正式上线同步，定于 2027 年第一季度。"],
     ["如何支付？","使用 Solana 网络的 USDT。点击产品的参与按钮即可查看充值地址与二维码；转账后将完成画面截图发送至 Telegram，确认后发放配额确认函。"],
@@ -755,7 +755,7 @@ zh: {
     ["哪些国家可以使用？","牌照与合作方条款限制的司法辖区（含美国、英国、法国、德国、荷兰、西班牙、澳大利亚等）以及当地法律禁止在线博彩的国家不可使用。使用前请确认所在地法律。"]] },
   cta:{ title:"加入<br><em>DAO 轮</em>", sub:"5 档产品，$300 起。通过 Telegram 发送 DAO 名称与产品名，专人将引导后续流程。", b1:"通过 Telegram 申请", b2:"查看商业计划书" },
   footer:{ tag:"Telegram 内的全栈加密赌场。平台增长以 $TFI 回馈 DAO。", c1:"产品", c2:"DAO", c3:"链接", how:"如何游玩", tg:"Telegram", docs:"商业计划书",
-    legal1:"TeleFi 与 SpinFi 为独立公司、独立品牌。本网站所有内容仅供参考，不构成投资邀约、金融建议或证券要约。$TFI 是 TeleFi 游戏生态内使用的实用型代币，不保证收益或价格上涨。",
+    legal1:"本网站所有内容仅供参考，不构成投资邀约、金融建议或证券要约。$TFI 是 TeleFi 游戏生态内使用的实用型代币，不保证收益或价格上涨。",
     legal2:"在线博彩在各司法辖区均须持牌。受限辖区及当地法律禁止的国家无法使用本服务。博彩可能成瘾——请理性游戏。",
     age:"仅限 18 岁以上人士使用。" }
 },
@@ -764,20 +764,20 @@ ja: {
   nav:{ about:"概要", games:"ゲーム", invest:"DAO 投資", token:"$TFI トークン", roadmap:"ロードマップ", faq:"FAQ", cta:"DAO に参加" },
   hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"Telegram で遊び、", l2:"DAO と一緒に", l3:"ハウスを所有する",
     sub:"TeleFi は Telegram ミニアプリ内で3秒で始まるクリプトカジノです。スロット・ライブ・テーブル・クラッシュなど 10,000 種以上、USDT 入出金。そしてプラットフォームの成長は Solana ベースの $TFI トークンとして DAO コミュニティに還元されます。",
-    cta1:"DAO 投資商品を見る", cta2:"TeleFi とは？", ftag:"FEATURED", ftitle:"SpinFi シーズン 2", fsub:"Pini IP · 4言語運営ノウハウを継承",
+    cta1:"DAO 投資商品を見る", cta2:"TeleFi とは？", ftag:"FEATURED", ftitle:"DAO ラウンド近日開始", fsub:"5つの商品 · $300 から · Solana $TFI 配分",
     stats:[["10,000+","ライセンスゲーム"],["100+","ゲームプロバイダー"],["10B","$TFI 総発行量"],["3秒","最初のゲームまで"]] },
   ticker:{ tag:"DAO ROUND", items:["$TFI DAO ラウンド近日開始","Anjouan ライセンス申請中","2027年 Q1 正式ローンチ","スロット · ライブ · テーブル · クラッシュ","USDT 入出金 · 平均3分","Solana ベースのユーティリティトークン","5つの商品 · $300 から"] },
   about:{ title:"インストールも登録も不要。<br>Telegram で<em>すぐ一勝負</em>。",
-    sub:"TeleFi は SpinFi のシーズン 2 です。スロット専門だったシーズン 1 から拡張し、ライセンスプロバイダーが供給するスロット・カード・ライブカジノ・ミニゲームのすべてを Telegram ミニアプリで提供します。",
+    sub:"TeleFi は、ライセンスプロバイダーが供給するスロット・カード・ライブカジノ・ミニゲームのすべてを一つの Telegram ミニアプリで提供するクリプトカジノです。インストールも登録もカードも不要 — Telegram アカウントと USDT があれば十分です。",
     features:[
       ["Telegram ミニアプリ","ボットを開いた瞬間、3秒でロビーへ。アプリのインストールも書類も不要。Telegram アカウント一つでゲームウォレットが自動作成されます。"],
       ["ライセンスゲームのみ","Anjouan ゲーミングライセンスのもと、100社以上のライセンスプロバイダーのゲームのみを提供。RTP はプロバイダー公式値そのままです。"],
       ["フルバーティカル","スロット · ライブカジノ · テーブル · クラッシュ/ミニゲーム。スポーツブック以外のカジノ全ジャンルを一つのウォレットで。"],
       ["クリプトネイティブ","USDT 入出金。カードや PSP の手数料も拒否もありません。1倍ロールオーバー達成後は24時間いつでも出金、平均3分。"],
-      ["ボーナスエンジン","ウェルカム · リロード · キャッシュバック · レーキバック · デイリーラッキーホイール。SpinFi で設計したパラシュートボーナス方式をそのまま継承。"],
+      ["ボーナスエンジン","ウェルカム · リロード · キャッシュバック · レーキバック · デイリーラッキーホイール。すべてのボーナスは1倍ロールオーバー — 一度賭ければそのまま出金できます。"],
       ["DAO が所有するハウス","プラットフォームの成長は $TFI としてコミュニティに還元。DAO はトークンを保有し、ゲームラインナップやプロモ予算を共に決めます。"]
     ],
-    seasonT:"シーズン 1 → シーズン 2", seasonP:"シーズン 1（SpinFi）がランディングとブランド、4言語運営を検証したなら、シーズン 2（TeleFi）は実際のゲーム運営と DAO 所有構造へ拡張します。Pini キャラクター IP はシーズン 2 リスキンとして続きます。" },
+    seasonT:"Pini — TeleFi のマスコット", seasonP:"Pini は TeleFi の公式キャラクターです。ゲーム案内やジャックポット通知、ボーナスクーポン、ミッション報酬までプレイヤーの旅に寄り添い、Telegram のステッカー・絵文字パックで拡散します。" },
   games:{ title:"10,000+ のゲーム、<br><em>一つのウォレット</em>で。", sub:"スポーツブック以外のフルバーティカル。プロバイダー公式 RTP のまま、Telegram 内で直接起動します。",
     verticals:[["スロット","Hacksaw · Pragmatic · BGaming · PG Soft"],["ライブカジノ","Evolution · Ezugi · Vivo"],["テーブル · カード","Evoplay · Platipus · 3 Oaks"],["クラッシュ · ミニゲーム","Spribe (Aviator) · InOut · Turbo"]],
     providers:"パートナープロバイダー", pnote:"※ 上の画面は同一ターンキープラットフォームで実運営中の事業者画面に TeleFi ロゴを適用したモックアップです。正式画面は Pini IP と独自ブランディングで別途制作され、表示されているゲーム・プロモは TeleFi の実際のコンテンツではありません。" },
@@ -808,13 +808,13 @@ ja: {
     alloc:{ liq:["DAO 流動性供給","DEX 流動性プール · マーケットメイク。DAO 参加者の流動性を保証します。"], dao:["DAO ラウンド","5つの投資商品を通じて DAO に配分"], eco:["エコシステム · プレイヤー報酬","レーキバック · ミッション · ラッキーホイール · シーズン報酬"], fdn:["財団","運営 · 法務 · ライセンス · 開発（24ヶ月リニア）"], team:["チーム · アドバイザー","12ヶ月クリフ後、24ヶ月リニア"], mkt:["マーケティング · パートナーシップ","KOL · 取引所 · 提携"], rsv:["トレジャリー準備金","緊急準備金"] },
     utils:[["REWARDS","ゲーム報酬","レーキバック・ミッション・ラッキーホイールの報酬は $TFI で支給。遊ぶほどトークンが貯まります。"],["STAKING","ステーキング · VIP ティア","$TFI をステーキングすると VIP ティアが上がり、ボーナスブーストと出金優先権を得られます。"],["GOVERNANCE","DAO ガバナンス","ゲームプロバイダーの追加、プロモ予算、シーズンイベントを DAO 投票で決定します。"],["DISCOUNT","手数料割引 · ショップ","リワードショップの決済やプレミアム機能の利用時に $TFI で割引を受けられます。"],["BUYBACK","バイバック & バーン","プラットフォーム純収益の一定割合で市場から $TFI を買い戻して焼却。供給は減る一方です。"],["AFFILIATE","アフィリエイト報酬","友達招待やチャンネルアフィリエイトの報酬を $TFI で支給。ユーザーがそのままマーケターになります。"]] },
   road:{ title:"2027 Q1 <em>正式ローンチ</em>への道", sub:"ライセンス → 連携 → DAO ラウンド → ローンチ → TGE。各段階は前段階の完了を条件に進みます。", done:"完了", now:"進行中",
-    items:[["2026 Q3","ブランド · 事業計画確定",["TeleFi ブランド CI · Pini IP シーズン 2 リスキン","ターンキープラットフォームの見積 · 契約交渉","収益モデル検証 · 事業計画書5言語"],"done"],
+    items:[["2026 Q3","ブランド · 事業計画確定",["TeleFi ブランド CI · Pini キャラクター IP","ターンキープラットフォームの見積 · 契約交渉","収益モデル検証 · 事業計画書5言語"],"done"],
       ["2026 Q4","法人 · ライセンス · DAO ラウンド",["オフショア法人設立 · Anjouan ライセンス申請","プラットフォーム API 連携 · USDT 決済連携","DAO ラウンド開始 · ソフトローンチ（ホワイトリスト）"],"now"],
       ["2027 Q1","正式ローンチ · TGE",["Telegram ミニアプリ正式公開","$TFI TGE · DEX 流動性供給","レーキバック · ラッキーホイール · リワードショップ稼働"],""],
       ["2027 Q2","Web · ステーキング · ガバナンス",["Web カジノ公開（同一アカウント · 同一ウォレット）","$TFI ステーキング · VIP ティア","DAO ガバナンス初回投票"],""],
       ["2027 H2","拡張",["TeleFi オリジナルゲーム","アフィリエイトプログラム · KOL 拡大","新言語 · 新地域への拡張"],""]] },
   faq:{ title:"よくある質問", items:[
-    ["TeleFi とは何ですか？","Telegram ミニアプリ内で動作するクリプトカジノです。スロット・ライブ・テーブル・ミニゲームはライセンスプロバイダーから供給され、入出金は USDT で行います。SpinFi のシーズン 2 として、別法人・別ブランドで運営します。"],
+    ["TeleFi とは何ですか？","Telegram ミニアプリ内で動作するクリプトカジノです。スロット・ライブ・テーブル・ミニゲームはライセンスプロバイダーから供給され、入出金は USDT で行います。"],
     ["DAO 投資商品を購入すると何が得られますか？","参加金額に応じた $TFI の配分（基本配分 + ランク別ボーナス）、ガバナンス投票権、そしてリワードプール・VIP ティア・ファウンディングシートなどのランク別特典が付与されます。詳細は各商品カードをご覧ください。"],
     ["$TFI はいつ、どのように配布されますか？","TGE（トークン生成イベント）時に配分量の 25% が Solana ウォレットへ配布され、残りの 75% は6ヶ月間、毎月リニアにアンロックされます。TGE は正式ローンチと同時に 2027年第1四半期を目標としています。"],
     ["決済方法は？","Solana ネットワークの USDT で決済します。商品の参加ボタンを押すと入金アドレスと QR が表示され、送金後に完了画面のキャプチャを Telegram で送っていただければ、確認後に配分確認書を発行します。"],
@@ -822,7 +822,7 @@ ja: {
     ["どの国で利用できますか？","ライセンスおよびパートナー条件で制限される管轄（米国・英国・フランス・ドイツ・オランダ・スペイン・オーストラリアなど）と、現地法でオンラインゲームが禁止されている国では利用できません。ご利用前に居住国の法令をご確認ください。"]] },
   cta:{ title:"DAO ラウンドに<br><em>参加しよう</em>", sub:"5つの商品、$300 から。Telegram で DAO 名と商品名を送っていただければ、担当者が手順をご案内します。", b1:"Telegram で申請", b2:"事業計画書を見る" },
   footer:{ tag:"Telegram の中のフルスタック・クリプトカジノ。プラットフォームの成長は $TFI として DAO に還元されます。", c1:"プロダクト", c2:"DAO", c3:"リンク", how:"遊び方", tg:"Telegram", docs:"事業計画書",
-    legal1:"TeleFi は SpinFi とは別法人・別ブランドとして運営されます。本ウェブサイトのすべての内容は情報提供を目的としており、投資勧誘、金融助言、または有価証券の募集には該当しません。$TFI は TeleFi ゲームエコシステム内で使用されるユーティリティトークンであり、収益や価格上昇を保証するものではありません。",
+    legal1:"本ウェブサイトのすべての内容は情報提供を目的としており、投資勧誘、金融助言、または有価証券の募集には該当しません。$TFI は TeleFi ゲームエコシステム内で使用されるユーティリティトークンであり、収益や価格上昇を保証するものではありません。",
     legal2:"オンラインゲームは管轄ごとに許認可の対象です。制限管轄および現地法で禁止されている国ではサービスを利用できません。ギャンブルには依存性があります — 責任を持ってプレイしてください。",
     age:"18歳以上のみ利用できます。" }
 }
