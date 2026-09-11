@@ -528,6 +528,7 @@ const CONFIG = {
   PAY: {
     address: "TeLeFiDemoWaLLet1111111111111111111111111111", // TODO: 실제 USDT(Solana) 입금 주소로 교체
     isDemo: true,                                            // 실제 주소로 바꾸면 false — DEMO 배지·경고문이 사라짐
+    telegram: "https://t.me/PEAKY1028",                      // 캡처본 받는 담당자 (모달의 "텔레그램으로 캡처본 보내기" 버튼)
     usdtMint: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", // USDT SPL mint (Solana mainnet) — Solana Pay QR용
   },
   TOTAL_SUPPLY: 10_000_000_000,
@@ -906,7 +907,7 @@ function renderPay(){
   $("#payAddrL").textContent = P.addrLabel; $("#payAddr").textContent = CONFIG.PAY.address;
   $("#payCopy").textContent = P.copy; $("#payStepsT").textContent = P.stepsT;
   $("#paySteps").innerHTML = P.steps.map(s => `<li>${esc(fmtT(s, {amount: num(t.usd), name}))}</li>`).join("");
-  $("#payTg").textContent = P.tg; $("#payTg").href = CONFIG.TELEGRAM_URL; $("#payScan").textContent = P.scan;
+  $("#payTg").textContent = P.tg; $("#payTg").href = CONFIG.PAY.telegram || CONFIG.TELEGRAM_URL; $("#payScan").textContent = P.scan;
   $("#payWarn").textContent = CONFIG.PAY.isDemo ? P.warn : P.warnLive;
   // Solana Pay URI — 지갑 앱이 스캔하면 주소·금액·USDT 토큰이 자동 입력된다
   const uri = `solana:${CONFIG.PAY.address}?amount=${t.usd}&spl-token=${CONFIG.PAY.usdtMint}&label=TeleFi&message=${encodeURIComponent("TeleFi DAO " + name)}`;
