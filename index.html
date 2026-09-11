@@ -89,31 +89,53 @@
   @media(max-width:480px){.nav .in{padding:0 14px;gap:12px}.langs button{padding:8px 7px;font-size:11px}.logo{font-size:19px}.wrap{padding:0 18px}.hero .grid{padding-left:18px;padding-right:18px}}
 
   /* HERO */
-  .hero{position:relative;overflow:hidden;padding:0;background:radial-gradient(1200px 600px at 75% 30%,rgba(245,184,24,.10),transparent 60%),var(--bg)}
-  .hero .grid{max-width:var(--wrap);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) 180px;gap:24px;align-items:center;min-height:calc(100vh - 68px - 60px)}
-  .hero h1{font-size:clamp(46px,6.6vw,100px);line-height:.92;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:normal}
+  .hero{position:relative;overflow:hidden;padding:0;background:var(--bg)}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(900px 560px at 72% 40%,rgba(245,184,24,.16),transparent 62%),radial-gradient(700px 420px at 12% 95%,rgba(42,171,238,.10),transparent 60%)}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 65% 60% at 58% 42%,#000 20%,transparent 100%);mask-image:radial-gradient(ellipse 65% 60% at 58% 42%,#000 20%,transparent 100%)}
+  .hero .grid{position:relative;z-index:1;max-width:var(--wrap);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) 180px;gap:28px;align-items:center;min-height:calc(100vh - 68px - 60px)}
+  .pill{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line2);background:rgba(245,184,24,.08);border-radius:999px;padding:8px 15px 8px 11px;font-size:11px;letter-spacing:.18em;font-weight:800;color:var(--gold);text-transform:uppercase;margin-bottom:24px}
+  .pill i{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 2.2s infinite;flex:0 0 8px}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,184,24,.55)}70%{box-shadow:0 0 0 10px rgba(245,184,24,0)}100%{box-shadow:0 0 0 0 rgba(245,184,24,0)}}
+  .hero h1{font-size:clamp(46px,6.6vw,100px);line-height:.92;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:normal;text-shadow:0 20px 60px rgba(0,0,0,.6)}
   html[lang="ko"] .hero h1{font-size:clamp(40px,5.7vw,84px)}
   html[lang="ja"] .hero h1,html[lang="zh"] .hero h1{font-size:clamp(36px,5vw,72px)}
-  .hero h1 .l3{color:var(--gold)}
+  .hero h1 .l3{background:linear-gradient(92deg,#FFE79C 0%,var(--gold) 40%,#D08F0A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero .sub{margin-top:26px;font-size:16.5px;max-width:34em}
   .hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
-  .hero .visual{position:relative;height:min(78vh,720px);min-height:460px;overflow:hidden}
-  .hero .stripes{position:absolute;right:-6%;top:6%;width:78%;height:88%;background:repeating-linear-gradient(-45deg,var(--gold) 0 26px,transparent 26px 58px);clip-path:polygon(18% 0,100% 0,100% 100%,0 100%);opacity:.95;transform:skewX(-6deg)}
-  .hero .slab{position:absolute;right:6%;top:0;width:44%;height:100%;background:var(--gold);clip-path:polygon(35% 0,100% 0,65% 100%,0 100%);opacity:.55}
-  .hero .pini{position:absolute;inset:0;margin:auto;height:100%;width:auto;max-width:none;object-fit:contain;-webkit-mask-image:radial-gradient(ellipse 62% 66% at 50% 52%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 62% 66% at 50% 52%,#000 58%,transparent 100%);filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
-  .hero .frag{position:absolute;background:var(--gold);opacity:.9}
-  .hero .stats{display:flex;flex-direction:column;gap:12px;border-left:1px solid var(--line);padding-left:22px;position:relative;z-index:2}
-  .hero .stat{padding:8px 0}
-  .hero .stat .v{font-family:var(--display);font-size:38px;line-height:1;color:var(--ink)}
+  .hero .ctas .btn.gold{box-shadow:0 14px 36px -12px rgba(245,184,24,.7)}
+  .hero .ctas .btn.ghost{background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
+  .stage{position:relative;height:min(78vh,720px);min-height:540px;display:flex;align-items:center;justify-content:center;perspective:1500px}
+  .stage .glow{position:absolute;width:76%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,184,24,.30),rgba(245,184,24,.07) 45%,transparent 70%);filter:blur(22px);animation:breathe 6s ease-in-out infinite}
+  @keyframes breathe{50%{transform:scale(1.12)}}
+  .stage .band{position:absolute;right:-12%;top:8%;width:62%;height:84%;background:repeating-linear-gradient(-45deg,rgba(245,184,24,.18) 0 18px,transparent 18px 46px);transform:skewX(-8deg);-webkit-mask-image:linear-gradient(180deg,transparent,#000 28%,#000 72%,transparent);mask-image:linear-gradient(180deg,transparent,#000 28%,#000 72%,transparent)}
+  .phone{position:relative;width:min(300px,66%);aspect-ratio:620/1342;border-radius:46px;background:#0B0B0D;padding:12px;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 0 1px rgba(245,184,24,.28),0 50px 100px -30px rgba(0,0,0,.95),0 0 90px -18px rgba(245,184,24,.38),inset 0 0 0 1px rgba(255,255,255,.06);transform:rotateY(-14deg) rotateX(6deg) rotateZ(-2deg);animation:float 7s ease-in-out infinite}
+  .phone::before{content:"";position:absolute;left:50%;top:22px;width:30%;height:22px;transform:translateX(-50%);background:#000;border-radius:999px;z-index:2}
+  .phone::after{content:"";position:absolute;inset:0;border-radius:46px;background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 32%,transparent 66%,rgba(245,184,24,.14));pointer-events:none}
+  .phone .scr{width:100%;height:100%;border-radius:36px;overflow:hidden;background:#111}
+  .phone .scr img{width:100%;height:100%;object-fit:cover;object-position:top}
+  @keyframes float{50%{transform:rotateY(-14deg) rotateX(6deg) rotateZ(-2deg) translateY(-14px)}}
+  .fc{position:absolute;z-index:3;background:rgba(19,19,22,.74);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:12px 15px;box-shadow:0 24px 50px -20px rgba(0,0,0,.85);min-width:190px;animation:float2 8s ease-in-out infinite}
+  .fc .k{display:block;font-size:10px;letter-spacing:.16em;color:var(--dim);font-weight:800;text-transform:uppercase}
+  .fc b{display:block;font-size:15px;margin-top:3px;white-space:nowrap}
+  .fc b i{font-style:normal;color:var(--gold);font-family:var(--display);font-size:18px;letter-spacing:.02em}
+  .fc.a{left:-2%;top:14%}.fc.b{right:-2%;bottom:20%;animation-delay:-3s}.fc.c{left:4%;bottom:7%;animation-delay:-5.5s;min-width:0}
+  .fc .chk{display:inline-flex;width:18px;height:18px;border-radius:50%;background:var(--ok);color:#000;font-size:11px;align-items:center;justify-content:center;font-weight:900;margin-right:7px;vertical-align:-3px}
+  @keyframes float2{50%{transform:translateY(-10px)}}
+  .hero .stats{display:grid;gap:10px;position:relative;z-index:2}
+  .hero .stat{background:rgba(21,21,23,.62);border:1px solid var(--line);border-top:2px solid var(--gold);border-radius:10px;padding:14px 16px;backdrop-filter:blur(8px)}
+  .hero .stat .v{font-family:var(--display);font-size:36px;line-height:1;color:var(--ink)}
   .hero .stat .v i{font-style:normal;color:var(--gold)}
-  .hero .stat .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:5px;font-weight:700}
-  .featured{margin:34px 0 0;display:inline-flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 16px 12px 12px;max-width:380px}
-  .featured .ic{width:44px;height:44px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 44px}
+  .hero .stat .l{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:6px;font-weight:700}
+  .featured{margin:34px 0 0;display:inline-flex;align-items:center;gap:14px;background:rgba(21,21,23,.6);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:10px;padding:12px 18px 12px 12px;max-width:400px;transition:border-color .2s}
+  .featured:hover{border-color:var(--line2)}
+  .featured .ic{width:44px;height:44px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 44px;box-shadow:0 10px 24px -10px rgba(232,53,46,.8)}
   .featured .tag{font-size:10px;letter-spacing:.2em;color:var(--red);font-weight:800}
   .featured b{display:block;font-size:14px}
   .featured span{font-size:12px;color:var(--dim)}
-  @media(max-width:1100px){.hero .grid{grid-template-columns:1fr 1fr;} .hero .stats{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:18px} .hero .stat{flex:1 1 140px}}
-  @media(max-width:820px){.hero .grid{grid-template-columns:1fr;padding-top:44px;min-height:0} .hero .visual{height:420px;min-height:0;margin-top:10px} .hero h1{font-size:clamp(50px,15vw,88px)} .hero .stat .v{font-size:30px}}
+  @media(prefers-reduced-motion:reduce){.pill i,.stage .glow,.phone,.fc{animation:none}}
+  @media(max-width:1100px){.hero .grid{grid-template-columns:1fr 1fr} .hero .stats{grid-column:1/-1;grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:820px){.hero .grid{grid-template-columns:1fr;padding-top:44px;min-height:0} .stage{height:520px;min-height:0;margin-top:6px} .phone{width:min(250px,62%)} .hero h1{font-size:clamp(50px,15vw,88px)} .hero .stats{grid-template-columns:repeat(2,1fr)} .hero .stat .v{font-size:30px}}
+  @media(max-width:480px){.fc.c{display:none}.fc{min-width:0;padding:10px 12px}.fc b{font-size:13px}.fc b i{font-size:15px}}
 
   /* TICKER */
   .ticker{display:flex;align-items:stretch;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0D0D0F;margin-top:40px;overflow:hidden}
@@ -357,7 +379,7 @@
 <header class="hero">
   <div class="grid">
     <div>
-      <div class="eyebrow" data-i18n="hero.eyebrow">TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN</div>
+      <div class="pill"><i></i><span data-i18n="hero.eyebrow">TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN</span></div>
       <h1 class="d"><span class="l1" data-i18n="hero.l1">텔레그램에서</span><br><span class="l2" data-i18n="hero.l2">플레이하고,</span><br><span class="l3" data-i18n="hero.l3">하우스를 소유하라</span></h1>
       <p class="sub" data-i18n="hero.sub"></p>
       <div class="ctas">
@@ -369,14 +391,12 @@
         <div><div class="tag" data-i18n="hero.ftag">FEATURED</div><b data-i18n="hero.ftitle">DAO 라운드 오픈 예정</b><span data-i18n="hero.fsub">5개 상품 · $300부터 · 솔라나 $TFI 배정</span></div>
       </a>
     </div>
-    <div class="visual" aria-hidden="true">
-      <div class="slab"></div>
-      <div class="stripes"></div>
-      <span class="frag" style="left:8%;top:14%;width:14px;height:14px;transform:rotate(20deg)"></span>
-      <span class="frag" style="left:14%;top:70%;width:22px;height:8px;transform:rotate(-30deg)"></span>
-      <span class="frag" style="right:10%;top:80%;width:10px;height:10px;transform:rotate(45deg)"></span>
-      <span class="frag" style="right:18%;top:8%;width:8px;height:26px;transform:rotate(15deg)"></span>
-      <img class="pini" src="assets/pini-hero.webp" alt="" width="900" height="1124">
+    <div class="stage" aria-hidden="true">
+      <div class="glow"></div><div class="band"></div>
+      <div class="phone"><div class="scr"><img src="assets/shots/mobile-lobby.webp" alt="" width="620" height="1342" fetchpriority="high"></div></div>
+      <div class="fc a"><span class="k" data-i18n="hero.c1k"></span><b data-i18n-html="hero.c1v"></b></div>
+      <div class="fc b"><span class="k" data-i18n="hero.c2k"></span><b data-i18n-html="hero.c2v"></b></div>
+      <div class="fc c"><b><span class="chk">✓</span><span data-i18n="hero.c3"></span></b></div>
     </div>
     <aside class="stats" id="heroStats"></aside>
   </div>
@@ -564,6 +584,7 @@ ko: {
   hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"텔레그램에서", l2:"플레이하고,", l3:"하우스를 소유하라",
     sub:"텔레파이는 텔레그램 미니앱에서 3초 만에 시작하는 크립토 카지노입니다. 슬롯·라이브·테이블·미니게임 10,000종 이상, USDT 입출금. 그리고 플랫폼의 성장은 솔라나 기반 $TFI 토큰으로 DAO 커뮤니티에 돌아갑니다.",
     cta1:"DAO 투자 상품 보기", cta2:"텔레파이란?", ftag:"FEATURED", ftitle:"DAO 라운드 오픈 예정", fsub:"5개 상품 · $300부터 · 솔라나 $TFI 배정",
+    c1k:"DAO 라운드 · PRO", c1v:"<i>1,150,000</i> TFI 배정", c2k:"USDT 입금 확인", c2v:"<i>+5,000</i> USDT · Solana", c3:"Solana Pay · 3초 결제",
     stats:[["10,000+","라이선스 게임"],["100+","게임 프로바이더"],["10B","$TFI 총 발행량"],["3초","첫 게임까지"]] },
   ticker:{ tag:"DAO ROUND", items:["$TFI DAO 라운드 오픈 예정","앙주안 라이선스 진행 중","2027 Q1 정식 런칭","슬롯 · 라이브 · 테이블 · 크래시","USDT 입출금 · 평균 3분","솔라나 기반 유틸리티 토큰","5개 투자 상품 · $300부터"] },
   about:{ title:"설치도 가입도 없이,<br>텔레그램에서 <em>바로 한 판</em>.",
@@ -579,7 +600,7 @@ ko: {
     seasonT:"피니 — 텔레파이 마스코트", seasonP:"피니(Pini)는 텔레파이의 공식 캐릭터입니다. 게임 안내, 잭팟 알림, 보너스 쿠폰, 미션 보상까지 유저의 여정을 함께하고, 텔레그램 스티커·이모지 팩으로 바이럴을 만듭니다." },
   games:{ title:"10,000+ 게임,<br><em>한 지갑</em>으로.", sub:"스포츠북만 제외한 풀 버티컬. 라이선스 프로바이더의 공식 RTP 그대로, 텔레그램 안에서 바로 실행됩니다.",
     verticals:[["슬롯","Hacksaw · Pragmatic · BGaming · PG Soft"],["라이브 카지노","Evolution · Ezugi · Vivo"],["테이블 · 카드","Evoplay · Platipus · 3 Oaks"],["크래시 · 미니게임","Spribe (Aviator) · InOut · Turbo"]],
-    providers:"파트너 프로바이더", pnote:"※ 위 화면은 동일 턴키 플랫폼의 실운영 화면에 텔레파이 로고를 적용한 목업입니다. 정식 화면은 피니 IP와 자체 브랜딩으로 별도 제작되며, 표시된 게임·프로모션은 텔레파이의 실제 콘텐츠가 아닙니다." },
+    providers:"파트너 프로바이더", pnote:"※ 본 페이지의 제품 화면은 동일 턴키 플랫폼의 실운영 화면에 텔레파이 로고를 적용한 목업입니다. 정식 화면은 피니 IP와 자체 브랜딩으로 별도 제작되며, 표시된 게임·프로모션은 텔레파이의 실제 콘텐츠가 아닙니다." },
   how:{ title:"코인이 처음이어도<br><em>3분이면</em> 첫 게임", sub:"원화나 카드가 아닌 USDT로 즐기는 Web3 카지노입니다. 지갑 생성부터 출금까지 네 단계면 끝납니다.",
     steps:[["텔레그램에서 열기","설치도 가입 서류도 없습니다. 텔레파이 봇을 여는 순간 내 게임 지갑이 자동으로 만들어집니다."],["USDT 입금","거래소나 텔레그램 지갑에서 USDT를 내 입금 주소로 보내면 몇 초 안에 잔액에 반영됩니다."],["보너스 받고 플레이","웰컴 보너스를 챙기고 슬롯·라이브·테이블·크래시 10,000종 이상을 즐기세요."],["언제든 출금","1배 롤링만 채우면 24시간 언제든 내 지갑으로. 평균 3분이면 도착합니다."]] },
   invest:{ title:"DAO를 위한<br><em>5개의 투자 상품</em>", sub:"총 발행량의 30%(30억 $TFI)를 DAO 라운드에 배정합니다. 상품을 구매한 DAO에는 $TFI가 배정되고 등급별 혜택이 부여됩니다. 결제는 USDT로 진행합니다.",
@@ -631,6 +652,7 @@ en: {
   hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"Play on", l2:"Telegram.", l3:"Own the house.",
     sub:"TeleFi is a crypto casino that opens in three seconds inside a Telegram mini app. 10,000+ slots, live tables, card and crash games, USDT in and out — and the platform's growth flows back to the DAO community through the Solana-based $TFI token.",
     cta1:"View DAO packages", cta2:"What is TeleFi?", ftag:"FEATURED", ftitle:"DAO round opening soon", fsub:"5 packages · from $300 · Solana $TFI allocation",
+    c1k:"DAO round · PRO", c1v:"<i>1,150,000</i> TFI allocated", c2k:"USDT deposit confirmed", c2v:"<i>+5,000</i> USDT · Solana", c3:"Solana Pay · 3-second checkout",
     stats:[["10,000+","Licensed games"],["100+","Game providers"],["10B","$TFI total supply"],["3s","To first spin"]] },
   ticker:{ tag:"DAO ROUND", items:["$TFI DAO round opening soon","Anjouan license in progress","Full launch Q1 2027","Slots · Live · Table · Crash","USDT in & out · 3-min avg withdrawal","Solana-based utility token","5 packages · from $300"] },
   about:{ title:"No install. No sign-up.<br>Just <em>one spin</em> in Telegram.",
@@ -646,7 +668,7 @@ en: {
     seasonT:"Pini — the TeleFi mascot", seasonP:"Pini is TeleFi's official character. From game guides and jackpot alerts to bonus coupons and mission rewards, Pini walks with the player — and spreads through Telegram sticker and emoji packs." },
   games:{ title:"10,000+ games,<br><em>one wallet</em>.", sub:"Every vertical except sportsbook. The provider's official RTP, launched straight inside Telegram.",
     verticals:[["Slots","Hacksaw · Pragmatic · BGaming · PG Soft"],["Live casino","Evolution · Ezugi · Vivo"],["Table · cards","Evoplay · Platipus · 3 Oaks"],["Crash · mini games","Spribe (Aviator) · InOut · Turbo"]],
-    providers:"Partner providers", pnote:"※ Screens above are mockups: live screens of an operator on the same turnkey platform with the TeleFi logo applied. Final screens will be built separately with the Pini IP and TeleFi branding; games and promotions shown are not TeleFi content." },
+    providers:"Partner providers", pnote:"※ Product screens on this page are mockups: live screens of an operator on the same turnkey platform with the TeleFi logo applied. Final screens will be built separately with the Pini IP and TeleFi branding; games and promotions shown are not TeleFi content." },
   how:{ title:"New to crypto?<br><em>First game</em> in 3 minutes", sub:"A Web3 casino played in USDT, not cards or fiat. From wallet creation to withdrawal in four steps.",
     steps:[["Open it in Telegram","No install, no forms. The moment you open the TeleFi bot, your game wallet is created."],["Deposit USDT","Send USDT from an exchange or the Telegram wallet to your deposit address — it shows in your balance within seconds."],["Claim the bonus, play","Grab the welcome bonus and play 10,000+ slots, live tables, card and crash games."],["Withdraw any time","Clear a 1× rollover and withdraw to your own wallet 24/7. Three minutes on average."]] },
   invest:{ title:"Five packages<br><em>built for DAOs</em>", sub:"30% of total supply (3 billion $TFI) is allocated to the DAO round. A DAO that buys a package receives a $TFI allocation plus tier benefits. Payment is in USDT.",
@@ -698,6 +720,7 @@ zh: {
   hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"在 Telegram 玩，", l2:"和 DAO 一起", l3:"做庄家",
     sub:"TeleFi 是在 Telegram 小程序内 3 秒即可开局的加密赌场。10,000+ 款老虎机、真人、桌面与 Crash 小游戏，USDT 充提——而平台的增长通过 Solana 链上的 $TFI 代币回馈 DAO 社区。",
     cta1:"查看 DAO 投资产品", cta2:"什么是 TeleFi？", ftag:"FEATURED", ftitle:"DAO 轮即将开放", fsub:"5 档产品 · $300 起 · Solana $TFI 配额",
+    c1k:"DAO 轮 · PRO", c1v:"<i>1,150,000</i> TFI 已配额", c2k:"USDT 到账确认", c2v:"<i>+5,000</i> USDT · Solana", c3:"Solana Pay · 3 秒完成",
     stats:[["10,000+","持牌游戏"],["100+","游戏供应商"],["10B","$TFI 总发行量"],["3秒","即可开局"]] },
   ticker:{ tag:"DAO ROUND", items:["$TFI DAO 轮即将开放","Anjouan 牌照申请中","2027 年 Q1 正式上线","老虎机 · 真人 · 桌面 · Crash","USDT 充提 · 平均 3 分钟到账","Solana 实用型代币","5 档产品 · $300 起"] },
   about:{ title:"无需安装，无需注册，<br>在 Telegram 里<em>直接开局</em>。",
@@ -713,7 +736,7 @@ zh: {
     seasonT:"Pini —— TeleFi 吉祥物", seasonP:"Pini 是 TeleFi 的官方角色。从游戏引导、头奖提醒到奖金券与任务奖励，Pini 全程陪伴玩家，并通过 Telegram 贴纸与表情包传播。" },
   games:{ title:"10,000+ 款游戏，<br><em>一个钱包</em>。", sub:"除体育博彩外的全品类。供应商官方 RTP，在 Telegram 内直接启动。",
     verticals:[["老虎机","Hacksaw · Pragmatic · BGaming · PG Soft"],["真人赌场","Evolution · Ezugi · Vivo"],["桌面 · 牌类","Evoplay · Platipus · 3 Oaks"],["Crash · 小游戏","Spribe (Aviator) · InOut · Turbo"]],
-    providers:"合作供应商", pnote:"※ 以上画面为同一交钥匙平台上运营商的实际界面套用 TeleFi 标志的样机。正式界面将采用 Pini IP 与自有品牌另行制作，所示游戏与活动并非 TeleFi 的实际内容。" },
+    providers:"合作供应商", pnote:"※ 本页产品画面为同一交钥匙平台上运营商的实际界面套用 TeleFi 标志的样机。正式界面将采用 Pini IP 与自有品牌另行制作，所示游戏与活动并非 TeleFi 的实际内容。" },
   how:{ title:"第一次接触加密货币？<br><em>3 分钟</em>开始第一局", sub:"这是用 USDT 而非银行卡或法币游玩的 Web3 赌场。从创建钱包到提现只需四步。",
     steps:[["在 Telegram 打开","无需安装，无需表格。打开 TeleFi 机器人的那一刻，你的游戏钱包就已创建。"],["充值 USDT","从交易所或 Telegram 钱包把 USDT 发到你的充值地址，几秒内到账。"],["领取奖金，开始游戏","领取欢迎奖金，畅玩 10,000+ 款老虎机、真人、桌面与 Crash 游戏。"],["随时提现","完成 1 倍流水后，24 小时随时提到自己的钱包，平均 3 分钟到账。"]] },
   invest:{ title:"为 DAO 打造的<br><em>5 档投资产品</em>", sub:"总发行量的 30%（30 亿 $TFI）分配给 DAO 轮。购买产品的 DAO 将获得 $TFI 配额及对应等级权益。以 USDT 支付。",
@@ -765,6 +788,7 @@ ja: {
   hero:{ eyebrow:"TELEGRAM MINI APP · CRYPTO CASINO · SOLANA TOKEN", l1:"Telegram で遊び、", l2:"DAO と一緒に", l3:"ハウスを所有する",
     sub:"TeleFi は Telegram ミニアプリ内で3秒で始まるクリプトカジノです。スロット・ライブ・テーブル・クラッシュなど 10,000 種以上、USDT 入出金。そしてプラットフォームの成長は Solana ベースの $TFI トークンとして DAO コミュニティに還元されます。",
     cta1:"DAO 投資商品を見る", cta2:"TeleFi とは？", ftag:"FEATURED", ftitle:"DAO ラウンド近日開始", fsub:"5つの商品 · $300 から · Solana $TFI 配分",
+    c1k:"DAO ラウンド · PRO", c1v:"<i>1,150,000</i> TFI 配分", c2k:"USDT 入金確認", c2v:"<i>+5,000</i> USDT · Solana", c3:"Solana Pay · 3秒で決済",
     stats:[["10,000+","ライセンスゲーム"],["100+","ゲームプロバイダー"],["10B","$TFI 総発行量"],["3秒","最初のゲームまで"]] },
   ticker:{ tag:"DAO ROUND", items:["$TFI DAO ラウンド近日開始","Anjouan ライセンス申請中","2027年 Q1 正式ローンチ","スロット · ライブ · テーブル · クラッシュ","USDT 入出金 · 平均3分","Solana ベースのユーティリティトークン","5つの商品 · $300 から"] },
   about:{ title:"インストールも登録も不要。<br>Telegram で<em>すぐ一勝負</em>。",
@@ -780,7 +804,7 @@ ja: {
     seasonT:"Pini — TeleFi のマスコット", seasonP:"Pini は TeleFi の公式キャラクターです。ゲーム案内やジャックポット通知、ボーナスクーポン、ミッション報酬までプレイヤーの旅に寄り添い、Telegram のステッカー・絵文字パックで拡散します。" },
   games:{ title:"10,000+ のゲーム、<br><em>一つのウォレット</em>で。", sub:"スポーツブック以外のフルバーティカル。プロバイダー公式 RTP のまま、Telegram 内で直接起動します。",
     verticals:[["スロット","Hacksaw · Pragmatic · BGaming · PG Soft"],["ライブカジノ","Evolution · Ezugi · Vivo"],["テーブル · カード","Evoplay · Platipus · 3 Oaks"],["クラッシュ · ミニゲーム","Spribe (Aviator) · InOut · Turbo"]],
-    providers:"パートナープロバイダー", pnote:"※ 上の画面は同一ターンキープラットフォームで実運営中の事業者画面に TeleFi ロゴを適用したモックアップです。正式画面は Pini IP と独自ブランディングで別途制作され、表示されているゲーム・プロモは TeleFi の実際のコンテンツではありません。" },
+    providers:"パートナープロバイダー", pnote:"※ 本ページの製品画面は同一ターンキープラットフォームで実運営中の事業者画面に TeleFi ロゴを適用したモックアップです。正式画面は Pini IP と独自ブランディングで別途制作され、表示されているゲーム・プロモは TeleFi の実際のコンテンツではありません。" },
   how:{ title:"暗号資産が初めてでも<br><em>3分</em>で最初のゲーム", sub:"円やカードではなく USDT で楽しむ Web3 カジノ。ウォレット作成から出金まで4ステップで完了します。",
     steps:[["Telegram で開く","インストールも書類も不要。TeleFi ボットを開いた瞬間にゲームウォレットが作成されます。"],["USDT を入金","取引所や Telegram ウォレットから入金アドレスへ USDT を送ると、数秒で残高に反映されます。"],["ボーナスを受け取ってプレイ","ウェルカムボーナスを獲得し、スロット・ライブ・テーブル・クラッシュ 10,000 種以上を楽しめます。"],["いつでも出金","1倍ロールオーバーを達成すれば 24時間いつでも自分のウォレットへ。平均3分で着金します。"]] },
   invest:{ title:"DAO のための<br><em>5つの投資商品</em>", sub:"総発行量の 30%（30億 $TFI）を DAO ラウンドに配分します。商品を購入した DAO には $TFI が配分され、ランク別の特典が付与されます。決済は USDT で行います。",
