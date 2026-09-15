@@ -317,7 +317,14 @@
   .pm-head h3{font-size:clamp(26px,4vw,40px);margin-top:4px;padding-right:44px}
   .pm-demo{display:inline-block;margin-top:10px;background:var(--red);color:#fff;font-size:10.5px;font-weight:900;letter-spacing:.16em;padding:4px 9px;border-radius:3px}
   .pm-demo[hidden]{display:none}
-  .pm-body{display:grid;grid-template-columns:270px 1fr;gap:26px;margin-top:22px}
+  .pm-chains{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .pm-chains .k{flex-basis:100%;margin-bottom:2px}
+  .pm-chains button{flex:1 1 200px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--dim);cursor:pointer;text-align:left;font-family:var(--body);transition:border-color .15s}
+  .pm-chains button:hover{border-color:var(--line2)}
+  .pm-chains button.on{border-color:var(--gold);color:var(--ink);box-shadow:0 0 0 1px var(--gold) inset;background:rgba(245,184,24,.08)}
+  .pm-chains b{display:block;font-size:14.5px;font-weight:800}
+  .pm-chains small{display:block;font-size:11.5px;margin-top:2px;color:var(--dim)}
+  .pm-body{display:grid;grid-template-columns:270px 1fr;gap:26px;margin-top:18px}
   @media(max-width:720px){.pm-body{grid-template-columns:1fr}.pm{padding:20px 18px 22px}}
   .pm-qr{background:#fff;border-radius:12px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;align-self:start}
   .pm-qr svg{width:100%;height:auto;display:block;max-width:240px;margin:0 auto}
@@ -507,7 +514,8 @@
 <dialog id="pay" aria-labelledby="payTitle">
   <div class="pm">
     <button class="pm-x" id="payClose" type="button" aria-label="Close">✕</button>
-    <div class="pm-head"><div class="eyebrow">DAO PACKAGE · USDT (SOLANA)</div><h3 id="payTitle" class="d"></h3><span class="pm-demo" id="payDemo"></span></div>
+    <div class="pm-head"><div class="eyebrow">DAO PACKAGE · USDT (TRC20 · BEP20)</div><h3 id="payTitle" class="d"></h3><span class="pm-demo" id="payDemo"></span></div>
+    <div class="pm-chains" id="payChains"></div>
     <div class="pm-body">
       <div class="pm-qr"><div id="payQr"></div><div class="pm-scan" id="payScan"></div></div>
       <div class="pm-info">
@@ -547,10 +555,12 @@ const CONFIG = {
   TELEGRAM_URL: "https://t.me/PEAKY1028",                    // 하단 CTA · 푸터 텔레그램 링크
   DOCS_URL: "https://plan.telefi.cc/",
   PAY: {
-    address: "TeLeFiDemoWaLLet1111111111111111111111111111", // TODO: 실제 USDT(Solana) 입금 주소로 교체
-    isDemo: true,                                            // 실제 주소로 바꾸면 false — DEMO 배지·경고문이 사라짐
-    telegram: "https://t.me/PEAKY1028",                      // 캡처본 받는 담당자 (모달의 "텔레그램으로 캡처본 보내기" 버튼)
-    usdtMint: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB", // USDT SPL mint (Solana mainnet) — Solana Pay QR용
+    chains: [ // 체크섬 검증 완료(2026-09-15): Tron base58check · BNB EIP-55
+      { id:"trc20", name:"USDT · TRC20", net:"Tron",            address:"TW7octRhRqxzKyaqaJVaYobXR6dUugBTe7" },
+      { id:"bep20", name:"USDT · BEP20", net:"BNB Chain (BSC)", address:"0x2C2c62DbA27B1834d65fe48b7f0DD81BeFE5a6f7" },
+    ],
+    isDemo: false,                        // true로 두면 DEMO 배지·데모 경고문 표시
+    telegram: "https://t.me/PEAKY1028",   // 캡처본 받는 담당자 (모달의 "텔레그램으로 캡처본 보내기" 버튼)
   },
   TOTAL_SUPPLY: 10_000_000_000,
   ROUND_PRICE: 0.005,                                      // USD per TFI (DAO round)
@@ -607,8 +617,8 @@ const I18N = {
       "c1k": "DAO 라운드 · PRO",
       "c1v": "<i>1,150,000</i> TFI 배정",
       "c2k": "USDT 입금 확인",
-      "c2v": "<i>+5,000</i> USDT · Solana",
-      "c3": "Solana Pay · 3초 결제",
+      "c2v": "<i>+5,000</i> USDT · TRC20",
+      "c3": "USDT 입금 · TRC20 / BEP20",
       "stats": [
         [
           "10,000+",
@@ -738,7 +748,7 @@ const I18N = {
         ],
         [
           "결제",
-          "USDT (Solana)"
+          "USDT · TRC20 / BEP20"
         ],
         [
           "지급",
@@ -799,15 +809,15 @@ const I18N = {
       "steps": [
         [
           "상품 선택 → 입금 주소·QR 확인",
-          "원하는 상품의 참여 버튼을 누르면 USDT(Solana) 입금 주소와 QR, 송금 금액과 배정 토큰 수가 표시됩니다."
+          "원하는 상품의 참여 버튼을 누르면 USDT 입금 주소(TRC20·BEP20 중 선택)와 QR, 송금 금액과 배정 토큰 수가 표시됩니다."
         ],
         [
           "USDT 송금 후 캡처",
-          "표시된 금액을 Solana 네트워크로 정확히 송금하고, 완료 화면(트랜잭션 ID)을 캡처합니다."
+          "Tron(TRC20) 또는 BNB Chain(BEP20) 중 하나를 골라 표시된 금액을 정확히 송금하고, 완료 화면(트랜잭션 ID)을 캡처합니다."
         ],
         [
           "텔레그램으로 캡처본 전송 → $TFI 100% 즉시 지급",
-          "캡처본 + DAO 이름 + 상품명을 텔레그램으로 보내주세요. 입금 확인 즉시 배정량의 100%를 솔라나 지갑으로 지급하며, 이후 P2P 거래가 가능합니다."
+          "캡처본 + DAO 이름 + 상품명 + $TFI 받을 솔라나 지갑 주소를 텔레그램으로 보내주세요. 입금 확인 즉시 배정량의 100%를 지급하며, 이후 P2P 거래가 가능합니다."
         ]
       ],
       "disc": "※ 본 페이지의 내용은 정보 제공 목적이며 투자 권유가 아닙니다. $TFI는 텔레파이 게임 생태계 내 유틸리티 토큰이며, 가격·배정·지급 조건은 DAO 라운드 확정 시 최종 공지되는 조건을 따릅니다. 디지털 자산은 가격 변동 위험이 있습니다."
@@ -818,19 +828,20 @@ const I18N = {
       "amount": "송금 금액",
       "receive": "받는 $TFI",
       "incl": "기본 {base} + 보너스 {bonus}%",
-      "addrLabel": "입금 주소 · USDT (Solana)",
+      "addrLabel": "입금 주소 · {chain}",
       "copy": "주소 복사",
       "copied": "복사됨 ✓",
       "stepsT": "참여 절차",
       "steps": [
-        "위 주소로 정확히 {amount} USDT를 Solana 네트워크로 송금합니다.",
+        "{net} 네트워크로 위 주소에 정확히 {amount} USDT를 송금합니다 ({chain}).",
         "송금 완료 화면(트랜잭션 ID가 보이게)을 캡처합니다.",
-        "텔레그램으로 캡처본 + DAO 이름 + 상품명({name})을 보내주세요. 입금 확인 즉시 $TFI 100%를 솔라나 지갑으로 지급합니다."
+        "텔레그램으로 캡처본 + DAO 이름 + 상품명({name}) + $TFI 받을 솔라나 지갑 주소를 보내주세요. 입금 확인 즉시 $TFI 100%를 지급합니다."
       ],
       "tg": "텔레그램으로 캡처본 보내기",
-      "scan": "지갑 앱으로 QR 스캔 (Solana Pay)",
-      "warn": "⚠️ 데모 주소입니다. 실제 입금 주소는 텔레그램 신청 후 개별 안내됩니다. Solana 네트워크의 USDT만 보내세요 — TRC20·ERC20 등 다른 네트워크로 보내면 복구할 수 없습니다.",
-      "warnLive": "⚠️ Solana 네트워크의 USDT만 보내세요 — 다른 네트워크로 보내면 복구할 수 없습니다."
+      "scan": "지갑 앱으로 QR 스캔 · {chain}",
+      "warn": "⚠️ 데모 주소입니다. 실제 입금 주소는 텔레그램 신청 후 개별 안내됩니다. {net} 네트워크의 USDT만 보내세요.",
+      "warnLive": "⚠️ 이 주소로는 {net} 네트워크의 USDT만 보내세요. 다른 네트워크(Solana·ERC20 등)나 다른 코인을 보내면 복구할 수 없습니다. 입금 후 반드시 캡처본을 텔레그램으로 보내주셔야 배정이 확인됩니다.",
+      "chainT": "입금 네트워크 선택 — 둘 중 편한 쪽으로 보내세요"
     },
     "token": {
       "title": "<em>$TFI</em> — 게임 생태계를<br>움직이는 토큰",
@@ -992,7 +1003,7 @@ const I18N = {
         ],
         [
           "결제는 어떤 방식인가요?",
-          "USDT(Solana)로 결제합니다. 상품의 참여 버튼을 누르면 입금 주소와 QR이 표시되며, 송금 후 완료 화면 캡처본을 텔레그램으로 보내주시면 확인 후 배정 확인서를 발급합니다."
+          "USDT로 결제합니다. Tron(TRC20)과 BNB Chain(BEP20) 중 편한 네트워크를 고르면 됩니다. 상품의 참여 버튼을 누르면 네트워크별 입금 주소와 QR이 표시되며, 송금 후 완료 화면 캡처본을 텔레그램으로 보내주시면 확인 후 $TFI를 지급합니다."
         ],
         [
           "라이선스가 있나요?",
@@ -1051,8 +1062,8 @@ const I18N = {
       "c1k": "DAO round · PRO",
       "c1v": "<i>1,150,000</i> TFI allocated",
       "c2k": "USDT deposit confirmed",
-      "c2v": "<i>+5,000</i> USDT · Solana",
-      "c3": "Solana Pay · 3-second checkout",
+      "c2v": "<i>+5,000</i> USDT · TRC20",
+      "c3": "USDT deposits · TRC20 / BEP20",
       "stats": [
         [
           "10,000+",
@@ -1182,7 +1193,7 @@ const I18N = {
         ],
         [
           "Payment",
-          "USDT (Solana)"
+          "USDT · TRC20 / BEP20"
         ],
         [
           "Delivery",
@@ -1243,15 +1254,15 @@ const I18N = {
       "steps": [
         [
           "Pick a package → get the address & QR",
-          "Press the join button on a package to see the USDT (Solana) deposit address, a QR code, the amount to send and the $TFI you receive."
+          "Press the join button on a package to see the USDT deposit address (choose TRC20 or BEP20), a QR code, the amount to send and the $TFI you receive."
         ],
         [
           "Send USDT, take a screenshot",
-          "Send exactly the shown amount on the Solana network and screenshot the completed transfer (with the transaction ID)."
+          "Pick Tron (TRC20) or BNB Chain (BEP20), send exactly the shown amount, and screenshot the completed transfer (with the transaction ID)."
         ],
         [
           "Send the screenshot on Telegram → 100% of $TFI delivered",
-          "Send the screenshot + your DAO name + package name on Telegram. As soon as the deposit is confirmed, 100% of your allocation is delivered to your Solana wallet and can be traded P2P."
+          "Send the screenshot + your DAO name + package name + the Solana wallet address that should receive $TFI on Telegram. As soon as the deposit is confirmed, 100% of your allocation is delivered and can be traded P2P."
         ]
       ],
       "disc": "※ This page is for information only and is not an offer or solicitation to invest. $TFI is a utility token within the TeleFi game ecosystem; price, allocation and delivery terms are subject to the final terms published when the DAO round is confirmed. Digital assets carry price risk."
@@ -1262,19 +1273,20 @@ const I18N = {
       "amount": "Send exactly",
       "receive": "You receive",
       "incl": "base {base} + {bonus}% bonus",
-      "addrLabel": "Deposit address · USDT (Solana)",
+      "addrLabel": "Deposit address · {chain}",
       "copy": "Copy address",
       "copied": "Copied ✓",
       "stepsT": "How to join",
       "steps": [
-        "Send exactly {amount} USDT to the address above on the Solana network.",
+        "Send exactly {amount} USDT to the address above on the {net} network ({chain}).",
         "Take a screenshot of the completed transfer (with the transaction ID visible).",
-        "Send the screenshot + your DAO name + the package name ({name}) on Telegram. As soon as the deposit is confirmed, 100% of your $TFI is delivered to your Solana wallet."
+        "Send the screenshot + your DAO name + the package name ({name}) + the Solana wallet address that should receive $TFI on Telegram. 100% of your $TFI is delivered as soon as the deposit is confirmed."
       ],
       "tg": "Send screenshot on Telegram",
-      "scan": "Scan with your wallet app (Solana Pay)",
-      "warn": "⚠️ This is a demo address. The real deposit address is provided individually after you apply on Telegram. Send USDT on the Solana network only — transfers on other networks (TRC20, ERC20…) cannot be recovered.",
-      "warnLive": "⚠️ Send USDT on the Solana network only — transfers on other networks cannot be recovered."
+      "scan": "Scan with your wallet app · {chain}",
+      "warn": "⚠️ This is a demo address. The real deposit address is provided individually after you apply on Telegram. Send USDT on the {net} network only.",
+      "warnLive": "⚠️ Send USDT on the {net} network only to this address. Transfers on other networks (Solana, ERC20…) or other coins cannot be recovered. After sending, you must send the screenshot on Telegram — your allocation is confirmed from the screenshot.",
+      "chainT": "Choose a deposit network — either one works"
     },
     "token": {
       "title": "<em>$TFI</em> — the token that<br>runs the game economy",
@@ -1436,7 +1448,7 @@ const I18N = {
         ],
         [
           "How do I pay?",
-          "In USDT on Solana. Press a package's join button to see the deposit address and QR code; after sending, share a screenshot of the completed transfer on Telegram and we issue your allocation certificate once confirmed."
+          "In USDT — choose whichever network suits you, Tron (TRC20) or BNB Chain (BEP20). Press a package's join button to see the deposit address and QR code for each network; after sending, share a screenshot of the completed transfer on Telegram and we deliver your $TFI once confirmed."
         ],
         [
           "Is TeleFi licensed?",
@@ -1495,8 +1507,8 @@ const I18N = {
       "c1k": "DAO 轮 · PRO",
       "c1v": "<i>1,150,000</i> TFI 已配额",
       "c2k": "USDT 到账确认",
-      "c2v": "<i>+5,000</i> USDT · Solana",
-      "c3": "Solana Pay · 3 秒完成",
+      "c2v": "<i>+5,000</i> USDT · TRC20",
+      "c3": "USDT 充值 · TRC20 / BEP20",
       "stats": [
         [
           "10,000+",
@@ -1626,7 +1638,7 @@ const I18N = {
         ],
         [
           "支付",
-          "USDT (Solana)"
+          "USDT · TRC20 / BEP20"
         ],
         [
           "发放",
@@ -1687,15 +1699,15 @@ const I18N = {
       "steps": [
         [
           "选择产品 → 查看充值地址与二维码",
-          "点击产品的参与按钮，即可看到 USDT（Solana）充值地址、二维码、转账金额与可获得的 $TFI 数量。"
+          "点击产品的参与按钮，即可看到 USDT 充值地址（可选 TRC20 或 BEP20）、二维码、转账金额与可获得的 $TFI 数量。"
         ],
         [
           "转账 USDT 并截图",
-          "通过 Solana 网络准确转账所示金额，并截取转账完成画面（含交易 ID）。"
+          "选择 Tron（TRC20）或 BNB Chain（BEP20）其中之一，准确转账所示金额，并截取转账完成画面（含交易 ID）。"
         ],
         [
           "通过 Telegram 发送截图 → 立即发放 100% $TFI",
-          "将截图 + DAO 名称 + 产品名发送至 Telegram。到账确认后立即将配额的 100% 发放至你的 Solana 钱包，之后可进行 P2P 交易。"
+          "将截图 + DAO 名称 + 产品名 + 用于接收 $TFI 的 Solana 钱包地址发送至 Telegram。到账确认后立即发放配额的 100%，之后可进行 P2P 交易。"
         ]
       ],
       "disc": "※ 本页内容仅供参考，不构成投资邀约。$TFI 是 TeleFi 游戏生态内的实用型代币；价格、配额与发放条件以 DAO 轮确认时公布的最终条款为准。数字资产存在价格波动风险。"
@@ -1706,19 +1718,20 @@ const I18N = {
       "amount": "转账金额",
       "receive": "您将获得",
       "incl": "基础 {base} + 加成 {bonus}%",
-      "addrLabel": "充值地址 · USDT (Solana)",
+      "addrLabel": "充值地址 · {chain}",
       "copy": "复制地址",
       "copied": "已复制 ✓",
       "stepsT": "参与流程",
       "steps": [
-        "通过 Solana 网络向上方地址准确转账 {amount} USDT。",
+        "通过 {net} 网络向上方地址准确转账 {amount} USDT（{chain}）。",
         "截取转账完成画面（需显示交易 ID）。",
-        "通过 Telegram 发送截图 + DAO 名称 + 产品名（{name}）。到账确认后立即将 100% 的 $TFI 发放至你的 Solana 钱包。"
+        "通过 Telegram 发送截图 + DAO 名称 + 产品名（{name}）+ 用于接收 $TFI 的 Solana 钱包地址。到账确认后立即发放 100% 的 $TFI。"
       ],
       "tg": "通过 Telegram 发送截图",
-      "scan": "使用钱包 App 扫码（Solana Pay）",
-      "warn": "⚠️ 这是演示地址。实际充值地址将在 Telegram 申请后单独提供。请仅通过 Solana 网络发送 USDT —— 通过 TRC20、ERC20 等其他网络转账将无法找回。",
-      "warnLive": "⚠️ 请仅通过 Solana 网络发送 USDT —— 其他网络的转账无法找回。"
+      "scan": "使用钱包 App 扫码 · {chain}",
+      "warn": "⚠️ 这是演示地址。实际充值地址将在 Telegram 申请后单独提供。请仅通过 {net} 网络发送 USDT。",
+      "warnLive": "⚠️ 此地址仅接收 {net} 网络的 USDT。通过其他网络（Solana、ERC20 等）或转入其他币种将无法找回。转账后务必通过 Telegram 发送截图——以截图确认配额。",
+      "chainT": "选择充值网络 — 任选其一即可"
     },
     "token": {
       "title": "<em>$TFI</em> —— 驱动游戏生态的<br>代币",
@@ -1880,7 +1893,7 @@ const I18N = {
         ],
         [
           "如何支付？",
-          "使用 Solana 网络的 USDT。点击产品的参与按钮即可查看充值地址与二维码；转账后将完成画面截图发送至 Telegram，确认后发放配额确认函。"
+          "使用 USDT 支付，Tron（TRC20）与 BNB Chain（BEP20）任选其一。点击产品的参与按钮即可查看各网络的充值地址与二维码；转账后将完成画面截图发送至 Telegram，确认后发放 $TFI。"
         ],
         [
           "有牌照吗？",
@@ -1939,8 +1952,8 @@ const I18N = {
       "c1k": "DAO ラウンド · PRO",
       "c1v": "<i>1,150,000</i> TFI 配分",
       "c2k": "USDT 入金確認",
-      "c2v": "<i>+5,000</i> USDT · Solana",
-      "c3": "Solana Pay · 3秒で決済",
+      "c2v": "<i>+5,000</i> USDT · TRC20",
+      "c3": "USDT 入金 · TRC20 / BEP20",
       "stats": [
         [
           "10,000+",
@@ -2070,7 +2083,7 @@ const I18N = {
         ],
         [
           "決済",
-          "USDT (Solana)"
+          "USDT · TRC20 / BEP20"
         ],
         [
           "配布",
@@ -2131,15 +2144,15 @@ const I18N = {
       "steps": [
         [
           "商品を選ぶ → 入金アドレスと QR を確認",
-          "商品の参加ボタンを押すと、USDT（Solana）の入金アドレスと QR、送金額、受け取る $TFI 数が表示されます。"
+          "商品の参加ボタンを押すと、USDT の入金アドレス（TRC20 / BEP20 から選択）と QR、送金額、受け取る $TFI 数が表示されます。"
         ],
         [
           "USDT を送金してキャプチャ",
-          "表示された金額を Solana ネットワークで正確に送金し、完了画面（トランザクション ID）をキャプチャします。"
+          "Tron（TRC20）または BNB Chain（BEP20）のどちらかを選び、表示された金額を正確に送金し、完了画面（トランザクション ID）をキャプチャします。"
         ],
         [
           "Telegram でキャプチャを送信 → $TFI を 100% 即時配布",
-          "キャプチャ + DAO 名 + 商品名を Telegram で送ってください。入金確認後すぐに配分量の 100% を Solana ウォレットへ配布し、その後 P2P 取引が可能です。"
+          "キャプチャ + DAO 名 + 商品名 + $TFI を受け取る Solana ウォレットアドレスを Telegram で送ってください。入金確認後すぐに配分量の 100% を配布し、その後 P2P 取引が可能です。"
         ]
       ],
       "disc": "※ 本ページの内容は情報提供を目的としており、投資勧誘ではありません。$TFI は TeleFi ゲームエコシステム内のユーティリティトークンであり、価格・配分・配布条件は DAO ラウンド確定時に公表される最終条件に従います。デジタル資産には価格変動リスクがあります。"
@@ -2150,19 +2163,20 @@ const I18N = {
       "amount": "送金額",
       "receive": "受け取る $TFI",
       "incl": "基本 {base} + ボーナス {bonus}%",
-      "addrLabel": "入金アドレス · USDT (Solana)",
+      "addrLabel": "入金アドレス · {chain}",
       "copy": "アドレスをコピー",
       "copied": "コピー済み ✓",
       "stepsT": "参加手順",
       "steps": [
-        "上記アドレスへ Solana ネットワークで {amount} USDT を正確に送金します。",
+        "{net} ネットワークで上記アドレスへ {amount} USDT を正確に送金します（{chain}）。",
         "送金完了画面（トランザクション ID が見える状態）をキャプチャします。",
-        "Telegram でキャプチャ + DAO 名 + 商品名（{name}）を送ってください。入金確認後すぐに $TFI の 100% を Solana ウォレットへ配布します。"
+        "Telegram でキャプチャ + DAO 名 + 商品名（{name}）+ $TFI を受け取る Solana ウォレットアドレスを送ってください。入金確認後すぐに $TFI の 100% を配布します。"
       ],
       "tg": "Telegram でキャプチャを送る",
-      "scan": "ウォレットアプリで QR をスキャン（Solana Pay）",
-      "warn": "⚠️ これはデモ用アドレスです。実際の入金アドレスは Telegram 申請後に個別にご案内します。USDT は Solana ネットワークのみで送金してください — TRC20・ERC20 など他のネットワークで送ると復旧できません。",
-      "warnLive": "⚠️ USDT は Solana ネットワークのみで送金してください — 他のネットワークでの送金は復旧できません。"
+      "scan": "ウォレットアプリで QR をスキャン · {chain}",
+      "warn": "⚠️ これはデモ用アドレスです。実際の入金アドレスは Telegram 申請後に個別にご案内します。{net} ネットワークの USDT のみ送金してください。",
+      "warnLive": "⚠️ このアドレスには {net} ネットワークの USDT のみ送金してください。他のネットワーク（Solana・ERC20 など）や他のコインを送ると復旧できません。送金後は必ずキャプチャを Telegram で送ってください — キャプチャ確認後に配分されます。",
+      "chainT": "入金ネットワークを選択 — どちらでも可"
     },
     "token": {
       "title": "<em>$TFI</em> — ゲームエコシステムを<br>動かすトークン",
@@ -2324,7 +2338,7 @@ const I18N = {
         ],
         [
           "決済方法は？",
-          "Solana ネットワークの USDT で決済します。商品の参加ボタンを押すと入金アドレスと QR が表示され、送金後に完了画面のキャプチャを Telegram で送っていただければ、確認後に配分確認書を発行します。"
+          "USDT で決済します。Tron（TRC20）と BNB Chain（BEP20）のどちらか使いやすい方を選んでください。商品の参加ボタンを押すとネットワークごとの入金アドレスと QR が表示され、送金後に完了画面のキャプチャを Telegram で送っていただければ、確認後に $TFI を配布します。"
         ],
         [
           "ライセンスはありますか？",
@@ -2424,30 +2438,33 @@ function donut(){
 const fmtT = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k] ?? "");
 let payTier = null;
 function openPay(id){ payTier = CONFIG.TIERS.find(t => t.id === id); if (!payTier) return; renderPay(); const d = $("#pay"); if (!d.open) d.showModal(); }
+let payChain = CONFIG.PAY.chains[0];
 function renderPay(){
   const t = payTier; if (!t) return;
-  const T = I18N[document.documentElement.lang] || I18N.ko, P = T.pay, name = t.id.toUpperCase();
+  const T = I18N[document.documentElement.lang] || I18N.ko, P = T.pay, name = t.id.toUpperCase(), c = payChain;
   const base = t.usd / CONFIG.ROUND_PRICE, total = base * (1 + t.bonus);
-  $("#payTitle").textContent = fmtT(P.title, {name});
+  const v = {name, amount: num(t.usd), chain: c.name, net: c.net};
+  $("#payTitle").textContent = fmtT(P.title, v);
   $("#payDemo").textContent = P.demo; $("#payDemo").hidden = !CONFIG.PAY.isDemo;
+  $("#payChains").innerHTML = `<span class="k">${esc(P.chainT)}</span>` + CONFIG.PAY.chains.map(x => `<button type="button" class="${x.id === c.id ? "on" : ""}" data-chain="${x.id}"><b>${esc(x.name)}</b><small>${esc(x.net)}</small></button>`).join("");
   $("#payAmtL").textContent = P.amount; $("#payAmt").textContent = `$${num(t.usd)} USDT`;
   $("#payRecL").textContent = P.receive; $("#payRec").textContent = `${num(total)} TFI`;
   $("#payIncl").textContent = fmtT(P.incl, {base: num(base), bonus: Math.round(t.bonus * 100)});
-  $("#payAddrL").textContent = P.addrLabel; $("#payAddr").textContent = CONFIG.PAY.address;
+  $("#payAddrL").textContent = fmtT(P.addrLabel, v); $("#payAddr").textContent = c.address;
   $("#payCopy").textContent = P.copy; $("#payStepsT").textContent = P.stepsT;
-  $("#paySteps").innerHTML = P.steps.map(s => `<li>${esc(fmtT(s, {amount: num(t.usd), name}))}</li>`).join("");
-  $("#payTg").textContent = P.tg; $("#payTg").href = CONFIG.PAY.telegram || CONFIG.TELEGRAM_URL; $("#payScan").textContent = P.scan;
-  $("#payWarn").textContent = CONFIG.PAY.isDemo ? P.warn : P.warnLive;
-  // Solana Pay URI — 지갑 앱이 스캔하면 주소·금액·USDT 토큰이 자동 입력된다
-  const uri = `solana:${CONFIG.PAY.address}?amount=${t.usd}&spl-token=${CONFIG.PAY.usdtMint}&label=TeleFi&message=${encodeURIComponent("TeleFi DAO " + name)}`;
+  $("#paySteps").innerHTML = P.steps.map(s => `<li>${esc(fmtT(s, v))}</li>`).join("");
+  $("#payTg").textContent = P.tg; $("#payTg").href = CONFIG.PAY.telegram || CONFIG.TELEGRAM_URL; $("#payScan").textContent = fmtT(P.scan, v);
+  $("#payWarn").textContent = fmtT(CONFIG.PAY.isDemo ? P.warn : P.warnLive, v);
+  // QR = 입금 주소 문자열 그대로 (Trust·Binance·TronLink 등 지갑 앱이 공통으로 인식)
   const q = $("#payQr");
-  if (typeof qrcode === "function") { const qr = qrcode(0, "M"); qr.addData(uri); qr.make(); q.innerHTML = qr.createSvgTag({cellSize: 4, margin: 0}).replace(/width="\d+px" height="\d+px"/, 'width="100%" height="100%"'); }
-  else q.innerHTML = `<code style="font-size:11px;word-break:break-all;color:#000">${esc(uri)}</code>`;
+  if (typeof qrcode === "function") { const qr = qrcode(0, "M"); qr.addData(c.address); qr.make(); q.innerHTML = qr.createSvgTag({cellSize: 4, margin: 0}).replace(/width="\d+px" height="\d+px"/, 'width="100%" height="100%"'); }
+  else q.innerHTML = `<code style="font-size:11px;word-break:break-all;color:#000">${esc(c.address)}</code>`;
 }
+$("#payChains").addEventListener("click", e => { const b = e.target.closest("[data-chain]"); if (!b) return; payChain = CONFIG.PAY.chains.find(x => x.id === b.dataset.chain) || payChain; renderPay(); });
 $("#tiers").addEventListener("click", e => { const b = e.target.closest("[data-pay]"); if (b) openPay(b.dataset.pay); });
 $("#payClose").addEventListener("click", () => $("#pay").close());
 $("#pay").addEventListener("click", e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
-$("#payCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(CONFIG.PAY.address); $("#payCopy").textContent = (I18N[document.documentElement.lang] || I18N.ko).pay.copied; setTimeout(renderPay, 1500); } catch (e) {} });
+$("#payCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(payChain.address); $("#payCopy").textContent = (I18N[document.documentElement.lang] || I18N.ko).pay.copied; setTimeout(renderPay, 1500); } catch (e) {} });
 
 /* links */
 ["#ctaTg","#fTg"].forEach(s => { const a = $(s); a.href = CONFIG.TELEGRAM_URL; a.target = "_blank"; a.rel = "noopener"; });
