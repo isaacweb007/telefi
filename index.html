@@ -344,6 +344,15 @@
   .pm #payTg{margin-top:16px;width:100%;justify-content:center;padding:16px}
   .pm-warn{margin-top:14px;font-size:12px;color:#F8B4B0;background:rgba(232,53,46,.1);border:1px solid rgba(232,53,46,.35);border-radius:8px;padding:10px 12px;line-height:1.55}
 
+  dialog#closed{margin:auto;border:0;padding:0;background:transparent;width:min(520px,calc(100vw - 24px));color:var(--ink)}
+  dialog#closed::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(6px)}
+  .cm{padding:30px 32px 32px}
+  .cm h3{font-size:clamp(21px,3.2vw,29px);margin:6px 0 12px;padding-right:44px;line-height:1.2}
+  .cm p{font-size:14.5px;color:#C6D6E4;margin:0 0 22px}
+  .cm .btn{width:100%;justify-content:center;padding:15px}
+  .btn.soon{background:rgba(255,255,255,.05);color:var(--dim);border:1px dashed var(--line2);cursor:pointer}
+  .btn.soon:hover{color:var(--gold);border-color:var(--gold);background:rgba(245,184,24,.07)}
+
   /* FOOTER */
   footer{padding:60px 0 30px;border-top:1px solid var(--line);background:#070708}
   .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px}
@@ -529,6 +538,16 @@
   </div>
 </dialog>
 
+<dialog id="closed" aria-labelledby="closedTitle">
+  <div class="pm cm">
+    <button class="pm-x" id="closedX" type="button" aria-label="Close">✕</button>
+    <div class="eyebrow">DAO ROUND</div>
+    <h3 id="closedTitle" class="d"></h3>
+    <p id="closedBody"></p>
+    <a class="btn gold" id="closedTg" target="_blank" rel="noopener"></a>
+  </div>
+</dialog>
+
 <footer>
   <div class="wrap">
     <div class="fgrid">
@@ -562,6 +581,7 @@ const CONFIG = {
     isDemo: false,                        // true로 두면 DEMO 배지·데모 경고문 표시
     telegram: "https://t.me/PEAKY1028",   // 캡처본 받는 담당자 (모달의 "텔레그램으로 캡처본 보내기" 버튼)
   },
+  ROUND_OPEN: false,                     // ← 참여 재개 시 true 로만 바꾸면 됨 (상품 버튼 + ?pay= 딥링크 둘 다 복구)
   TOTAL_SUPPLY: 10_000_000_000,
   ROUND_PRICE: 0.005,                                      // USD per TFI (DAO round)
   TIERS: [ // 보너스는 배정량에 가산
@@ -820,7 +840,13 @@ const I18N = {
           "캡처본 + DAO 이름 + 상품명 + $TFI 받을 솔라나 지갑 주소를 텔레그램으로 보내주세요. 입금 확인 즉시 배정량의 100%를 지급하며, 이후 P2P 거래가 가능합니다."
         ]
       ],
-      "disc": "※ 본 페이지의 내용은 정보 제공 목적이며 투자 권유가 아닙니다. $TFI는 텔레파이 게임 생태계 내 유틸리티 토큰이며, 가격·배정·지급 조건은 DAO 라운드 확정 시 최종 공지되는 조건을 따릅니다. 디지털 자산은 가격 변동 위험이 있습니다."
+      "disc": "※ 본 페이지의 내용은 정보 제공 목적이며 투자 권유가 아닙니다. $TFI는 텔레파이 게임 생태계 내 유틸리티 토큰이며, 가격·배정·지급 조건은 DAO 라운드 확정 시 최종 공지되는 조건을 따릅니다. 디지털 자산은 가격 변동 위험이 있습니다.",
+      "closed": {
+        "btn": "참여 준비 중",
+        "title": "DAO 라운드 참여가 곧 다시 열립니다",
+        "body": "현재 참여 접수를 일시적으로 중단했습니다. 조만간 다시 열 예정이며, 재개 일정은 텔레그램으로 안내드립니다.",
+        "tg": "텔레그램으로 문의하기"
+      }
     },
     "pay": {
       "title": "{name} 상품 참여",
@@ -1265,7 +1291,13 @@ const I18N = {
           "Send the screenshot + your DAO name + package name + the Solana wallet address that should receive $TFI on Telegram. As soon as the deposit is confirmed, 100% of your allocation is delivered and can be traded P2P."
         ]
       ],
-      "disc": "※ This page is for information only and is not an offer or solicitation to invest. $TFI is a utility token within the TeleFi game ecosystem; price, allocation and delivery terms are subject to the final terms published when the DAO round is confirmed. Digital assets carry price risk."
+      "disc": "※ This page is for information only and is not an offer or solicitation to invest. $TFI is a utility token within the TeleFi game ecosystem; price, allocation and delivery terms are subject to the final terms published when the DAO round is confirmed. Digital assets carry price risk.",
+      "closed": {
+        "btn": "Opening soon",
+        "title": "DAO round participation reopens soon",
+        "body": "We have paused new participation for now. The round will reopen shortly and we will announce the date on Telegram.",
+        "tg": "Ask on Telegram"
+      }
     },
     "pay": {
       "title": "Join — {name} package",
@@ -1710,7 +1742,13 @@ const I18N = {
           "将截图 + DAO 名称 + 产品名 + 用于接收 $TFI 的 Solana 钱包地址发送至 Telegram。到账确认后立即发放配额的 100%，之后可进行 P2P 交易。"
         ]
       ],
-      "disc": "※ 本页内容仅供参考，不构成投资邀约。$TFI 是 TeleFi 游戏生态内的实用型代币；价格、配额与发放条件以 DAO 轮确认时公布的最终条款为准。数字资产存在价格波动风险。"
+      "disc": "※ 本页内容仅供参考，不构成投资邀约。$TFI 是 TeleFi 游戏生态内的实用型代币；价格、配额与发放条件以 DAO 轮确认时公布的最终条款为准。数字资产存在价格波动风险。",
+      "closed": {
+        "btn": "即将开放",
+        "title": "DAO 轮参与即将重新开放",
+        "body": "目前暂停接受新的参与。本轮将在近期重新开放，具体时间将通过 Telegram 公布。",
+        "tg": "通过 Telegram 咨询"
+      }
     },
     "pay": {
       "title": "参与 — {name} 产品",
@@ -2155,7 +2193,13 @@ const I18N = {
           "キャプチャ + DAO 名 + 商品名 + $TFI を受け取る Solana ウォレットアドレスを Telegram で送ってください。入金確認後すぐに配分量の 100% を配布し、その後 P2P 取引が可能です。"
         ]
       ],
-      "disc": "※ 本ページの内容は情報提供を目的としており、投資勧誘ではありません。$TFI は TeleFi ゲームエコシステム内のユーティリティトークンであり、価格・配分・配布条件は DAO ラウンド確定時に公表される最終条件に従います。デジタル資産には価格変動リスクがあります。"
+      "disc": "※ 本ページの内容は情報提供を目的としており、投資勧誘ではありません。$TFI は TeleFi ゲームエコシステム内のユーティリティトークンであり、価格・配分・配布条件は DAO ラウンド確定時に公表される最終条件に従います。デジタル資産には価格変動リスクがあります。",
+      "closed": {
+        "btn": "まもなく再開",
+        "title": "DAO ラウンドの参加はまもなく再開します",
+        "body": "現在、新規の参加受付を一時停止しています。近日中に再開し、日程は Telegram でお知らせします。",
+        "tg": "Telegram で問い合わせる"
+      }
     },
     "pay": {
       "title": "参加 — {name} 商品",
@@ -2410,7 +2454,9 @@ function render(lang){
       <div class="alloc">${num(total)} TFI <span>· ${esc(L.alloc)}</span></div>
       <span class="bonus">${esc(L.base)} ${num(base)} ${t.bonus ? `+ ${esc(L.bonus)} ${Math.round(t.bonus*100)}%` : `· ${esc(L.bonus)} 0%`}</span>
       <ul>${T.invest.perks[t.id].map(p => `<li>${esc(p)}</li>`).join("")}</ul>
-      <button class="btn gold" type="button" data-pay="${t.id}">${esc(L.cta)}<span class="ar">→</span></button></div>`;
+      ${CONFIG.ROUND_OPEN
+        ? `<button class="btn gold" type="button" data-pay="${t.id}">${esc(L.cta)}<span class="ar">→</span></button>`
+        : `<button class="btn soon" type="button" data-closed="1">${esc(T.invest.closed.btn)}</button>`}</div>`;
   }).join("");
   $("#invSteps").innerHTML = T.invest.steps.map(([t,d]) => `<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join("");
 
@@ -2422,6 +2468,7 @@ function render(lang){
   $("#faqList").innerHTML = T.faq.items.map(([q,a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("");
 
   if ($("#pay").open) renderPay();
+  if ($("#closed").open) renderClosed();
   try { localStorage.setItem("telefi.lang", lang); } catch(e){}
   const u = new URL(location.href); u.searchParams.set("lang", lang); history.replaceState(null, "", u);
 }
@@ -2461,7 +2508,17 @@ function renderPay(){
   else q.innerHTML = `<code style="font-size:11px;word-break:break-all;color:#000">${esc(c.address)}</code>`;
 }
 $("#payChains").addEventListener("click", e => { const b = e.target.closest("[data-chain]"); if (!b) return; payChain = CONFIG.PAY.chains.find(x => x.id === b.dataset.chain) || payChain; renderPay(); });
-$("#tiers").addEventListener("click", e => { const b = e.target.closest("[data-pay]"); if (b) openPay(b.dataset.pay); });
+$("#tiers").addEventListener("click", e => {
+  if (e.target.closest("[data-closed]")) { renderClosed(); $("#closed").showModal(); return; }
+  const b = e.target.closest("[data-pay]"); if (b) openPay(b.dataset.pay);
+});
+function renderClosed(){
+  const T = I18N[document.documentElement.lang] || I18N.ko, C = T.invest.closed;
+  $("#closedTitle").textContent = C.title; $("#closedBody").textContent = C.body;
+  $("#closedTg").textContent = C.tg; $("#closedTg").href = CONFIG.PAY.telegram || CONFIG.TELEGRAM_URL;
+}
+$("#closedX").addEventListener("click", () => $("#closed").close());
+$("#closed").addEventListener("click", e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
 $("#payClose").addEventListener("click", () => $("#pay").close());
 $("#pay").addEventListener("click", e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
 $("#payCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(payChain.address); $("#payCopy").textContent = (I18N[document.documentElement.lang] || I18N.ko).pay.copied; setTimeout(renderPay, 1500); } catch (e) {} });
@@ -2479,7 +2536,7 @@ const initial = (() => {
   const n = (navigator.language || "en").slice(0,2); return I18N[n] ? n : "en";
 })();
 donut(); render(initial);
-const payParam = new URLSearchParams(location.search).get("pay"); if (payParam) openPay(payParam); // ?pay=pro 딥링크
+const payParam = new URLSearchParams(location.search).get("pay"); if (payParam && CONFIG.ROUND_OPEN) openPay(payParam); // ?pay=pro 딥링크
 </script>
 </body>
 </html>
